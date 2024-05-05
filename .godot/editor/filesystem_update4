@@ -1,0 +1,6 @@
+res://entites/player/player_base.tscn
+res://entites/player/player_base.gd
+res://levels/testing levels/movement_testLvl.tscn
+res://levels/testing levels/new_tile_set.tres
+res://entites/player/scripts/move_state.gd
+res://entites/player/move_state.tscn
