@@ -1,17 +1,8 @@
-res://entites/player/move_state.tscn
-res://levels/testing levels/new_tile_set.tres
-res://levels/testing levels/movement_testLvl.tscn
+res://levels/testing levels/tavern_testLvl.tscn
+res://levels/testing levels/tavern_tileSet.tres
+res://misc/shaders/background_shader.gdshader
 res://entites/player/player_base.tscn
-res://entites/player/player_base.gd
-res://entites/player/test_mesh.tscn
-res://entites/player/scripts/Camera_script.gd
-res://misc/debugging/Stats_overlay.tscn
-res://levels/testing levels/scripts/movement_testLvl.gd
-res://misc/debugging/Stats_Script.gd
-res://entites/player/scripts/player_base.gd
+res://entites/weapons/wep_staff.tscn
 res://UI/pause_scene.tscn
-res://UI/scripts/pause_scene.gd
-res://entites/player/weapons/wep_staff.tscn
-res://entites/player/weapons/proj_fireball.tscn
-res://entites/player/weapons/scripts/proj_fireball.gd
-res://entites/player/weapons/scripts/wep_staff.gd
+res://entites/weapons/proj_fireball.tscn
+res://entites/weapons/wep_template.tscn

@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbl8s2qnonmam"]
+
+[ext_resource type="Script" path="res://entites/weapons/scripts/wep_template.gd" id="1_p7is5"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_l3m7q"]
+bounce = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ctcjp"]
+size = Vector2(30, 5)
+
+[node name="wep_template" type="RigidBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_l3m7q")
+gravity_scale = 0.0
+script = ExtResource("1_p7is5")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ctcjp")
+
+[node name="placeholder" type="ColorRect" parent="."]
+offset_left = -15.0
+offset_top = -2.0
+offset_right = 15.0
+offset_bottom = 3.0
+pivot_offset = Vector2(15, 2.5)
+color = Color(0.5006, 0.376429, 0, 1)

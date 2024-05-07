@@ -1,9 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://bpt5t83htohip"]
+[gd_scene load_steps=3 format=3 uid="uid://bpt5t83htohip"]
 
-[ext_resource type="Script" path="res://entites/player/weapons/scripts/wep_staff.gd" id="1_pccgl"]
+[ext_resource type="Script" path="res://entites/weapons/scripts/wep_staff.gd" id="1_gnawu"]
+[ext_resource type="PackedScene" uid="uid://cbw8nuibk3vht" path="res://entites/weapons/proj_fireball.tscn" id="2_a6su2"]
 
 [node name="wep_staff" type="Node2D"]
-script = ExtResource("1_pccgl")
+script = ExtResource("1_gnawu")
+fire_cooldown = 0.2
+speed = 400.0
+projectile = ExtResource("2_a6su2")
 
 [node name="placeholder" type="ColorRect" parent="."]
 offset_right = 20.0

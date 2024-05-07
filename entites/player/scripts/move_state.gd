@@ -5,7 +5,7 @@ extends Node2D
 @export var walk_speed: float = 100
 @export var run_speed: float = 200
 #-------------------------------------------------------------#
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	_input_process()
 	
 	#adding walking ability

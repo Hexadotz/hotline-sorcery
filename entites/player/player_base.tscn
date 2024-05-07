@@ -1,34 +1,103 @@
-[gd_scene load_steps=7 format=3 uid="uid://bb6wptty77ery"]
+[gd_scene load_steps=15 format=3 uid="uid://bb6wptty77ery"]
 
 [ext_resource type="Script" path="res://entites/player/scripts/player_base.gd" id="1_2y85j"]
-[ext_resource type="Script" path="res://entites/player/scripts/Camera_script.gd" id="2_8ym38"]
 [ext_resource type="PackedScene" uid="uid://dl2wrgx64v4mn" path="res://entites/player/move_state.tscn" id="2_sba3e"]
 [ext_resource type="PackedScene" uid="uid://bxrta1oppe24y" path="res://UI/pause_scene.tscn" id="4_3dlif"]
-[ext_resource type="PackedScene" uid="uid://bpt5t83htohip" path="res://entites/player/weapons/wep_staff.tscn" id="5_qypyv"]
+[ext_resource type="PackedScene" uid="uid://bpt5t83htohip" path="res://entites/weapons/wep_staff.tscn" id="5_yr7f0"]
+[ext_resource type="Texture2D" uid="uid://b6b5dsriav5gw" path="res://art/player/player.png" id="6_duoci"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_eu1if"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nl3in"]
+size = Vector2(18, 30)
 
-[node name="player" type="CharacterBody2D" groups=["player"]]
+[sub_resource type="AtlasTexture" id="AtlasTexture_da7tw"]
+atlas = ExtResource("6_duoci")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jth0n"]
+atlas = ExtResource("6_duoci")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_etbd6"]
+atlas = ExtResource("6_duoci")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhr5p"]
+atlas = ExtResource("6_duoci")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ya78s"]
+atlas = ExtResource("6_duoci")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7fjbi"]
+atlas = ExtResource("6_duoci")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l1270"]
+atlas = ExtResource("6_duoci")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q4k7m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_da7tw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jth0n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_etbd6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhr5p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ya78s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7fjbi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l1270")
+}],
+"loop": true,
+"name": &"run_anim",
+"speed": 15.0
+}]
+
+[node name="player" type="CharacterBody2D" node_paths=PackedStringArray("anim", "camera") groups=["player"]]
 script = ExtResource("1_2y85j")
+anim = NodePath("animation")
+camera = NodePath("Camera2D")
+distance = Vector2(200, 200)
+pan_speed = 20.0
 
 [node name="body" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_eu1if")
+shape = SubResource("RectangleShape2D_nl3in")
 
-[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
+[node name="animation" type="AnimatedSprite2D" parent="."]
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_q4k7m")
+animation = &"run_anim"
+frame_progress = 0.139643
+
+[node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.5, 2.5)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
-script = ExtResource("2_8ym38")
-player = NodePath("..")
-distance = Vector2(150, 150)
-pan_speed = 20.0
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="forward_placehoder" type="ColorRect" parent="."]
 offset_left = 17.0
 offset_top = -2.0
 offset_right = 21.0
 offset_bottom = 2.0
 color = Color(1, 0, 0, 1)
+
+[node name="hands" type="Node2D" parent="."]
+
+[node name="wep_staff" parent="hands" instance=ExtResource("5_yr7f0")]
+position = Vector2(0, 5.51)
 
 [node name="move_state" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_sba3e")]
 player = NodePath("..")
@@ -36,6 +105,3 @@ walk_speed = 150.0
 run_speed = 300.0
 
 [node name="Pause" parent="." instance=ExtResource("4_3dlif")]
-
-[node name="wep_staff" parent="." instance=ExtResource("5_qypyv")]
-position = Vector2(0, 5.51)

@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://bhc5sfyi4imdq"]
+
+[node name="Option_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(850, 450)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="TabContainer" type="TabContainer" parent="CenterContainer/PanelContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = -25.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="base" type="TabBar" parent="CenterContainer/PanelContainer/Panel/TabContainer"]
+layout_mode = 2
+
+[node name="Controles (WIP)" type="TabBar" parent="CenterContainer/PanelContainer/Panel/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Audio" type="TabBar" parent="CenterContainer/PanelContainer/Panel/TabContainer"]
+visible = false
+layout_mode = 2

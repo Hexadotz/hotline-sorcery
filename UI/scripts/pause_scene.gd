@@ -2,7 +2,7 @@ extends CanvasLayer
 
 var captured: bool = true
 #----------------------------------------------------------#
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	#toggle the pause menu on or off
 	if Input.is_action_just_pressed("ui_cancel"):
 		captured = !captured
@@ -22,9 +22,14 @@ func _on_resume_pressed() -> void:
 func _on_restart_pressed() -> void:
 	get_tree().reload_current_scene()
 
+func _on_options_pressed() -> void:
+	pass
+
 #go to the main menu (still WIP because uh... we need a menu in the first place)
 func _on_menu_pressed() -> void:
 	pass
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
+
+
