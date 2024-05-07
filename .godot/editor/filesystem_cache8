@@ -1,5 +1,5 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1714952096
+::res://::1715030260
 icon.svg::CompressedTexture2D::537017795355917130::1714928304::1714928326::1::::<><>::
 ::res://addons/::1714952092
 ::res://addons/godot-idea-board/::1714928356
@@ -53,8 +53,8 @@ h3_format.gd::GDScript::-1::1714928356::0::1::::<>Resource<>::
 h4_format.gd::GDScript::-1::1714928356::0::1::::<>Resource<>::
 h5_format.gd::GDScript::-1::1714928356::0::1::::<>Resource<>::
 h6_format.gd::GDScript::-1::1714928356::0::1::::<>Resource<>::
-::res://addons/godot-idea-board/savedata/::1714951921
-base.json::JSON::-1::1714928869::0::1::::<><>::
+::res://addons/godot-idea-board/savedata/::1715030209
+base.json::JSON::-1::1715030209::0::1::::<><>::
 ::res://addons/godot-idea-board/theme/::1714928356
 black_gradient.tres::Gradient::8024571211063266237::1714928356::0::1::::<><>::
 focused_header_lineedit_stylebox.tres::StyleBoxFlat::7431535972691608021::1714928356::0::1::::<><>::
@@ -86,7 +86,7 @@ translation.csv::Translation::4616545587557674593::1714928356::1714928358::1::::
 translation.en.translation::OptimizedTranslation::519172063214165863::1714928358::0::1::::<><>::
 translation.gd::GDScript::-1::1714928356::0::1::::<>Node<>::
 translation.ja_JP.translation::OptimizedTranslation::9198974260189371630::1714928358::0::1::::<><>::
-::res://addons/Todo_Manager/::1714952048
+::res://addons/Todo_Manager/::1715030209
 ColourPicker.gd::GDScript::-1::1714952047::0::1::::<>HBoxContainer<>::
 Current.gd::GDScript::-1::1714952047::0::1::::<>Panel<>::
 Dock.gd::GDScript::-1::1714952047::0::1::::<>Control<>::
@@ -94,11 +94,12 @@ Pattern.gd::GDScript::-1::1714952048::0::1::::<>HBoxContainer<>::
 plugin.cfg::TextFile::-1::1714952048::0::1::::<><>::
 plugin.gd::GDScript::-1::1714952048::0::1::::<>EditorPlugin<>::
 Project.gd::GDScript::-1::1714952048::0::1::::<>Panel<>::
+todo.cfg::TextFile::-1::1715030209::0::1::::<><>::
 todoItem_class.gd::GDScript::-1::1714952048::0::1::::<>RefCounted<>::
 todo_class.gd::GDScript::-1::1714952048::0::1::::<>RefCounted<>::
 ::res://addons/Todo_Manager/doc/::1714952048
 example.gd::GDScript::-1::1714952048::0::1::::<>Node<>::
-::res://addons/Todo_Manager/doc/images/::1714952061
+::res://addons/Todo_Manager/doc/images/::1714952099
 example1.png::CompressedTexture2D::8063086250666186557::1714952048::1714952099::1::::<><>::
 example2.png::CompressedTexture2D::4967096191679558711::1714952048::1714952099::1::::<><>::
 Instruct1.png::CompressedTexture2D::5947310953019404561::1714952048::1714952099::1::::<><>::
@@ -111,14 +112,23 @@ TODO_Manager_Logo.png::CompressedTexture2D::1296571772831373712::1714952048::171
 ColourPicker.tscn::PackedScene::2957809393656723737::1714952048::0::1::::<><>::res://addons/Todo_Manager/ColourPicker.gd
 Dock.tscn::PackedScene::4584442902745049483::1714952048::0::1::::<><>::res://addons/Todo_Manager/Dock.gd<>res://addons/Todo_Manager/Project.gd<>res://addons/Todo_Manager/Current.gd
 Pattern.tscn::PackedScene::4056048923411208166::1714952048::0::1::::<><>::res://addons/Todo_Manager/Pattern.gd
+::res://assets/::1715030260
 ::res://entites/::1714928852
-::res://entites/player/::1714951921
-player_base.tscn::PackedScene::2521968826885834666::1714951768::0::1::::<><>::res://entites/player/player_base.gd
-player_base.gd::GDScript::-1::1714951893::0::1::::PlayerScript<>CharacterBody2D<>::
-move_state.tscn::PackedScene::7988444014913232433::1714951921::0::1::::<><>::res://entites/player/scripts/move_state.gd
-::res://entites/player/scripts/::1714951921
-move_state.gd::GDScript::-1::1714951921::0::1::::<>Node2D<>::
+::res://entites/player/::1715030209
+move_state.tscn::PackedScene::7988444014913232433::1715030209::0::1::::<><>::res://entites/player/scripts/move_state.gd
+player_base.gd::GDScript::-1::1715024844::0::1::::PlayerScript<>CharacterBody2D<>::
+player_base.tscn::PackedScene::2521968826885834666::1715030293::0::1::::<><>::res://entites/player/player_base.gd<>res://entites/player/scripts/Camera_script.gd<>uid://dl2wrgx64v4mn::::res://entites/player/move_state.tscn
+test_mesh.tscn::PackedScene::6387281235914567578::1715030209::0::1::::<><>::
+::res://entites/player/scripts/::1715028927
+Camera_script.gd::GDScript::-1::1715028927::0::1::::<>Camera2D<>::
+move_state.gd::GDScript::-1::1714952585::0::1::::<>Node2D<>::
 ::res://levels/::1714929587
-::res://levels/testing levels/::1714949801
-movement_testLvl.tscn::PackedScene::718911046168588::1714949801::0::1::::<><>::uid://dkp65ow8han0w::::res://levels/testing levels/new_tile_set.tres<>uid://bb6wptty77ery::::res://entites/player/player_base.tscn
-new_tile_set.tres::TileSet::7894052725184769324::1714947900::0::1::::<><>::uid://hweus7ne4tbu::::res://icon.svg
+::res://levels/testing levels/::1715030209
+movement_testLvl.tscn::PackedScene::718911046168588::1715030209::0::1::::<><>::res://levels/testing levels/scripts/movement_testLvl.gd<>uid://dkp65ow8han0w::::res://levels/testing levels/new_tile_set.tres<>uid://bb6wptty77ery::::res://entites/player/player_base.tscn<>uid://c3bfulxgsvkoj::::res://misc/debugging/Stats_overlay.tscn
+new_tile_set.tres::TileSet::7894052725184769324::1715028029::0::1::::<><>::uid://hweus7ne4tbu::::res://icon.svg
+::res://levels/testing levels/scripts/::1715029005
+movement_testLvl.gd::GDScript::-1::1715029005::0::1::::<>Node2D<>::
+::res://misc/::1715028414
+::res://misc/debugging/::1715030209
+Stats_overlay.tscn::PackedScene::6740533281431956053::1715030209::0::1::::<><>::res://misc/debugging/Stats_Script.gd
+Stats_Script.gd::GDScript::-1::1715028679::0::1::::DebuggerOverlay<>CanvasLayer<>::

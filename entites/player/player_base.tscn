@@ -1,18 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://bb6wptty77ery"]
+[gd_scene load_steps=7 format=3 uid="uid://bb6wptty77ery"]
 
-[ext_resource type="Script" path="res://entites/player/player_base.gd" id="1_5ho4u"]
+[ext_resource type="Script" path="res://entites/player/scripts/player_base.gd" id="1_2y85j"]
+[ext_resource type="Script" path="res://entites/player/scripts/Camera_script.gd" id="2_8ym38"]
 [ext_resource type="PackedScene" uid="uid://dl2wrgx64v4mn" path="res://entites/player/move_state.tscn" id="2_sba3e"]
+[ext_resource type="PackedScene" uid="uid://bxrta1oppe24y" path="res://UI/pause_scene.tscn" id="4_3dlif"]
+[ext_resource type="PackedScene" uid="uid://bpt5t83htohip" path="res://entites/player/weapons/wep_staff.tscn" id="5_qypyv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eu1if"]
 
 [node name="player" type="CharacterBody2D" groups=["player"]]
-script = ExtResource("1_5ho4u")
+script = ExtResource("1_2y85j")
 
 [node name="body" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_eu1if")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
+zoom = Vector2(2.5, 2.5)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+script = ExtResource("2_8ym38")
+player = NodePath("..")
+distance = Vector2(150, 150)
+pan_speed = 20.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = 17.0
@@ -23,3 +32,10 @@ color = Color(1, 0, 0, 1)
 
 [node name="move_state" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_sba3e")]
 player = NodePath("..")
+walk_speed = 150.0
+run_speed = 300.0
+
+[node name="Pause" parent="." instance=ExtResource("4_3dlif")]
+
+[node name="wep_staff" parent="." instance=ExtResource("5_qypyv")]
+position = Vector2(0, 5.51)
