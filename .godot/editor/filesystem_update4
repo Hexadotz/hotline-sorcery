@@ -1,8 +1,18 @@
-res://levels/testing levels/tavern_testLvl.tscn
 res://levels/testing levels/tavern_tileSet.tres
 res://misc/shaders/background_shader.gdshader
+res://entites/enemies/enemy_template.tscn
+res://misc/blood_particle.gd
+res://levels/testing levels/tavern_testLvl.tscn
 res://entites/player/player_base.tscn
-res://entites/weapons/wep_staff.tscn
+res://misc/blood_particle.tscn
 res://UI/pause_scene.tscn
+res://misc/UI_theme.tres
 res://entites/weapons/proj_fireball.tscn
+res://entites/weapons/scripts/proj_fireball.gd
 res://entites/weapons/wep_template.tscn
+res://entites/weapons/scripts/wep_template.gd
+res://misc/maxwell/maxwell.tscn
+res://entites/player/weapon_manager.tscn
+res://entites/weapons/wep_staff.tscn
+res://entites/enemies/enemy_template.gd
+res://misc/debugging/Stats_Script.gd

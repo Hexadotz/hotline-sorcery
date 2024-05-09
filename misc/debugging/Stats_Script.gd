@@ -30,7 +30,7 @@ func _process(_delta: float) -> void:
 		var value = null
 		
 		if s[1] != "":
-			node_V2 = cur_scene.get_node(s[1])
+			node_V2 = cur_scene.find_child(s[1])
 		
 		if node_V2:
 			value = get_node_property(node_V2, s[2], s[3])
@@ -50,6 +50,7 @@ func _process(_delta: float) -> void:
 			if s[0].count("-") == 2:
 				var text: String = s[0].replace("-", "")
 				label_text += "----------- " + text + " -----------"
+			
 		
 		label_text += "\n"
 	

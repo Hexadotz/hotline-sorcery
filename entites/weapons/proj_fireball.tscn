@@ -1,10 +1,13 @@
-[gd_scene load_steps=17 format=3 uid="uid://cbw8nuibk3vht"]
+[gd_scene load_steps=16 format=3 uid="uid://cbw8nuibk3vht"]
 
 [ext_resource type="Script" path="res://entites/weapons/scripts/proj_fireball.gd" id="1_7464d"]
 [ext_resource type="Texture2D" uid="uid://cbgbf5tycsbn8" path="res://art/player/flaming_missile.png" id="2_gxvfx"]
 [ext_resource type="Texture2D" uid="uid://dnb087kq4mhcj" path="res://art/player/magic_missile.png" id="3_ue1c7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_esw8c"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sb7t3"]
 radius = 5.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5xp41"]
@@ -76,14 +79,6 @@ animations = [{
 "speed": 15.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_sb7t3"]
-radius = 5.0
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ye12x"]
-particle_flag_disable_z = true
-direction = Vector3(0, 0, 0)
-gravity = Vector3(-50, 0, 0)
-
 [sub_resource type="Curve" id="Curve_bd1x4"]
 _data = [Vector2(0, 0.263736), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -92,12 +87,17 @@ point_count = 2
 top_level = true
 gravity_scale = 0.0
 script = ExtResource("1_7464d")
+trail_color = Color(0, 0.391667, 0.5, 1)
 line_length = 5.0
 
 [node name="Collision_hitbox" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_esw8c")
 disabled = true
+
+[node name="hurtbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+shape = SubResource("CircleShape2D_sb7t3")
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
 rotation = 1.5708
@@ -107,33 +107,16 @@ animation = &"missile"
 autoplay = "missile"
 frame_progress = 0.199589
 
-[node name="placeholder" type="ColorRect" parent="."]
-visible = false
-offset_left = -3.0
-offset_top = -3.0
-offset_right = 3.0
-offset_bottom = 3.0
-pivot_offset = Vector2(3, 3)
-color = Color(0.92, 0, 0, 1)
-
-[node name="hitbox" type="ShapeCast2D" parent="."]
-visible = false
-shape = SubResource("CircleShape2D_sb7t3")
-target_position = Vector2(0, 0)
+[node name="trail_effect" type="Line2D" parent="."]
+self_modulate = Color(0, 0.565333, 0.64, 0.627451)
+show_behind_parent = true
+width = 5.0
+width_curve = SubResource("Curve_bd1x4")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
 autostart = true
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-visible = false
-process_material = SubResource("ParticleProcessMaterial_ye12x")
-
-[node name="Line2D" type="Line2D" parent="."]
-self_modulate = Color(0, 0.565333, 0.64, 0.627451)
-show_behind_parent = true
-width = 5.0
-width_curve = SubResource("Curve_bd1x4")
-
+[connection signal="body_entered" from="hurtbox" to="." method="_on_hirtbox_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

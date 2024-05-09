@@ -1,0 +1,68 @@
+[gd_scene load_steps=6 format=3 uid="uid://bxqg66243pmx2"]
+
+[ext_resource type="PackedScene" uid="uid://o8hsfwlsjh4q" path="res://misc/maxwell/scene.gltf" id="1_8y7a0"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_30kii"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="Animation" id="Animation_vdrer"]
+resource_name = "rotate"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("why did i do this?:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.28319, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fg770"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("why did i do this?:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_joh18"]
+_data = {
+"RESET": SubResource("Animation_fg770"),
+"rotate": SubResource("Animation_vdrer")
+}
+
+[node name="he has to be in the game" type="Sprite2D"]
+position = Vector2(-1.90735e-06, 0)
+scale = Vector2(0.093, 0.1)
+texture = SubResource("ViewportTexture_30kii")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(0.92921, -0.0660767, 0.363597, 0, 0.983885, 0.178802, -0.369552, -0.166145, 0.914236, 1.50992, 1.765, 3.207)
+
+[node name="why did i do this?" parent="." instance=ExtResource("1_8y7a0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_joh18")
+}
+autoplay = "rotate"
+speed_scale = 0.5
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.665504, 0.746394, 0, -0.746394, 0.665504, 0, 2.8357, 3.43504)

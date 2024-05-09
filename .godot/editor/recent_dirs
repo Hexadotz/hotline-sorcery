@@ -1,11 +1,16 @@
+res://misc/maxwell
+res://misc/fonts
+res://misc
+res://entites/enemies
+res://art/player
+res://misc/autoloads
+res://entites/player
+res://entites/player/scripts
 res://entites/weapons/scripts
 res://UI
-res://art/player
 res://misc/shaders
 res://entites/weapons
 res://UI/scripts
 res://misc/debugging
 res://levels/testing levels/scripts
-res://entites/player/scripts
-res://entites/player
 res://levels/testing levels

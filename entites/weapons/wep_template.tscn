@@ -8,9 +8,12 @@ bounce = 1.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ctcjp"]
 size = Vector2(30, 5)
 
-[node name="wep_template" type="RigidBody2D"]
+[node name="wep_template" type="RigidBody2D" groups=["weapon"]]
+collision_layer = 3
+mass = 50.0
 physics_material_override = SubResource("PhysicsMaterial_l3m7q")
 gravity_scale = 0.0
+can_sleep = false
 script = ExtResource("1_p7is5")
 
 [node name="Collision" type="CollisionShape2D" parent="."]

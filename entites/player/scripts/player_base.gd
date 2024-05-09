@@ -20,6 +20,7 @@ var instance: MeshInstance2D
 func _ready() -> void:
 	instance = test_point.instantiate()
 	add_child(instance)
+	#TODO: pass the player reference to all the child nodes that needs him
 	for node in get_children(true):
 		if node.has_method("Player"):
 			pass

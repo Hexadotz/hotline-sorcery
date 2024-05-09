@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0yixotfdub5k"]
+
+[ext_resource type="Script" path="res://entites/player/scripts/hands_script.gd" id="1_lrs72"]
+[ext_resource type="PackedScene" uid="uid://bpt5t83htohip" path="res://entites/weapons/wep_staff.tscn" id="2_wb3r7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3ao7j"]
+radius = 30.0
+
+[node name="weapon_manager" type="Node2D" node_paths=PackedStringArray("hand", "back", "staff", "pickup_raduis")]
+script = ExtResource("1_lrs72")
+hand = NodePath("hand")
+back = NodePath("back")
+staff = NodePath("hand/wep_staff")
+pickup_raduis = NodePath("pickup_area")
+
+[node name="pickup_area" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="raduis" type="CollisionShape2D" parent="pickup_area"]
+shape = SubResource("CircleShape2D_3ao7j")
+
+[node name="hand" type="Node2D" parent="."]
+position = Vector2(10, 18)
+
+[node name="wep_staff" parent="hand" instance=ExtResource("2_wb3r7")]
+
+[node name="back" type="Node2D" parent="."]
+position = Vector2(-13, 0)
+rotation = -1.5708

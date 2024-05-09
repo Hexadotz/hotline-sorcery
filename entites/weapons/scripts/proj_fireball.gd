@@ -1,36 +1,31 @@
 extends RigidBody2D
 
-@export var projectile_type: int
+@export_enum("fireball", "magic_mis") var projectile_type: int
 
-@onready var hitbox: ShapeCast2D = $hitbox
+@export var trail_color: Color = Color(1, 1, 1, 1)
+@export var line_length: float = 10.0 #the length of the trail
+@export var damage: float = 5
+
+@onready var player: PlayerScript = get_tree().get_nodes_in_group("player")[0]
 @onready var anim: AnimatedSprite2D = $Animation
-@onready var line: Line2D = $Line2D
-#NOTE: i need to get some sleep
+@onready var hitbox: Area2D = $hurtbox
+@onready var line: Line2D = $trail_effect
+
+var point_pos: Vector2 = Vector2.ZERO #the point the line is going to start from
 #----------------------------------------------------------#
 func _ready() -> void:
-	#HACK: this is ugly and needs to be eradicated from existance (by that i mean the reference of the player)
-	#what if the enemy pick up the staff? who the fuck is going to tell this ball where the player is
-	hitbox.add_exception(get_parent().get_parent().get_parent().player)
+	line.modulate = trail_color
+
+func setup_projectile() -> void:
+	pass
 
 func _physics_process(_delta: float) -> void:
 	_draw_trail()
-	
-	if hitbox.is_colliding():
-		#get the first collision that occures
-		var collidier = hitbox.get_collider(0)
-		#if its an enemy damage him and the destory itself if not well destroy itself as well 
-		if collidier.is_in_group("enemy"):
-			if collidier.has_method("got_hit"):
-				collidier.got_hit()
-				queue_free()
-		else:
-			queue_free()
 
-@export var line_length: float = 10.0
-var point_pos: Vector2 = Vector2.ZERO
-#this function draws a trail effect behind the boolet
+#this function draws a trail effect behind the boolets
 func _draw_trail() -> void:
 	#keep the line effect from inhereting the global position and rotation
+	
 	line.global_position = Vector2.ZERO
 	line.global_rotation = 0
 	
@@ -42,8 +37,19 @@ func _draw_trail() -> void:
 	#the moment the line points becomes greater than line_length we start deleteing the fist ones
 	while line.get_point_count() > line_length:
 		line.remove_point(0)
-	
 
+func prepare_proj(shooter: Node2D, forward_dir: Vector2, start_point: Vector2, speed: float) -> void:
+	var direction: Vector2 = shooter.global_position.direction_to(forward_dir)
+	global_position = start_point
+	linear_velocity = direction * (speed + shooter.speed)
+	rotation = shooter.rotation
 #if the bullet went far without colliding with anything destroy it for optimization
 func _on_timer_timeout() -> void:
 	queue_free()
+
+func _on_hirtbox_body_entered(body: Node2D) -> void:
+	if body.is_in_group("enemy"):
+		if body.has_method("on_hit"):
+			body.on_hit(damage)
+	else:
+		queue_free()

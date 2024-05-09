@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bxrta1oppe24y"]
+[gd_scene load_steps=3 format=3 uid="uid://bxrta1oppe24y"]
 
 [ext_resource type="Script" path="res://UI/scripts/pause_scene.gd" id="1_hxplg"]
+[ext_resource type="Theme" uid="uid://kdfneisskda" path="res://misc/UI_theme.tres" id="2_l0hgq"]
 
 [node name="Pause" type="CanvasLayer"]
 process_mode = 3
@@ -12,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_l0hgq")
 
 [node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
 layout_mode = 2
