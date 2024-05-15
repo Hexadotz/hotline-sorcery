@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bbl8s2qnonmam"]
 
-[ext_resource type="Script" path="res://entites/weapons/scripts/wep_template.gd" id="1_p7is5"]
+[ext_resource type="Script" path="res://entites/weapons/scripts/wep_template.gd" id="1_1rpx1"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_l3m7q"]
 bounce = 1.0
@@ -14,7 +14,7 @@ mass = 50.0
 physics_material_override = SubResource("PhysicsMaterial_l3m7q")
 gravity_scale = 0.0
 can_sleep = false
-script = ExtResource("1_p7is5")
+script = ExtResource("1_1rpx1")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ctcjp")

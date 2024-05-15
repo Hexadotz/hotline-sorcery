@@ -1,0 +1,61 @@
+[gd_scene load_steps=10 format=3 uid="uid://jltejnrxk3tb"]
+
+[ext_resource type="Script" path="res://entites/enemies/goblin/goblin_script.gd" id="1_7s807"]
+[ext_resource type="SpriteFrames" uid="uid://bdqsq83jwm8rf" path="res://entites/enemies/goblin/goblin_sprites.tres" id="2_ojbe7"]
+[ext_resource type="PackedScene" uid="uid://bc6kr4x6hxvn2" path="res://entites/enemies/template/hostile_move_state.tscn" id="3_h1oyt"]
+[ext_resource type="PackedScene" uid="uid://fip1cv74ls24" path="res://entites/enemies/template/eye_sight.tscn" id="3_jw1i5"]
+[ext_resource type="PackedScene" uid="uid://dg6k2vofxo3o4" path="res://entites/enemies/goblin/attack_state.tscn" id="5_lctcw"]
+[ext_resource type="PackedScene" uid="uid://cv0wglh2kryn7" path="res://entites/enemies/goblin/hide_state.tscn" id="6_acyy4"]
+[ext_resource type="PackedScene" uid="uid://i7ttmc5me7rg" path="res://entites/enemies/goblin/panic_state.tscn" id="7_xnyci"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j7iyn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i2s1b"]
+radius = 13.0
+
+[node name="goblin" type="CharacterBody2D" node_paths=PackedStringArray("nav_agent", "animation", "sight_area", "body", "move_state", "attack_state", "hide_state", "panic_state") groups=["enemy"]]
+collision_mask = 2
+script = ExtResource("1_7s807")
+nav_agent = NodePath("NavigationAgent")
+animation = NodePath("Animation")
+sight_area = NodePath("eye_sight")
+body = NodePath("Collision")
+move_state = NodePath("States/hostile_move_state")
+attack_state = NodePath("States/attack_state")
+hide_state = NodePath("States/Hide_state")
+panic_state = NodePath("States/panic_state")
+
+[node name="Animation" type="AnimatedSprite2D" parent="."]
+z_index = -1
+rotation = -1.5708
+sprite_frames = ExtResource("2_ojbe7")
+animation = &"attack"
+frame = 2
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_j7iyn")
+
+[node name="eye_sight" parent="." instance=ExtResource("3_jw1i5")]
+
+[node name="hurt_box" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurt_box"]
+shape = SubResource("CircleShape2D_i2s1b")
+
+[node name="NavigationAgent" type="NavigationAgent2D" parent="."]
+target_desired_distance = 15.0
+debug_enabled = true
+
+[node name="States" type="Node2D" parent="."]
+
+[node name="hostile_move_state" parent="States" node_paths=PackedStringArray("parent") instance=ExtResource("3_h1oyt")]
+parent = NodePath("../..")
+
+[node name="attack_state" parent="States" node_paths=PackedStringArray("parent") instance=ExtResource("5_lctcw")]
+parent = NodePath("../..")
+
+[node name="Hide_state" parent="States" node_paths=PackedStringArray("parent") instance=ExtResource("6_acyy4")]
+parent = NodePath("../..")
+
+[node name="panic_state" parent="States" node_paths=PackedStringArray("parent") instance=ExtResource("7_xnyci")]
+parent = NodePath("../..")

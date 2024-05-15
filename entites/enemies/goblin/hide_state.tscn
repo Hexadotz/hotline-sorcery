@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cv0wglh2kryn7"]
+
+[ext_resource type="Script" path="res://entites/enemies/goblin/hide_state.gd" id="1_hbuit"]
+
+[node name="Hide_state" type="Node"]
+script = ExtResource("1_hbuit")

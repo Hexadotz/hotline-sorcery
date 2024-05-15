@@ -38,11 +38,12 @@ func _draw_trail() -> void:
 	while line.get_point_count() > line_length:
 		line.remove_point(0)
 
-func prepare_proj(shooter: Node2D, forward_dir: Vector2, start_point: Vector2, speed: float) -> void:
-	var direction: Vector2 = shooter.global_position.direction_to(forward_dir)
-	global_position = start_point
+func prepare_proj(shooter: Node2D, glob_pos: Vector2, to_vec: Vector2, speed: float) -> void:
+	var direction: Vector2 = glob_pos.direction_to(to_vec)
+	global_position = glob_pos
 	linear_velocity = direction * (speed + shooter.speed)
 	rotation = shooter.rotation
+
 #if the bullet went far without colliding with anything destroy it for optimization
 func _on_timer_timeout() -> void:
 	queue_free()
@@ -50,6 +51,6 @@ func _on_timer_timeout() -> void:
 func _on_hirtbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy"):
 		if body.has_method("on_hit"):
-			body.on_hit(damage)
+			body.on_hit(damage, linear_velocity.normalized())
 	else:
 		queue_free()

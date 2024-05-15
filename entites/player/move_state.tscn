@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://entites/player/scripts/move_state.gd" id="1_y2sbs"]
 
-[node name="move_state" type="Node2D"]
+[node name="move_state" type="Node"]
 script = ExtResource("1_y2sbs")

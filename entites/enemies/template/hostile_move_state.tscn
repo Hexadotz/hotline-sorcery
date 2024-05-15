@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bc6kr4x6hxvn2"]
+
+[ext_resource type="Script" path="res://entites/enemies/template/hostile_move_state.gd" id="1_xqfax"]
+
+[node name="move_state" type="Node"]
+script = ExtResource("1_xqfax")

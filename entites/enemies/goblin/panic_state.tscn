@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://i7ttmc5me7rg"]
+
+[ext_resource type="Script" path="res://entites/enemies/goblin/panic_state.gd" id="1_rawym"]
+
+[node name="panic_state" type="Node"]
+script = ExtResource("1_rawym")
+
+[node name="look_cooldown" type="Timer" parent="."]
+wait_time = 0.8
+
+[connection signal="timeout" from="look_cooldown" to="." method="_on_look_cooldown_timeout"]

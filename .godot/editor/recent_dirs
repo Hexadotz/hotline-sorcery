@@ -1,16 +1,21 @@
-res://misc/maxwell
-res://misc/fonts
-res://misc
-res://entites/enemies
-res://art/player
-res://misc/autoloads
-res://entites/player
-res://entites/player/scripts
-res://entites/weapons/scripts
+res://entites/enemies/template
+res://UI/scripts
 res://UI
+res://entites/enemies/goblin
+res://sound/audio_streams
+res://art/player
+res://entites/player
+res://art/goblin
+res://
+res://entites/weapons/scripts
 res://misc/shaders
 res://entites/weapons
-res://UI/scripts
+res://entites/enemies
+res://misc
+res://misc/maxwell
+res://misc/fonts
+res://misc/autoloads
+res://entites/player/scripts
 res://misc/debugging
 res://levels/testing levels/scripts
 res://levels/testing levels

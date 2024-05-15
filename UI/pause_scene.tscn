@@ -1,71 +1,123 @@
-[gd_scene load_steps=3 format=3 uid="uid://bxrta1oppe24y"]
+[gd_scene load_steps=6 format=3 uid="uid://bxrta1oppe24y"]
 
 [ext_resource type="Script" path="res://UI/scripts/pause_scene.gd" id="1_hxplg"]
 [ext_resource type="Theme" uid="uid://kdfneisskda" path="res://misc/UI_theme.tres" id="2_l0hgq"]
+[ext_resource type="Shader" path="res://misc/shaders/vignette.gdshader" id="2_ti763"]
 
-[node name="Pause" type="CanvasLayer"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ulitx"]
+shader = ExtResource("2_ti763")
+shader_parameter/vignette_intensity = 1.0
+shader_parameter/vignette_opacity = 0.4
+shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_keqky"]
+
+[node name="UI" type="CanvasLayer"]
 process_mode = 3
 script = ExtResource("1_hxplg")
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="Post Process" type="TextureRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_ulitx")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -231.0
+offset_top = -129.0
+offset_right = 229.0
+offset_bottom = 129.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(50, 50)
+texture = SubResource("CanvasTexture_keqky")
+
+[node name="HUD" type="Control" parent="."]
+visible = false
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("2_l0hgq")
 
-[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+[node name="Label" type="Label" parent="HUD"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.815
+anchor_bottom = 0.815
+offset_top = -10.1201
+offset_right = 213.0
+offset_bottom = 12.8799
+theme = ExtResource("2_l0hgq")
+theme_override_font_sizes/font_size = 56
+text = "You are ded, not big surprise"
+
+[node name="Pause_UI" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Pause_UI"]
 layout_mode = 2
 
-[node name="Panel" type="Panel" parent="CenterContainer/PanelContainer"]
+[node name="Panel" type="Panel" parent="Pause_UI/PanelContainer"]
 custom_minimum_size = Vector2(300, 250)
 layout_mode = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/PanelContainer/Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Pause_UI/PanelContainer/Panel"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -105.0
+offset_top = -115.0
+offset_right = 95.0
+offset_bottom = 155.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 7
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/Panel/CenterContainer"]
-custom_minimum_size = Vector2(250, -150)
+[node name="Label" type="Label" parent="Pause_UI/PanelContainer/Panel/VBoxContainer"]
 layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="CenterContainer/PanelContainer/Panel/CenterContainer/VBoxContainer"]
-layout_mode = 2
-text = "Game paused"
+theme = ExtResource("2_l0hgq")
+text = "Game Paused"
 horizontal_alignment = 1
 
-[node name="space" type="Control" parent="CenterContainer/PanelContainer/Panel/CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 20)
+[node name="Control" type="Control" parent="Pause_UI/PanelContainer/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 
-[node name="Resume" type="Button" parent="CenterContainer/PanelContainer/Panel/CenterContainer/VBoxContainer"]
+[node name="Resume" type="Button" parent="Pause_UI/PanelContainer/Panel/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_l0hgq")
 text = "Resume Game"
 
-[node name="restart" type="Button" parent="CenterContainer/PanelContainer/Panel/CenterContainer/VBoxContainer"]
+[node name="Restart" type="Button" parent="Pause_UI/PanelContainer/Panel/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_l0hgq")
 text = "Restart level"
 
-[node name="options" type="Button" parent="CenterContainer/PanelContainer/Panel/CenterContainer/VBoxContainer"]
+[node name="Options" type="Button" parent="Pause_UI/PanelContainer/Panel/VBoxContainer"]
 layout_mode = 2
-text = "Options (WIP)"
+theme = ExtResource("2_l0hgq")
+text = "Option"
 
-[node name="menu" type="Button" parent="CenterContainer/PanelContainer/Panel/CenterContainer/VBoxContainer"]
+[node name="Menu" type="Button" parent="Pause_UI/PanelContainer/Panel/VBoxContainer"]
 layout_mode = 2
-text = "Go to main menu (WIP)"
+theme = ExtResource("2_l0hgq")
+text = "Main Menu"
 
-[node name="quit" type="Button" parent="CenterContainer/PanelContainer/Panel/CenterContainer/VBoxContainer"]
+[node name="Exit" type="Button" parent="Pause_UI/PanelContainer/Panel/VBoxContainer"]
 layout_mode = 2
-text = "Quit"
+theme = ExtResource("2_l0hgq")
+text = "Exit Game"
 
-[connection signal="pressed" from="CenterContainer/PanelContainer/Panel/CenterContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="CenterContainer/PanelContainer/Panel/CenterContainer/VBoxContainer/restart" to="." method="_on_restart_pressed"]
-[connection signal="pressed" from="CenterContainer/PanelContainer/Panel/CenterContainer/VBoxContainer/options" to="." method="_on_options_pressed"]
-[connection signal="pressed" from="CenterContainer/PanelContainer/Panel/CenterContainer/VBoxContainer/menu" to="." method="_on_menu_pressed"]
-[connection signal="pressed" from="CenterContainer/PanelContainer/Panel/CenterContainer/VBoxContainer/quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Pause_UI/PanelContainer/Panel/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Pause_UI/PanelContainer/Panel/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="Pause_UI/PanelContainer/Panel/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="Pause_UI/PanelContainer/Panel/VBoxContainer/Menu" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="Pause_UI/PanelContainer/Panel/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

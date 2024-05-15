@@ -1,4 +1,4 @@
-extends RigidBody2D
+class_name Weapon extends RigidBody2D
 
 @export_enum("melee", "ranged") var projectile_type: int
 @export var throw_strength: float = 250.0
@@ -14,7 +14,6 @@ var active: bool = true #disables the weapon if it's on the floor or on the back
 func _ready() -> void:
 	#my precious little hack, my precious...
 	player_path = get_tree().get_nodes_in_group("player")[0]
-	collision_box
 
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("drop-pickup"):
@@ -32,7 +31,7 @@ func throw() -> void:
 	if is_held:
 		reparent(cur_scene)
 		freeze = false
-		linear_velocity = player_path.looking_at_direction() * throw_strength
+		linear_velocity = player_path.looking_at() * throw_strength
 		collision_box.disabled = false
 		is_held = false
 		#disable the weapon functionality after we throw it

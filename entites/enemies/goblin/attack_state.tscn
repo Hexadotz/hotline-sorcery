@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://dg6k2vofxo3o4"]
+
+[ext_resource type="Script" path="res://entites/enemies/goblin/attack_state.gd" id="1_am06r"]
+[ext_resource type="AudioStream" uid="uid://y3huog7h0od8" path="res://sound/audio_streams/swing_set.tres" id="2_2oq2l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tl4ue"]
+size = Vector2(24.5, 46)
+
+[node name="attack_state" type="Node2D" node_paths=PackedStringArray("damage_area", "swing_audio")]
+script = ExtResource("1_am06r")
+damage_area = NodePath("damage_box")
+swing_audio = NodePath("swing sfx")
+
+[node name="damage_box" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="damage_box"]
+position = Vector2(11.75, 2)
+shape = SubResource("RectangleShape2D_tl4ue")
+debug_color = Color(0.600527, 0.308065, 2.88785e-07, 0.419608)
+
+[node name="swing sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_2oq2l")
+
+[connection signal="body_entered" from="damage_box" to="." method="_on_damage_box_body_entered"]

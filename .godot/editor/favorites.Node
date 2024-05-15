@@ -5,3 +5,7 @@ AnimatedSprite2D
 Sprite2D
 Timer
 Area2D
+ColorRect
+AudioStreamPlayer
+Node
+Button
