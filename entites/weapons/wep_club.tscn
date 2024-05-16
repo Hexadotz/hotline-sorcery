@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://cfbu68jex4a01"]
+
+[ext_resource type="Script" path="res://entites/weapons/scripts/wep_melee.gd" id="1_cc7cn"]
+[ext_resource type="Texture2D" uid="uid://c57y24dd7apdi" path="res://art/pickups/club.png" id="2_n4wep"]
+[ext_resource type="PackedScene" uid="uid://dtb0vl8kpt8gh" path="res://entites/weapons/hurtbox_base.tscn" id="3_f0r36"]
+[ext_resource type="AudioStream" uid="uid://y3huog7h0od8" path="res://sound/audio_streams/swing_set.tres" id="3_nuyxt"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_l3m7q"]
+friction = 0.0
+rough = true
+bounce = 0.1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ctcjp"]
+size = Vector2(30, 5)
+
+[node name="wep_melee" type="RigidBody2D" node_paths=PackedStringArray("hurtbox", "audio") groups=["weapon"]]
+collision_layer = 11
+physics_material_override = SubResource("PhysicsMaterial_l3m7q")
+gravity_scale = 0.0
+can_sleep = false
+script = ExtResource("1_cc7cn")
+type = "club"
+hurtbox = NodePath("Hurtbox")
+audio = NodePath("swing-SFX")
+throw_strength = 500.0
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_n4wep")
+flip_h = true
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ctcjp")
+
+[node name="Hurtbox" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("3_f0r36")]
+parent = NodePath("..")
+
+[node name="swing-SFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_nuyxt")

@@ -1,12 +1,16 @@
 [gd_scene load_steps=2 format=3 uid="uid://fip1cv74ls24"]
 
-[ext_resource type="Script" path="res://entites/enemies/template/detection_script.gd" id="1_mj6x0"]
+[ext_resource type="Script" path="res://entites/enemies/template/eye_sight.gd" id="1_65rcq"]
 
-[node name="eye_sight" type="Area2D"]
-collision_layer = 0
-collision_mask = 4
-monitorable = false
-script = ExtResource("1_mj6x0")
+[node name="eye_sight" type="Node2D"]
+script = ExtResource("1_65rcq")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(0, 0, 120, -100, 120, 100)
+[node name="player" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="player"]
+polygon = PackedVector2Array(0, 0, 150, -130, 150, 130)
+
+[node name="weapon" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="weapon"]
+polygon = PackedVector2Array(150, -134, 152, 129, -2, 0)

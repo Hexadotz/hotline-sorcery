@@ -1,3 +1,7 @@
+CollisionPolygon2D
+Area2D
+Timer
+Node
 RemoteTransform2D
 Button
 Control
@@ -7,9 +11,5 @@ Panel
 PanelContainer
 CenterContainer
 CanvasLayer
-Timer
-Node
 Node2D
 Path2D
-AudioStreamPlayer
-CollisionShape2D

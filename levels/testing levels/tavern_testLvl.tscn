@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bb6wptty77ery" path="res://entites/player/player_base.tscn" id="4_jf0if"]
 [ext_resource type="PackedScene" uid="uid://bbl8s2qnonmam" path="res://entites/weapons/wep_template.tscn" id="5_o578n"]
 [ext_resource type="PackedScene" uid="uid://c3bfulxgsvkoj" path="res://misc/debugging/Stats_overlay.tscn" id="5_vlsq4"]
-[ext_resource type="PackedScene" uid="uid://cfbu68jex4a01" path="res://entites/weapons/wep_melee.tscn" id="6_ffd1q"]
+[ext_resource type="PackedScene" uid="uid://cfbu68jex4a01" path="res://entites/weapons/wep_club.tscn" id="6_ffd1q"]
 [ext_resource type="TileSet" uid="uid://j5tui1ypp0ue" path="res://levels/testing levels/tavern_tileSet.tres" id="7_0cjn2"]
 [ext_resource type="PackedScene" uid="uid://bxqg66243pmx2" path="res://misc/maxwell/maxwell.tscn" id="8_jlwqr"]
 [ext_resource type="PackedScene" uid="uid://4vuhfs2xtc67" path="res://entites/enemies/template/enemy_template.tscn" id="9_gmyq5"]

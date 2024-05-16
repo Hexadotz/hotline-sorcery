@@ -52,6 +52,9 @@ func _physics_process(delta: float) -> void:
 		_animation_process(delta)
 	else:
 		velocity = velocity.lerp(Vector2.ZERO, 5 * get_physics_process_delta_time())
+		
+		if Input.is_action_just_pressed("restart"):
+			get_tree().reload_current_scene()
 	
 	move_and_slide()
 
@@ -93,7 +96,7 @@ func death(direc: Vector2) -> void:
 	body_anim.play("death")
 	if !IS_DEAD:
 		velocity = direc * 200
-		rotation = global_position.angle_to(direction.normalized())
+		#rotation = global_position.angle_to(direction)
 		IS_DEAD = true
 	
 	var blood_ins: GPUParticles2D = blood.instantiate()
@@ -106,3 +109,4 @@ func death(direc: Vector2) -> void:
 	blood_ins.process_material.direction = -blood_dir
 	
 	cur_scene.add_child(blood_ins)
+

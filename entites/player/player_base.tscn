@@ -276,6 +276,7 @@ animations = [{
 }]
 
 [node name="player" type="CharacterBody2D" node_paths=PackedStringArray("body_anim", "legs_anim", "camera") groups=["player"]]
+z_index = 1
 collision_layer = 5
 motion_mode = 1
 script = ExtResource("1_2y85j")

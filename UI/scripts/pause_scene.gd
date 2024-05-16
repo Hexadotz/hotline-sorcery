@@ -27,7 +27,7 @@ func _physics_process(_delta: float) -> void:
 
 #--------------------------------------------------------------------------#
 func _on_resume_pressed() -> void:
-	is_paused = false
+	is_paused = true
 
 func _on_restart_pressed() -> void:
 	get_tree().reload_current_scene()

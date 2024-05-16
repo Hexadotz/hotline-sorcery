@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=22 format=3 uid="uid://bdqsq83jwm8rf"]
+[gd_resource type="SpriteFrames" load_steps=24 format=3 uid="uid://bdqsq83jwm8rf"]
 
 [ext_resource type="Texture2D" uid="uid://c2yd8mo8mupep" path="res://art/goblin/goblin.png" id="1_x2v2b"]
 
@@ -34,11 +34,15 @@ region = Rect2(0, 192, 64, 64)
 atlas = ExtResource("1_x2v2b")
 region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_c1yl2"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_7wjyt"]
 atlas = ExtResource("1_x2v2b")
 region = Rect2(192, 128, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_slkri"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_f5x48"]
+atlas = ExtResource("1_x2v2b")
+region = Rect2(0, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vshks"]
 atlas = ExtResource("1_x2v2b")
 region = Rect2(0, 192, 64, 64)
 
@@ -61,6 +65,10 @@ region = Rect2(192, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_a412a"]
 atlas = ExtResource("1_x2v2b")
 region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3r323"]
+atlas = ExtResource("1_x2v2b")
+region = Rect2(192, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k7ymw"]
 atlas = ExtResource("1_x2v2b")
@@ -112,7 +120,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_a1cqh")
 }],
-"loop": true,
+"loop": false,
 "name": &"death",
 "speed": 5.0
 }, {
@@ -126,14 +134,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_c1yl2")
+"texture": SubResource("AtlasTexture_7wjyt")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_slkri")
+"texture": SubResource("AtlasTexture_f5x48")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vshks")
 }],
 "loop": false,
-"name": &"knockback",
-"speed": 5.0
+"name": &"knock_back",
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -154,6 +165,14 @@ animations = [{
 "loop": true,
 "name": &"run",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3r323")
+}],
+"loop": false,
+"name": &"unarmed",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
