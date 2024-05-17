@@ -1,5 +1,5 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1715897864
+::res://::1715982998
 icon.svg::CompressedTexture2D::537017795355917130::1715124272::1715124272::1::::<><>::
 ::res://addons/::1715124272
 ::res://addons/godot-idea-board/::1715124272
@@ -86,7 +86,7 @@ translation.csv::::-1::1715124272::1715124272::1::::<><>::
 translation.en.translation::OptimizedTranslation::519172063214165863::1715101604::0::1::::<><>::
 translation.gd::GDScript::-1::1715124272::0::1::::<>Node<>::
 translation.ja_JP.translation::OptimizedTranslation::9198974260189371630::1715101604::0::1::::<><>::
-::res://addons/Todo_Manager/::1715897863
+::res://addons/Todo_Manager/::1715982997
 ColourPicker.gd::GDScript::-1::1715124272::0::1::::<>HBoxContainer<>::
 Current.gd::GDScript::-1::1715124272::0::1::::<>Panel<>::
 Dock.gd::GDScript::-1::1715124272::0::1::::<>Control<>::
@@ -94,7 +94,7 @@ Pattern.gd::GDScript::-1::1715124272::0::1::::<>HBoxContainer<>::
 plugin.cfg::TextFile::-1::1715124272::0::1::::<><>::
 plugin.gd::GDScript::-1::1715124272::0::1::::<>EditorPlugin<>::
 Project.gd::GDScript::-1::1715124272::0::1::::<>Panel<>::
-todo.cfg::TextFile::-1::1715897863::0::1::::<><>::
+todo.cfg::TextFile::-1::1715982997::0::1::::<><>::
 todoItem_class.gd::GDScript::-1::1715124272::0::1::::<>RefCounted<>::
 todo_class.gd::GDScript::-1::1715124272::0::1::::<>RefCounted<>::
 ::res://addons/Todo_Manager/doc/::1715124272
@@ -132,30 +132,31 @@ wand.png::CompressedTexture2D::4505033346569688875::1715808552::1715864417::1:::
 inn_tilemap.png::CompressedTexture2D::8992602660459564151::1715101475::1715124272::1::::<><>::
 ::res://entites/::1715282938
 ::res://entites/enemies/::1715602806
-::res://entites/enemies/goblin/::1715897114
+::res://entites/enemies/goblin/::1715978843
 attack_state.gd::GDScript::-1::1715644742::0::1::::<>Node2D<>::
 attack_state.tscn::PackedScene::7645047334522558185::1715867335::0::1::::<><>::res://entites/enemies/goblin/attack_state.gd<>uid://y3huog7h0od8::::res://sound/audio_streams/swing_set.tres
-goblin.tscn::PackedScene::655569007671304087::1715897114::0::1::::<><>::res://entites/enemies/goblin/goblin_script.gd<>uid://bdqsq83jwm8rf::::res://entites/enemies/goblin/goblin_sprites.tres<>uid://bc6kr4x6hxvn2::::res://entites/enemies/template/hostile_move_state.tscn<>uid://fip1cv74ls24::::res://entites/enemies/template/eye_sight.tscn<>uid://dg6k2vofxo3o4::::res://entites/enemies/goblin/attack_state.tscn<>uid://cv0wglh2kryn7::::res://entites/enemies/goblin/hide_state.tscn<>uid://i7ttmc5me7rg::::res://entites/enemies/goblin/panic_state.tscn<>uid://chrkslhg8odb4::::res://entites/enemies/goblin/knockback_state.tscn
-goblin_script.gd::GDScript::-1::1715877943::0::1::::Goblin<>CharacterBody2D<>::
-goblin_sprites.tres::SpriteFrames::2631140514208336299::1715895176::0::1::::<><>::uid://c2yd8mo8mupep::::res://art/goblin/goblin.png
+goblin.tscn::PackedScene::655569007671304087::1715978843::0::1::::<><>::res://entites/enemies/goblin/goblin_script.gd<>uid://bdqsq83jwm8rf::::res://entites/enemies/goblin/goblin_sprites.tres<>uid://bc6kr4x6hxvn2::::res://entites/enemies/template/hostile_move_state.tscn<>uid://fip1cv74ls24::::res://entites/enemies/template/eye_sight.tscn<>uid://dg6k2vofxo3o4::::res://entites/enemies/goblin/attack_state.tscn<>uid://cv0wglh2kryn7::::res://entites/enemies/goblin/hide_state.tscn<>uid://i7ttmc5me7rg::::res://entites/enemies/goblin/panic_state.tscn<>uid://chrkslhg8odb4::::res://entites/enemies/goblin/knockback_state.tscn
+goblin_script.gd::GDScript::-1::1715978842::0::1::::Goblin<>CharacterBody2D<>::
+goblin_sprites.tres::SpriteFrames::2631140514208336299::1715976223::0::1::::<><>::uid://c2yd8mo8mupep::::res://art/goblin/goblin.png
 hide_state.gd::GDScript::-1::1715696858::0::1::::<>Node<>::
 hide_state.tscn::PackedScene::6299763606051966850::1715874219::0::1::::<><>::res://entites/enemies/goblin/hide_state.gd
-knockback_state.gd::GDScript::-1::1715873718::0::1::::<>Node<>::
-knockback_state.tscn::PackedScene::5299897597777145675::1715874219::0::1::::<><>::res://entites/enemies/goblin/knockback_state.gd
+knockback_state.gd::GDScript::-1::1715977011::0::1::::<>Node<>::
+knockback_state.tscn::PackedScene::5299897597777145675::1715978843::0::1::::<><>::res://entites/enemies/goblin/knockback_state.gd
 panic_state.gd::GDScript::-1::1715802861::0::1::::<>Node<>::
 panic_state.tscn::PackedScene::628759024930031848::1715874219::0::1::::<><>::res://entites/enemies/goblin/panic_state.gd
-::res://entites/enemies/template/::1715897741
-detection_script.gd::GDScript::-1::1715897729::0::1::::<>Node2D<>::
+::res://entites/enemies/template/::1715978843
+detection_script.gd::GDScript::-1::1715898155::0::1::::<>Node2D<>::
 enemy_template.gd::GDScript::-1::1715601271::0::1::::EnemyClass<>CharacterBody2D<>::
 enemy_template.tscn::PackedScene::2080055530432330542::1715639001::0::1::::<><>::res://entites/enemies/template/enemy_template.gd<>res://entites/enemies/template/detection_script.gd
-eye_sight.tscn::PackedScene::368416564736398819::1715897741::0::1::::<><>::res://entites/enemies/template/detection_script.gd
-hostile_move_state.gd::GDScript::-1::1715807898::0::1::::<>Node<>::
-hostile_move_state.tscn::PackedScene::2591433169895503729::1715897114::0::1::::<><>::res://entites/enemies/template/hostile_move_state.gd
-::res://entites/player/::1715897114
+eye_sight.gd::GDScript::-1::1715977058::0::1::::<>Node2D<>::
+eye_sight.tscn::PackedScene::368416564736398819::1715978843::0::1::::<><>::res://entites/enemies/template/eye_sight.gd
+hostile_move_state.gd::GDScript::-1::1715977504::0::1::::<>Node<>::
+hostile_move_state.tscn::PackedScene::2591433169895503729::1715978843::0::1::::<><>::res://entites/enemies/template/hostile_move_state.gd
+::res://entites/player/::1715978842
 health_manager.gd::GDScript::-1::1715639145::0::1::::<>Node2D<>::
 health_manager.tscn::PackedScene::5834656055344942524::1715639145::0::1::::<><>::res://entites/player/health_manager.gd
 move_state.tscn::PackedScene::7988444014913232433::1715549499::0::1::::<><>::res://entites/player/scripts/move_state.gd
-player_base.tscn::PackedScene::2521968826885834666::1715897114::0::1::::<><>::res://entites/player/scripts/player_base.gd<>uid://bkt8rwoa3jdh3::::res://art/player/player_death.png<>uid://dl2wrgx64v4mn::::res://entites/player/move_state.tscn<>uid://xs417e8g88yr::::res://art/player/player_death2.png<>uid://b0yixotfdub5k::::res://entites/player/weapon_manager.tscn<>uid://bxrta1oppe24y::::res://UI/pause_scene.tscn<>uid://b1k6amgksjnvj::::res://art/player/player_legs.png<>uid://dgqvcxmgljdeu::::res://art/player/player_legs2.png<>uid://b6b5dsriav5gw::::res://art/player/player.png
+player_base.tscn::PackedScene::2521968826885834666::1715978842::0::1::::<><>::res://entites/player/scripts/player_base.gd<>uid://bkt8rwoa3jdh3::::res://art/player/player_death.png<>uid://dl2wrgx64v4mn::::res://entites/player/move_state.tscn<>uid://xs417e8g88yr::::res://art/player/player_death2.png<>uid://b0yixotfdub5k::::res://entites/player/weapon_manager.tscn<>uid://bxrta1oppe24y::::res://UI/pause_scene.tscn<>uid://b1k6amgksjnvj::::res://art/player/player_legs.png<>uid://dgqvcxmgljdeu::::res://art/player/player_legs2.png<>uid://b6b5dsriav5gw::::res://art/player/player.png
 test_mesh.tscn::PackedScene::6387281235914567578::1715124272::0::1::::<><>::
 weapon_manager.tscn::PackedScene::4191214414853449914::1715895221::0::1::::<><>::res://entites/player/scripts/hands_script.gd<>uid://bpt5t83htohip::::res://entites/weapons/wep_staff.tscn
 ::res://entites/player/scripts/::1715870318
@@ -163,10 +164,10 @@ Camera_script.gd::GDScript::-1::1715124272::0::1::::<>Camera2D<>::
 hands_script.gd::GDScript::-1::1715263667::0::1::::<>Node2D<>::
 move_state.gd::GDScript::-1::1715466300::0::1::::<>Node<>::
 player_base.gd::GDScript::-1::1715870318::0::1::::PlayerScript<>CharacterBody2D<>::
-::res://entites/weapons/::1715897114
-hurtbox_base.tscn::PackedScene::8496470513657724383::1715897114::0::1::::<><>::res://entites/weapons/scripts/hurtbox_base.gd
+::res://entites/weapons/::1715978843
+hurtbox_base.tscn::PackedScene::8496470513657724383::1715978843::0::1::::<><>::res://entites/weapons/scripts/hurtbox_base.gd
 proj_fireball.tscn::PackedScene::4890474460580968565::1715639001::0::1::::<><>::res://entites/weapons/scripts/proj_fireball.gd<>uid://cbgbf5tycsbn8::::res://art/player/flaming_missile.png<>uid://dnb087kq4mhcj::::res://art/player/magic_missile.png
-wep_club.tscn::PackedScene::5127121410184217476::1715897114::0::1::::<><>::res://entites/weapons/scripts/wep_melee.gd<>uid://c57y24dd7apdi::::res://art/pickups/club.png<>uid://dtb0vl8kpt8gh::::res://entites/weapons/hurtbox_base.tscn<>uid://y3huog7h0od8::::res://sound/audio_streams/swing_set.tres
+wep_club.tscn::PackedScene::5127121410184217476::1715978843::0::1::::<><>::res://entites/weapons/scripts/wep_melee.gd<>uid://c57y24dd7apdi::::res://art/pickups/club.png<>uid://dtb0vl8kpt8gh::::res://entites/weapons/hurtbox_base.tscn<>uid://y3huog7h0od8::::res://sound/audio_streams/swing_set.tres
 wep_staff.tscn::PackedScene::3480333732326984891::1715639001::0::1::::<><>::res://entites/weapons/scripts/wep_staff.gd<>uid://cbw8nuibk3vht::::res://entites/weapons/proj_fireball.tscn
 wep_template.tscn::PackedScene::2481354931134591012::1715639001::0::1::::<><>::res://entites/weapons/scripts/wep_template.gd
 ::res://entites/weapons/scripts/::1715875619
@@ -176,18 +177,18 @@ wep_melee.gd::GDScript::-1::1715875619::0::1::::<>RigidBody2D<>::
 wep_staff.gd::GDScript::-1::1715465317::0::1::::<>Node2D<>::
 wep_template.gd::GDScript::-1::1715594821::0::1::::Weapon<>RigidBody2D<>::
 ::res://levels/::1715124272
-::res://levels/testing levels/::1715897114
+::res://levels/testing levels/::1715978842
 movement_testLvl.tscn::PackedScene::718911046168588::1715124272::0::1::::<><>::res://levels/testing levels/scripts/movement_testLvl.gd<>uid://dkp65ow8han0w::::res://levels/testing levels/new_tile_set.tres<>uid://bb6wptty77ery::::res://entites/player/player_base.tscn<>uid://c3bfulxgsvkoj::::res://misc/debugging/Stats_overlay.tscn
 new_tile_set.tres::TileSet::7894052725184769324::1715124272::0::1::::<><>::uid://hweus7ne4tbu::::res://icon.svg
 tavern_testLvl.gdshader::Shader::-1::1715124272::0::1::::<><>::
-tavern_testLvl.tscn::PackedScene::7997744665310479213::1715897114::0::1::::<><>::res://levels/testing levels/scripts/movement_testLvl.gd<>uid://hweus7ne4tbu::::res://icon.svg<>uid://d1ec375kk662n::::res://art/tilesets/inn_tilemap.png<>uid://bb6wptty77ery::::res://entites/player/player_base.tscn<>uid://bbl8s2qnonmam::::res://entites/weapons/wep_template.tscn<>uid://c3bfulxgsvkoj::::res://misc/debugging/Stats_overlay.tscn<>uid://cfbu68jex4a01::::res://entites/weapons/wep_club.tscn<>uid://j5tui1ypp0ue::::res://levels/testing levels/tavern_tileSet.tres<>uid://bxqg66243pmx2::::res://misc/maxwell/maxwell.tscn<>uid://4vuhfs2xtc67::::res://entites/enemies/template/enemy_template.tscn<>uid://jltejnrxk3tb::::res://entites/enemies/goblin/goblin.tscn
-tavern_tileSet.tres::TileSet::694820725567575800::1715895176::0::1::::<><>::uid://hweus7ne4tbu::::res://icon.svg<>uid://d1ec375kk662n::::res://art/tilesets/inn_tilemap.png
+tavern_testLvl.tscn::PackedScene::7997744665310479213::1715978842::0::1::::<><>::res://levels/testing levels/scripts/movement_testLvl.gd<>uid://hweus7ne4tbu::::res://icon.svg<>uid://d1ec375kk662n::::res://art/tilesets/inn_tilemap.png<>uid://bb6wptty77ery::::res://entites/player/player_base.tscn<>uid://bbl8s2qnonmam::::res://entites/weapons/wep_template.tscn<>uid://c3bfulxgsvkoj::::res://misc/debugging/Stats_overlay.tscn<>uid://cfbu68jex4a01::::res://entites/weapons/wep_club.tscn<>uid://j5tui1ypp0ue::::res://levels/testing levels/tavern_tileSet.tres<>uid://bxqg66243pmx2::::res://misc/maxwell/maxwell.tscn<>uid://jltejnrxk3tb::::res://entites/enemies/goblin/goblin.tscn
+tavern_tileSet.tres::TileSet::694820725567575800::1715976223::0::1::::<><>::uid://hweus7ne4tbu::::res://icon.svg<>uid://d1ec375kk662n::::res://art/tilesets/inn_tilemap.png
 ::res://levels/testing levels/scripts/::1715875034
 movement_testLvl.gd::GDScript::-1::1715875034::0::1::::<>Node2D<>::
-::res://misc/::1715799852
-blood_particle.gd::GDScript::-1::1715467302::0::1::::<>GPUParticles2D<>::
+::res://misc/::1715979391
+blood_particle.gd::GDScript::-1::1715978970::0::1::::<>GPUParticles2D<>::
 blood_particle.tres::ParticleProcessMaterial::423266358105475982::1715799852::0::1::::<><>::
-blood_particle.tscn::PackedScene::8477332770708254650::1715711318::0::1::::<><>::res://misc/blood_particle.gd<>uid://gbbeufdut16q::::res://misc/blood_particle.tres<>uid://233f6yg0gn5e::::res://art/blood.png
+blood_particle.tscn::PackedScene::8477332770708254650::1715979391::0::1::::<><>::res://misc/blood_particle.gd<>uid://gbbeufdut16q::::res://misc/blood_particle.tres<>uid://233f6yg0gn5e::::res://art/blood.png
 UI_theme.tres::Theme::20835546859447742::1715284937::0::1::::<><>::uid://dfecjk6s07bx0::::res://misc/fonts/medieval_fontA.tres
 ::res://misc/autoloads/::1715803003
 global_variables.gd::GDScript::-1::1715803003::0::1::::<>Node<>::
@@ -203,9 +204,9 @@ scene.gltf::PackedScene::1051225737182733774::1689165888::1715286422::1::::<><>:
 ::res://misc/maxwell/textures/::1715286226
 dingus_baseColor.jpeg::CompressedTexture2D::6737922776653090466::1689165886::1715286226::1::::<><>::
 whiskers_baseColor.png::CompressedTexture2D::3042505206099617887::1689165888::1715286226::1::::<><>::
-::res://misc/shaders/::1715897742
-background_shader.gdshader::Shader::-1::1715897742::0::1::::<><>::
-vignette.gdshader::Shader::-1::1715897742::0::1::::<><>::
+::res://misc/shaders/::1715979393
+background_shader.gdshader::Shader::-1::1715979393::0::1::::<><>::
+vignette.gdshader::Shader::-1::1715979393::0::1::::<><>::
 ::res://script_templates/::1715601426
 new_script.gd::GDScript::-1::1715601426::0::1::::<>Node<>::
 ::res://sound/::1715641686
@@ -214,10 +215,10 @@ magic_missile.mp3::AudioStreamMP3::7072982476738051712::1715451025::1715451112::
 swish.mp3::AudioStreamMP3::5678589740382833087::1715451025::1715611919::1::::<><>::
 swooosh.mp3::AudioStreamMP3::3784803339812220967::1715451025::1715451112::1::::<><>::
 swosh.mp3::AudioStreamMP3::7534806621599787181::1715451025::1715451112::1::::<><>::
-::res://sound/audio_streams/::1715895176
-swing_set.tres::AudioStreamRandomizer::1742796305313929463::1715895176::0::1::::<><>::uid://cm50sqeximb80::::res://sound/swish.mp3<>uid://dfl6ft3ca85wb::::res://sound/swosh.mp3<>uid://bt6nfmxutjggl::::res://sound/swooosh.mp3
-::res://UI/::1715897114
+::res://sound/audio_streams/::1715976223
+swing_set.tres::AudioStreamRandomizer::1742796305313929463::1715976223::0::1::::<><>::uid://cm50sqeximb80::::res://sound/swish.mp3<>uid://dfl6ft3ca85wb::::res://sound/swosh.mp3<>uid://bt6nfmxutjggl::::res://sound/swooosh.mp3
+::res://UI/::1715900514
 option_menu.tscn::PackedScene::2883725298835351606::1715124272::0::1::::<><>::
-pause_scene.tscn::PackedScene::4037013519985556302::1715897114::0::1::::<><>::res://UI/scripts/pause_scene.gd<>uid://kdfneisskda::::res://misc/UI_theme.tres<>res://misc/shaders/vignette.gdshader
+pause_scene.tscn::PackedScene::4037013519985556302::1715900514::0::1::::<><>::res://UI/scripts/pause_scene.gd<>uid://kdfneisskda::::res://misc/UI_theme.tres<>res://misc/shaders/vignette.gdshader
 ::res://UI/scripts/::1715866575
 pause_scene.gd::GDScript::-1::1715866575::0::1::::PlayerUI<>CanvasLayer<>::

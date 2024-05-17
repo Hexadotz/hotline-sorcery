@@ -1,15 +1,16 @@
-res://entites/enemies/template/eye_sight.tscn
-res://misc/shaders/vignette.gdshader
+res://misc/blood_particle.tscn
 res://sound/audio_streams/swing_set.tres
+res://misc/shaders/vignette.gdshader
 res://levels/testing levels/tavern_tileSet.tres
 res://entites/enemies/goblin/goblin_sprites.tres
 res://misc/shaders/background_shader.gdshader
-res://entites/enemies/template/detection_script.gd
 res://levels/testing levels/tavern_testLvl.tscn
 res://entites/player/player_base.tscn
 res://entites/enemies/goblin/goblin.tscn
 res://entites/enemies/template/hostile_move_state.tscn
 res://entites/weapons/wep_club.tscn
-res://UI/pause_scene.tscn
 res://entites/weapons/hurtbox_base.tscn
-res://entites/enemies/template/eye_sight.gd
+res://entites/enemies/template/eye_sight.tscn
+res://entites/enemies/goblin/knockback_state.tscn
+res://entites/enemies/goblin/goblin_script.gd
+res://entites/enemies/goblin/hide_state.gd

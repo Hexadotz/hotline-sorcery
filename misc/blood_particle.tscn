@@ -9,7 +9,7 @@ atlas = ExtResource("1_nm5gg")
 region = Rect2(0, 0, 8, 8)
 filter_clip = true
 
-[node name="blood_particle" type="GPUParticles2D"]
+[node name="blood_particle" type="GPUParticles2D" groups=["particle"]]
 z_index = -1
 rotation = 1.5708
 amount = 64

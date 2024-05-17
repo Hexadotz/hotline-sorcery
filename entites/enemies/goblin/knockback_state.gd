@@ -17,5 +17,9 @@ func knockback(direction: Vector2) -> void:
 		parent.velocity = lerp(parent.velocity, Vector2.ZERO, parent.ass_firction * get_physics_process_delta_time())
 
 func _on_timer_timeout() -> void:
-	parent.set_state(parent.STATES.CHASE)
+	if parent.ARMED:
+		parent.set_state(parent.STATES.CHASE)
+	else:
+		parent.set_state(parent.STATES.SEARCH_WEP)
+	
 	knocked_back = false

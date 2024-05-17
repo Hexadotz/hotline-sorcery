@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dl7fxlgsl1vn6"]
+[gd_scene load_steps=18 format=3 uid="uid://dl7fxlgsl1vn6"]
 
 [ext_resource type="Script" path="res://levels/testing levels/scripts/movement_testLvl.gd" id="1_r4i0w"]
 [ext_resource type="Texture2D" uid="uid://hweus7ne4tbu" path="res://icon.svg" id="2_fhs1k"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://cfbu68jex4a01" path="res://entites/weapons/wep_club.tscn" id="6_ffd1q"]
 [ext_resource type="TileSet" uid="uid://j5tui1ypp0ue" path="res://levels/testing levels/tavern_tileSet.tres" id="7_0cjn2"]
 [ext_resource type="PackedScene" uid="uid://bxqg66243pmx2" path="res://misc/maxwell/maxwell.tscn" id="8_jlwqr"]
-[ext_resource type="PackedScene" uid="uid://4vuhfs2xtc67" path="res://entites/enemies/template/enemy_template.tscn" id="9_gmyq5"]
 [ext_resource type="PackedScene" uid="uid://jltejnrxk3tb" path="res://entites/enemies/goblin/goblin.tscn" id="9_urmhy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e5v8l"]
@@ -558,10 +557,6 @@ position = Vector2(-129, -71)
 
 [node name="goblin2" parent="enemies" instance=ExtResource("9_urmhy")]
 position = Vector2(-335, -790)
-
-[node name="mark" parent="enemies" instance=ExtResource("9_gmyq5")]
-position = Vector2(-111, -462)
-rotation = 1.57079
 
 [node name="goblin3" parent="enemies" instance=ExtResource("9_urmhy")]
 position = Vector2(-9, -608)

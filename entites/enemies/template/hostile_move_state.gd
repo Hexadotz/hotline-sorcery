@@ -3,7 +3,7 @@ extends Node
 @export var parent: Node2D = get_parent()
 #---------------------------------------------------------#
 
-func move(target_pos: Vector2) -> void:
+func move_to(target_pos: Vector2) -> void:
 	parent.nav_agent.target_position = target_pos
 	
 	var next_point: Vector2 = parent.nav_agent.get_next_path_position()

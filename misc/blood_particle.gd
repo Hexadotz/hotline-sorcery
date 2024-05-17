@@ -21,4 +21,6 @@ func _ready() -> void:
 	texture = atlas_tex
 
 func _on_finish_timer_timeout() -> void:
+	set_process(false)
+	set_physics_process(false)
 	speed_scale = 0

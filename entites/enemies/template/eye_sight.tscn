@@ -2,8 +2,10 @@
 
 [ext_resource type="Script" path="res://entites/enemies/template/eye_sight.gd" id="1_65rcq"]
 
-[node name="eye_sight" type="Node2D"]
+[node name="eye_sight" type="Node2D" node_paths=PackedStringArray("player_sight", "wep_sight_area")]
 script = ExtResource("1_65rcq")
+player_sight = NodePath("player")
+wep_sight_area = NodePath("weapon")
 
 [node name="player" type="Area2D" parent="."]
 

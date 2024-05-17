@@ -21,7 +21,7 @@ func hide() -> void:
 			location_acquired = true
 		
 		#once we have a place to go to, well go to it
-		parent.move_state.move(location)
+		parent.move_state.move_to(location)
 		
 		#once we reach our hiding spot set the state to panic
 		parent.nav_agent.connect("target_reached" , func(): parent.set_state(parent.STATES.PANIC))

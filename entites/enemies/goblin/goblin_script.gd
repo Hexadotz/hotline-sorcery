@@ -15,6 +15,7 @@ class_name Goblin extends CharacterBody2D
 @export_range(25.0, 50, 0.1) var attack_distance: float = 30
 @export var detection_range: float = 100 ##the distance the enemy can look too
 @export var detection_gap: float = 40.0 ##how wide the view
+@export var pickup_raduis: float = 25.0 ##how close the weapon needs to be for the enemy to pick it up
 
 @onready var player: PlayerScript = GlobalVariables.player
 @onready var cur_scene:= get_tree().get_current_scene()
@@ -35,14 +36,21 @@ enum STATES{
 	KNOCKBACK,	#4
 	HIDING,		#5
 	PATROL,		#6
-	DEATH		#7
+	DEATH,		#7
+	SEARCH_WEP,	#8
 }
+
 var previous_st: STATES = STATES.IDLE
 var current_st: STATES = STATES.IDLE
 
+enum OCUP{
+	PLAYER,
+	SEARCH_WEP,
+}
+
 #WIP
+var current_target: Node2D = null
 var weapon_memory: Array = []
-#var node_list: Array[Node2D] = get_overlapping_bodies()
 #----------------------------------------------------------#
 func _ready() -> void:
 	pass
@@ -54,10 +62,8 @@ func _physics_process(_delta: float) -> void:
 		velocity = lerp(velocity, Vector2.ZERO, ass_firction * get_physics_process_delta_time())
 		if velocity.length() < 10:
 			body.disabled = true
+		
 	move_and_slide()
-	
-	#if weapon_memory.size() > 0:
-	print("wepons:", weapon_memory)
 
 #the base state machine 
 func _state_machine() -> void:
@@ -69,7 +75,7 @@ func _state_machine() -> void:
 				set_state(STATES.HIDING)
 		
 		STATES.CHASE:
-			move_state.move(player.global_position)
+			move_state.move_to(player.global_position)
 			
 			#if the hostile is close enough to the player attack
 			if !player.IS_DEAD:
@@ -86,7 +92,7 @@ func _state_machine() -> void:
 		
 		STATES.KNOCKBACK:
 			
-			knock_state.knockback(last_shot_dir) #<------ WIP
+			knock_state.knockback(last_shot_dir)
 			drop_weapon()
 			
 		STATES.HIDING:
@@ -97,6 +103,11 @@ func _state_machine() -> void:
 		
 		STATES.DEATH:
 			DEATH(last_shot_dir)
+		
+		STATES.SEARCH_WEP:
+			print("looking for a wapon")
+			print(weapon_memory)
+			look_for_weapon()
 
 func set_state(new_st: STATES) -> void:
 	previous_st = current_st
@@ -124,8 +135,23 @@ func DEATH(dir: Vector2) -> void:
 	if !IS_DEAD:
 		velocity = dir * 100
 		IS_DEAD = true
+
+#NOTE: the bastard can steal the club from your hand and kill you with it
+func look_for_weapon() -> void:
+	if weapon_memory.size() != 0:
+		var min_dist: float = global_position.distance_to(weapon_memory[0].global_position)
+		current_target = weapon_memory[0]
+		for wep in weapon_memory:
+			if global_position.distance_to(wep.global_position) < min_dist:
+				min_dist = global_position.distance_to(wep.global_position)
+				current_target = wep
+	else:
+		set_state(STATES.HIDING)
 	
-	sight_area.monitoring = false
+	move_state.move_to(current_target.global_position)
+	#if the enemy is close enough pickup a weapon
+	if global_position.distance_to(current_target.global_position) < pickup_raduis:
+		pickup_weapon(current_target)
 
 func drop_weapon() -> void:
 	#make the enemy unarmed
@@ -136,8 +162,10 @@ func drop_weapon() -> void:
 		
 		cur_scene.add_child(wep_ins)
 		ARMED = false
-		
-		set_state(STATES.HIDING)
 
-func pickup_weapon() -> void:
-	pass
+func pickup_weapon(wep: Node2D) -> void:
+	var prev_wep_index: int = weapon_memory.find(current_target)
+	weapon_memory.remove_at(prev_wep_index)
+	current_target.queue_free()
+	ARMED = true
+	set_state(STATES.CHASE)
