@@ -85,10 +85,9 @@ func _camera_process(delta: float) -> void:
 	#limit the pan raduis
 	camera.offset = clamp(camera.offset, -thres, thres)
 	
-	
 	#TODO: figure out how to overwrite godot's shitty camera rotation inheritance 
-	camera.rotation_degrees = clamp(camera.rotation_degrees, -max_ang, max_ang)
-	camera.rotation_degrees = lerp(camera.rotation_degrees, direction.x, tilt_strength * delta)
+	#camera.rotation_degrees = clamp(camera.rotation_degrees, -max_ang, max_ang)
+	#camera.rotation_degrees = lerp(camera.rotation_degrees, direction.x, tilt_strength * delta)
 
 
 func death(direc: Vector2) -> void:

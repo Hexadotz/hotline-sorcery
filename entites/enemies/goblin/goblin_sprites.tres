@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=24 format=3 uid="uid://bdqsq83jwm8rf"]
+[gd_resource type="SpriteFrames" load_steps=23 format=3 uid="uid://bdqsq83jwm8rf"]
 
 [ext_resource type="Texture2D" uid="uid://c2yd8mo8mupep" path="res://art/goblin/goblin.png" id="1_x2v2b"]
 
@@ -39,10 +39,6 @@ atlas = ExtResource("1_x2v2b")
 region = Rect2(192, 128, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f5x48"]
-atlas = ExtResource("1_x2v2b")
-region = Rect2(0, 192, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vshks"]
 atlas = ExtResource("1_x2v2b")
 region = Rect2(0, 192, 64, 64)
 
@@ -138,9 +134,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_f5x48")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vshks")
 }],
 "loop": false,
 "name": &"knock_back",

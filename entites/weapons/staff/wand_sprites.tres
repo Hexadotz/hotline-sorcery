@@ -1,0 +1,44 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://bg2qracb3aenk"]
+
+[ext_resource type="Texture2D" uid="uid://b5gjigvhtrrpr" path="res://art/player/wand.png" id="1_f5cx0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1lpii"]
+atlas = ExtResource("1_f5cx0")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2tygh"]
+atlas = ExtResource("1_f5cx0")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e2d8h"]
+atlas = ExtResource("1_f5cx0")
+region = Rect2(32, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_72id3"]
+atlas = ExtResource("1_f5cx0")
+region = Rect2(0, 0, 16, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1lpii")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2tygh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e2d8h")
+}],
+"loop": true,
+"name": &"firing",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_72id3")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]

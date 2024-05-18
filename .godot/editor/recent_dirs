@@ -1,3 +1,7 @@
+res://entites/objects/scripts
+res://entites/objects
+res://entites/weapons/staff
+res://art/player
 res://entites/enemies/template
 res://entites/weapons/scripts
 res://entites/weapons
@@ -6,7 +10,6 @@ res://entites/enemies/goblin
 res://UI/scripts
 res://UI
 res://sound/audio_streams
-res://art/player
 res://entites/player
 res://
 res://misc/shaders
@@ -17,5 +20,3 @@ res://misc/fonts
 res://misc/autoloads
 res://entites/player/scripts
 res://misc/debugging
-res://levels/testing levels/scripts
-res://levels/testing levels

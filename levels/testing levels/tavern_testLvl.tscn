@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dl7fxlgsl1vn6"]
+[gd_scene load_steps=20 format=3 uid="uid://dl7fxlgsl1vn6"]
 
 [ext_resource type="Script" path="res://levels/testing levels/scripts/movement_testLvl.gd" id="1_r4i0w"]
 [ext_resource type="Texture2D" uid="uid://hweus7ne4tbu" path="res://icon.svg" id="2_fhs1k"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bb6wptty77ery" path="res://entites/player/player_base.tscn" id="4_jf0if"]
 [ext_resource type="PackedScene" uid="uid://bbl8s2qnonmam" path="res://entites/weapons/wep_template.tscn" id="5_o578n"]
 [ext_resource type="PackedScene" uid="uid://c3bfulxgsvkoj" path="res://misc/debugging/Stats_overlay.tscn" id="5_vlsq4"]
+[ext_resource type="PackedScene" uid="uid://car4fbrrolllm" path="res://entites/objects/path_follow.tscn" id="5_wcpus"]
 [ext_resource type="PackedScene" uid="uid://cfbu68jex4a01" path="res://entites/weapons/wep_club.tscn" id="6_ffd1q"]
 [ext_resource type="TileSet" uid="uid://j5tui1ypp0ue" path="res://levels/testing levels/tavern_tileSet.tres" id="7_0cjn2"]
 [ext_resource type="PackedScene" uid="uid://bxqg66243pmx2" path="res://misc/maxwell/maxwell.tscn" id="8_jlwqr"]
@@ -472,7 +473,13 @@ source_geometry_group_name = &"nav"
 
 [sub_resource type="Curve2D" id="Curve2D_6fofc"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -272.998, -672.904, -68.8651, -30.7244, 68.8651, 30.7244, -215, -252, -72.0435, 57.211, 72.0435, -57.211, 231, -300, 20.9783, 61.0685, -20.9783, -61.0685, 262.616, -646.704, 0, 0, 0, 0, -272, -675)
+"points": PackedVector2Array(9.4402, -52.1858, -9.4402, 52.1858, -333.644, -618.331, -23.076, -17.7654, 23.076, 17.7654, -327.703, -363.662, -20.9782, 21.0964, 20.9782, -21.0964, -210.879, -368.902, 16.7826, 15.5447, -16.7826, -15.5447, -208.898, -614.139, 31.4673, -22.2067, -31.4673, 22.2067, -333.644, -619.379)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_6quv5"]
+_data = {
+"points": PackedVector2Array(-39.2001, 19.0703, 39.2001, -19.0703, -13, -467, -29.665, -21.1893, 29.665, 21.1893, 248, -491, 27.5461, -41.3191, -27.5461, 41.3191, 254, -151, 28.6055, 42.3785, -28.6055, -42.3785, 4, -154, -23.3082, 33.9028, 23.3082, -33.9028, -14, -465)
 }
 point_count = 5
 
@@ -534,16 +541,28 @@ position = Vector2(-358, -914)
 [node name="bitching_spot6" type="Node2D" parent="levels/AI test" groups=["hiding_spot"]]
 position = Vector2(328, -921)
 
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="levels"]
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="levels/AI test"]
 visible = false
 z_index = 1
-position = Vector2(-38, -611)
+position = Vector2(-50, -452)
 navigation_polygon = SubResource("NavigationPolygon_1ydt3")
 
-[node name="Path2D" type="Path2D" parent="levels"]
-position = Vector2(2.74316, -10.9273)
+[node name="Path2D" type="Path2D" parent="levels/AI test"]
+position = Vector2(-8, 148)
 scale = Vector2(1.01006, 0.954182)
 curve = SubResource("Curve2D_6fofc")
+
+[node name="PathFollow2D" parent="levels/AI test/Path2D" instance=ExtResource("5_wcpus")]
+patrole_speed = 0.1
+
+[node name="Path2D2" type="Path2D" parent="levels/AI test"]
+position = Vector2(-5, 2)
+curve = SubResource("Curve2D_6quv5")
+
+[node name="PathFollow2D" parent="levels/AI test/Path2D2" instance=ExtResource("5_wcpus")]
+position = Vector2(-13, -467)
+rotation = -0.452778
+patrole_speed = 0.1
 
 [node name="player" parent="." instance=ExtResource("4_jf0if")]
 position = Vector2(-15, 130)
@@ -555,15 +574,8 @@ position = Vector2(-129, -71)
 
 [node name="enemies" type="Node2D" parent="."]
 
-[node name="goblin2" parent="enemies" instance=ExtResource("9_urmhy")]
-position = Vector2(-335, -790)
-
 [node name="goblin3" parent="enemies" instance=ExtResource("9_urmhy")]
 position = Vector2(-9, -608)
-rotation = 1.57079
-
-[node name="goblin" parent="enemies" instance=ExtResource("9_urmhy")]
-position = Vector2(199, -792)
 rotation = 1.57079
 
 [node name="Debug_overlay" parent="." instance=ExtResource("5_vlsq4")]

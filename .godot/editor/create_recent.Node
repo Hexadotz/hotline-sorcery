@@ -1,3 +1,8 @@
+Path2D
+AnimatedSprite2D
+AnimationPlayer
+MeshInstance2D
+PathFollow2D
 CollisionPolygon2D
 Area2D
 Timer
@@ -8,8 +13,3 @@ Control
 Label
 VBoxContainer
 Panel
-PanelContainer
-CenterContainer
-CanvasLayer
-Node2D
-Path2D

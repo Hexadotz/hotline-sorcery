@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://car4fbrrolllm"]
+
+[ext_resource type="Script" path="res://entites/objects/scripts/path_follow.gd" id="1_11k2h"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_u183b"]
+size = Vector2(10, 10)
+
+[node name="PathFollow2D" type="PathFollow2D" groups=["patrol_path"]]
+position = Vector2(-333.644, -618.331)
+rotation = 1.74976
+script = ExtResource("1_11k2h")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+modulate = Color(0.716667, 0, 1, 1)
+mesh = SubResource("QuadMesh_u183b")

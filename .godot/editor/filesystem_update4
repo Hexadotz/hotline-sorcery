@@ -1,16 +1,21 @@
-res://misc/blood_particle.tscn
+res://levels/testing levels/tavern_testLvl.tscn
 res://sound/audio_streams/swing_set.tres
+res://entites/weapons/staff/wand_sprites.tres
 res://misc/shaders/vignette.gdshader
 res://levels/testing levels/tavern_tileSet.tres
 res://entites/enemies/goblin/goblin_sprites.tres
 res://misc/shaders/background_shader.gdshader
-res://levels/testing levels/tavern_testLvl.tscn
 res://entites/player/player_base.tscn
 res://entites/enemies/goblin/goblin.tscn
 res://entites/enemies/template/hostile_move_state.tscn
 res://entites/weapons/wep_club.tscn
-res://entites/weapons/hurtbox_base.tscn
-res://entites/enemies/template/eye_sight.tscn
-res://entites/enemies/goblin/knockback_state.tscn
+res://entites/player/weapon_manager.tscn
+res://entites/weapons/wep_staff.tscn
+res://entites/weapons/proj_fireball.tscn
+res://entites/weapons/scripts/wep_melee.gd
+res://entites/player/scripts/hands_script.gd
+res://entites/objects/path_follow.tscn
+res://entites/objects/scripts/path_follow.gd
+res://levels/testing levels/scripts/movement_testLvl.gd
 res://entites/enemies/goblin/goblin_script.gd
-res://entites/enemies/goblin/hide_state.gd
+res://entites/enemies/goblin/attack_state.tscn

@@ -7,18 +7,24 @@ extends Node2D
 @export var staff: Node2D
 @export var pickup_raduis: Area2D
 
-var wep_list: Array[Node2D] 
+var wep_list: Array[Node2D]
+var weapons_dropped: bool = false # this is used so we don't call the drop weapons function too many times
 #-------------------------------------------#
 func _ready() -> void:
 	pass
 
 func _physics_process(_delta: float) -> void:
-	
-	if Input.is_action_just_pressed("drop-pickup"):
-		_pickup_weapon()
-	
-	if Input.is_action_just_pressed("switch_wep"):
-		_switch_wepV2()
+	if !player.IS_DEAD:
+		if Input.is_action_just_pressed("drop-pickup"):
+			_pickup_weapon()
+		
+		if Input.is_action_just_pressed("switch_wep"):
+			_switch_wepV2()
+		
+	#once the player dies, drop all weapons, just once
+	else:
+		if !weapons_dropped:
+			_drop_weapons()
 
 #NOTE: i hate this
 func _switch_wepV2() -> void:
@@ -51,7 +57,6 @@ func _pickup_weapon() -> void:
 	if pickup_raduis.has_overlapping_bodies():
 		var list: Array[Node2D] = pickup_raduis.get_overlapping_bodies()
 		for wep in list:
-			#NOTE: working but i need to clean this somehow... fuck
 			if hand.get_child_count() + back.get_child_count() < 2:
 				#if we have the staff already equipped switch it to the back
 				if hand.get_child_count() == 1:
@@ -65,3 +70,18 @@ func _pickup_weapon() -> void:
 				wep.reparent(hand, false)
 				wep.pickup()
 				wep.global_transform = hand.global_transform
+
+func _drop_weapons() -> void:
+	var prim_wep = hand.get_child(0) if hand.get_child_count() != 0 else null
+	var sec_wep = back.get_child(0) if back.get_child_count() != 0 else null
+	
+	#fucking stupid ugly hack, i hate this
+	if prim_wep != null:
+		prim_wep.reparent(player.cur_scene)
+		if prim_wep.get("active") != null:
+			prim_wep.active = false
+	if sec_wep != null:
+		sec_wep.reparent(player.cur_scene)
+		if sec_wep.get("active") != null:
+			sec_wep.active = false
+	weapons_dropped = true

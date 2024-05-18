@@ -32,7 +32,7 @@ knock_state = NodePath("States/knockback_state")
 z_index = -1
 rotation = -1.5708
 sprite_frames = ExtResource("2_ojbe7")
-animation = &"unarmed"
+animation = &"idle"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_j7iyn")
@@ -45,7 +45,7 @@ shape = SubResource("CircleShape2D_j7iyn")
 shape = SubResource("CircleShape2D_i2s1b")
 
 [node name="NavigationAgent" type="NavigationAgent2D" parent="."]
-target_desired_distance = 15.0
+target_desired_distance = 40.0
 debug_enabled = true
 
 [node name="States" type="Node2D" parent="."]

@@ -5,6 +5,7 @@ class_name Goblin extends CharacterBody2D
 @export var animation: AnimatedSprite2D
 @export var sight_area: Area2D
 @export var body: CollisionShape2D
+@export var patrol_path: PathFollow2D ##the path the enemy will follow when patrolling, if none given it will pick a random path
 @export_subgroup("state refrences")
 @export var move_state: Node
 @export var attack_state: Node2D
@@ -23,8 +24,12 @@ class_name Goblin extends CharacterBody2D
 @onready var blood: PackedScene = preload("res://misc/blood_particle.tscn")
 
 var direction: Vector2 = Vector2.ZERO
-var speed: float = 200
+
+var ass_firction: float = 5.0
 var health: float = 20.0
+var speed: float = 200
+
+var PICKED_PATH: bool = false
 var IS_DEAD: bool = false
 var ARMED: bool = true
 
@@ -48,13 +53,10 @@ enum OCUP{
 	SEARCH_WEP,
 }
 
-#WIP
+#Weapon tracking
 var current_target: Node2D = null
 var weapon_memory: Array = []
 #----------------------------------------------------------#
-func _ready() -> void:
-	pass
-
 func _physics_process(_delta: float) -> void:
 	if !IS_DEAD:
 		_state_machine()
@@ -73,6 +75,15 @@ func _state_machine() -> void:
 			velocity = Vector2.ZERO
 			if health <= 10:
 				set_state(STATES.HIDING)
+			
+			if player.IS_DEAD:
+				await get_tree().create_timer(5).timeout
+				speed = 100
+				set_state(STATES.PATROL)
+			
+			await get_tree().create_timer(5).timeout
+			speed = 100
+			set_state(STATES.PATROL)
 		
 		STATES.CHASE:
 			move_state.move_to(player.global_position)
@@ -99,14 +110,15 @@ func _state_machine() -> void:
 			hide_state.hide()
 		STATES.PATROL:
 			
-			pass
-		
+			patrol() # <------ WIP
+			
 		STATES.DEATH:
-			DEATH(last_shot_dir)
-		
+			animation.play("death")
+			if !IS_DEAD:
+				velocity = last_shot_dir * 100
+				IS_DEAD = true
+			
 		STATES.SEARCH_WEP:
-			print("looking for a wapon")
-			print(weapon_memory)
 			look_for_weapon()
 
 func set_state(new_st: STATES) -> void:
@@ -129,13 +141,6 @@ func on_hit(dmg: float, hit_dir: Vector2) -> void:
 	if health <= 0:
 		set_state(STATES.DEATH)
 
-var ass_firction: float = 5.0
-func DEATH(dir: Vector2) -> void:
-	animation.play("death")
-	if !IS_DEAD:
-		velocity = dir * 100
-		IS_DEAD = true
-
 #NOTE: the bastard can steal the club from your hand and kill you with it
 func look_for_weapon() -> void:
 	if weapon_memory.size() != 0:
@@ -151,19 +156,32 @@ func look_for_weapon() -> void:
 	move_state.move_to(current_target.global_position)
 	#if the enemy is close enough pickup a weapon
 	if global_position.distance_to(current_target.global_position) < pickup_raduis:
-		pickup_weapon(current_target)
+		pickup_weapon()
 
 func drop_weapon() -> void:
 	#make the enemy unarmed
-	animation.play("unarmed")
 	if ARMED:
-		var wep_ins: RigidBody2D = club.instantiate()
+		var wep_ins: RigidBody2D = club.instantiate() 
 		wep_ins.global_position = global_position
 		
 		cur_scene.add_child(wep_ins)
 		ARMED = false
 
-func pickup_weapon(wep: Node2D) -> void:
+var patrol_loc: Node2D 
+func patrol() -> void:
+	var pathes: Array = get_tree().get_nodes_in_group("patrol_path")
+	
+	if !PICKED_PATH:
+		patrol_loc = pathes.pick_random() if patrol_path == null else patrol_path
+		PICKED_PATH = true
+	
+	print(patrol_loc)
+	if patrol_loc != null:
+		move_state.move_to(patrol_loc.global_position)
+	else:
+		set_state(STATES.PANIC)
+
+func pickup_weapon() -> void:
 	var prev_wep_index: int = weapon_memory.find(current_target)
 	weapon_memory.remove_at(prev_wep_index)
 	current_target.queue_free()
