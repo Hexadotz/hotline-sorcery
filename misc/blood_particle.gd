@@ -20,6 +20,10 @@ func _ready() -> void:
 	#finally put the texture
 	texture = atlas_tex
 
+func rotate_towards(target: Vector2) -> void:
+	var angle: float = global_position.angle_to(target)
+	rotation = angle - 90
+
 func _on_finish_timer_timeout() -> void:
 	set_process(false)
 	set_physics_process(false)

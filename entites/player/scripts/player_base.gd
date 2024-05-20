@@ -24,12 +24,9 @@ var mouse_pos: Vector2 = Vector2.ZERO
 var IS_DEAD: bool = false
 #-------debugging stuff----------#
 var test_point: PackedScene = preload("res://entites/player/test_mesh.tscn")
-var instance: MeshInstance2D
 #-------------------------------------------------------#
 func _ready() -> void:
 	GlobalVariables.player = self
-	instance = test_point.instantiate()
-	add_child(instance)
 	#TODO: pass the player reference to all the child nodes that needs him
 	for node: Node in get_children(true):
 		if node.get("player") != null:
@@ -42,9 +39,6 @@ func _physics_process(delta: float) -> void:
 		
 		#makes the player look where the mouse is pointing at for aiming
 		look_at(mouse_pos)
-		
-		#debuging mouse position NOTE: need to be removed once we have a mouse sprite
-		instance.global_position = mouse_pos
 		
 		velocity = lerp(velocity, target_dir, acceleration * delta)
 		#-----------------------------------------------------#
@@ -79,12 +73,20 @@ func _camera_process(delta: float) -> void:
 	var thres: Vector2 = distance * 2 if Input.is_action_pressed("zoom") else distance
 	var look_to_direction: Vector2 = (mouse_pos - global_position)
 	
-	#4th attempt (we so back)
 	camera.offset = (look_to_direction * pan_dis) * delta
 	
 	#limit the pan raduis
 	camera.offset = clamp(camera.offset, -thres, thres)
 	
+	if Input.is_action_pressed("fire") and GlobalVariables.player_staff.mana > 0:
+		var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+		var x_axis: float = rng.randf_range(0.5, 10.5) 
+		var y_axis: float = rng.randf_range(0.5, 10.5) 
+		camera.position = lerp(camera.position, Vector2(x_axis, y_axis), 1)
+	else:
+		camera.position = lerp(camera.position, Vector2.ZERO, 1)
+	
+	#NOTE: this was supposed to be the camera strafe
 	#TODO: figure out how to overwrite godot's shitty camera rotation inheritance 
 	#camera.rotation_degrees = clamp(camera.rotation_degrees, -max_ang, max_ang)
 	#camera.rotation_degrees = lerp(camera.rotation_degrees, direction.x, tilt_strength * delta)
@@ -101,11 +103,7 @@ func death(direc: Vector2) -> void:
 	var blood_ins: GPUParticles2D = blood.instantiate()
 	blood_ins.global_position = global_position
 	blood_ins.amount = 64
-	
-	#convert player direction from Vector2 to Vector3 because the godot developers are fucking morons
-	var dirc: Vector2 = direc.direction_to(global_position)
-	var blood_dir: Vector3 = Vector3.FORWARD.rotated(Vector3.UP, Vector2(dirc.x, -dirc.y).angle())
-	blood_ins.process_material.direction = -blood_dir
+	blood_ins.rotate_towards(direc)
 	
 	cur_scene.add_child(blood_ins)
 

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4dgnvpwwcqaw"]
+
+[ext_resource type="Script" path="res://entites/enemies/goblin/wep_search_state.gd" id="1_tghmy"]
+
+[node name="wep_search_state" type="Node"]
+script = ExtResource("1_tghmy")

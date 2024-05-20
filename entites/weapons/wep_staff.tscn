@@ -4,11 +4,18 @@
 [ext_resource type="PackedScene" uid="uid://cbw8nuibk3vht" path="res://entites/weapons/proj_fireball.tscn" id="2_a6su2"]
 [ext_resource type="SpriteFrames" uid="uid://bg2qracb3aenk" path="res://entites/weapons/staff/wand_sprites.tres" id="3_6efl4"]
 
-[node name="wep_staff" type="Node2D"]
+[node name="wep_staff" type="Node2D" node_paths=PackedStringArray("animation", "spawn_point", "cast_cooldown", "middle_point", "audio")]
 script = ExtResource("1_gnawu")
+animation = NodePath("staff")
+spawn_point = NodePath("staff/muzzle")
+cast_cooldown = NodePath("fire rater")
+middle_point = NodePath("staff/muzzle/center_marker")
+audio = NodePath("AudioStreamPlayer")
 projectile = ExtResource("2_a6su2")
-fire_cooldown = 0.2
-speed = 400.0
+bullet_speed = 250.0
+weapon_type = 1
+auto_cost = 0.5
+shotgun_spread = 3.0
 
 [node name="staff" type="AnimatedSprite2D" parent="."]
 rotation = 1.5708
@@ -20,7 +27,22 @@ frame_progress = 0.317397
 position = Vector2(0.499999, -12)
 rotation = -1.5708
 
+[node name="center_marker" type="Marker2D" parent="staff/muzzle"]
+position = Vector2(5, 0)
+
 [node name="fire rater" type="Timer" parent="."]
 one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 944.0
+offset_top = 563.0
+offset_right = 1055.0
+offset_bottom = 605.0
+theme_override_font_sizes/font_size = 30
+text = "fqdsgdf"
 
 [connection signal="timeout" from="fire rater" to="." method="_on_fire_rater_timeout"]

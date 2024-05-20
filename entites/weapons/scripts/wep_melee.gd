@@ -15,7 +15,7 @@ var active: bool = true #disables the weapon if it's on the floor or on the back
 #-----------------------------------------------------------#
 func _ready() -> void:
 	#my precious little hack, my precious...
-	player_path = get_tree().get_nodes_in_group("player")[0]
+	player_path = GlobalVariables.player
 	active = false
 
 func _physics_process(_delta: float) -> void:
@@ -36,11 +36,13 @@ func _physics_process(_delta: float) -> void:
 		hurtbox.throw_box.disabled = true
 
 func swing() -> void:
-	audio.play()
+	if not audio.is_playing():
+		audio.play()
+	$AnimationPlayer.play("shit")
 	var enemy_list: Array  = hurtbox.get_overlapping_bodies()
 	for node in enemy_list:
 		if node.is_in_group("enemy") and node.has_method("on_hit"):
-			node.on_hit(throw_strength, global_position.normalized())
+			node.on_hit(throw_strength, global_position.direction_to(node.global_position))
 
 func pickup() -> void:
 	#when we pickup the weapon, we disable its physics property as well as it's collision shape

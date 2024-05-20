@@ -24,6 +24,9 @@ GlobalVariables="*res://misc/autoloads/global_variables.gd"
 window/stretch/mode="viewport"
 window/stretch/aspect="ignore"
 window/vsync/vsync_mode=0
+mouse_cursor/custom_image="res://art/crosshair/Crosshair Solid (40).png"
+mouse_cursor/custom_image_hotspot=Vector2(16, 16)
+mouse_cursor/tooltip_position_offset=Vector2(0, 0)
 
 [editor_plugins]
 
@@ -96,6 +99,8 @@ switch_wep={
 2d_physics/layer_2="walls/objects"
 2d_physics/layer_3="player"
 2d_physics/layer_4="weapons"
+2d_physics/layer_5="windows"
+2d_physics/layer_6="doors"
 
 [rendering]
 

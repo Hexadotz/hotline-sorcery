@@ -1,12 +1,14 @@
+res://entites/player/scripts
 res://entites/objects/scripts
 res://entites/objects
-res://entites/weapons/staff
+res://entites/enemies/goblin
 res://art/player
+res://art/crosshair
+res://entites/weapons/staff
 res://entites/enemies/template
 res://entites/weapons/scripts
 res://entites/weapons
 res://art/goblin
-res://entites/enemies/goblin
 res://UI/scripts
 res://UI
 res://sound/audio_streams
@@ -18,5 +20,3 @@ res://misc
 res://misc/maxwell
 res://misc/fonts
 res://misc/autoloads
-res://entites/player/scripts
-res://misc/debugging

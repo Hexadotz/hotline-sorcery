@@ -7,9 +7,9 @@ extends Node2D
 @onready var parent: Goblin = get_parent()
 @onready var player_poly_col: CollisionPolygon2D = $player/CollisionPolygon2D
 @onready var wep_poly_col: CollisionPolygon2D = $weapon/CollisionPolygon2D
+
 #-----------------------------------------------------#
 func _ready() -> void:
-	print(player_sight)
 	_configure_view_radius()
  
 func _configure_view_radius() -> void:
@@ -27,11 +27,10 @@ func _physics_process(_delta: float) -> void:
 		player_sight.monitoring = false
  
 	if player_sight.monitoring:
-		var node_list: Array[Node2D] = player_sight.get_overlapping_bodies()
 		var wep_list: Array[Node2D] = wep_sight_area.get_overlapping_bodies()
 		_remember_weapons(wep_list)
  
-		if is_on_sight(node_list) and !parent.player.IS_DEAD and parent.ARMED:
+		if is_on_sight() and !parent.player.IS_DEAD and parent.ARMED:
 			if parent.current_st not in [parent.STATES.DEATH, parent.STATES.ATTACK, parent.STATES.KNOCKBACK, parent.STATES.HIDING]:
 				parent.set_state(parent.STATES.CHASE)
 	else:
@@ -44,17 +43,33 @@ func _remember_weapons(list: Array) -> void:
  
 #check the enemy's line of sight to prevent the enemy from chasing the player even through he is behind a wall
 var ray_parm = PhysicsRayQueryParameters2D.new()
-func is_on_sight(list: Array) -> bool:
-	for node in list:
-		if node.is_in_group("player"):
-			#setting up the ray paramaters
-			ray_parm.from = parent.global_position
-			ray_parm.to = node.global_position
- 			
-			var results: Dictionary = get_world_2d().direct_space_state.intersect_ray(ray_parm)
-			#this is made to prevent the game from ccrashing due to the enemy getting too close to the player the raycast fail to detect anyting
-			if results.has("collider"):
-				return results["collider"] == parent.player
-			else: 
-				return false
+func is_on_sight() -> bool:
+	var player: Array[Node2D] = player_sight.get_overlapping_bodies()
+	if !player.is_empty():
+		#setting up the ray paramaters
+		ray_parm.from = parent.global_position
+		ray_parm.to = player[0].global_position
+		ray_parm.exclude = GlobalVariables.window_list
+		
+		var results: Dictionary = get_world_2d().direct_space_state.intersect_ray(ray_parm)
+		#this is made to prevent the game from ccrashing due to the enemy getting too close to the player the raycast fail to detect anyting
+		if results.has("collider"):
+			return results["collider"] == parent.player
+		else: 
+			return false
 	return false
+
+#func is_on_sight(list: Array) -> bool:
+	#for node in list:
+		#if node.is_in_group("player"):
+			##setting up the ray paramaters
+			#ray_parm.from = parent.global_position
+			#ray_parm.to = node.global_position
+ 			#
+			#var results: Dictionary = get_world_2d().direct_space_state.intersect_ray(ray_parm)
+			##this is made to prevent the game from ccrashing due to the enemy getting too close to the player the raycast fail to detect anyting
+			#if results.has("collider"):
+				#return results["collider"] == parent.player
+			#else: 
+				#return false
+	#return false

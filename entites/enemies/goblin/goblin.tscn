@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://jltejnrxk3tb"]
+[gd_scene load_steps=13 format=3 uid="uid://jltejnrxk3tb"]
 
 [ext_resource type="Script" path="res://entites/enemies/goblin/goblin_script.gd" id="1_7s807"]
 [ext_resource type="SpriteFrames" uid="uid://bdqsq83jwm8rf" path="res://entites/enemies/goblin/goblin_sprites.tres" id="2_ojbe7"]
@@ -8,13 +8,15 @@
 [ext_resource type="PackedScene" uid="uid://cv0wglh2kryn7" path="res://entites/enemies/goblin/hide_state.tscn" id="6_acyy4"]
 [ext_resource type="PackedScene" uid="uid://i7ttmc5me7rg" path="res://entites/enemies/goblin/panic_state.tscn" id="7_xnyci"]
 [ext_resource type="PackedScene" uid="uid://chrkslhg8odb4" path="res://entites/enemies/goblin/knockback_state.tscn" id="8_yv5yv"]
+[ext_resource type="PackedScene" uid="uid://b3d2gll3cshny" path="res://entites/enemies/goblin/patrole_state.tscn" id="9_lddmv"]
+[ext_resource type="PackedScene" uid="uid://b4dgnvpwwcqaw" path="res://entites/enemies/goblin/wep_search_state.tscn" id="10_j14sw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j7iyn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i2s1b"]
 radius = 13.0
 
-[node name="goblin" type="CharacterBody2D" node_paths=PackedStringArray("nav_agent", "animation", "sight_area", "body", "move_state", "attack_state", "hide_state", "panic_state", "knock_state") groups=["enemy"]]
+[node name="goblin" type="CharacterBody2D" node_paths=PackedStringArray("nav_agent", "animation", "sight_area", "body", "move_state", "attack_state", "hide_state", "panic_state", "knock_state", "patrol_state", "wep_search_state") groups=["enemy"]]
 z_index = 1
 collision_mask = 2
 script = ExtResource("1_7s807")
@@ -27,6 +29,9 @@ attack_state = NodePath("States/attack_state")
 hide_state = NodePath("States/Hide_state")
 panic_state = NodePath("States/panic_state")
 knock_state = NodePath("States/knockback_state")
+patrol_state = NodePath("States/patrole_state")
+wep_search_state = NodePath("States/wep_search_state")
+pickup_raduis = 30.0
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
 z_index = -1
@@ -63,4 +68,10 @@ parent = NodePath("../..")
 parent = NodePath("../..")
 
 [node name="knockback_state" parent="States" node_paths=PackedStringArray("parent") instance=ExtResource("8_yv5yv")]
+parent = NodePath("../..")
+
+[node name="patrole_state" parent="States" node_paths=PackedStringArray("parent") instance=ExtResource("9_lddmv")]
+parent = NodePath("../..")
+
+[node name="wep_search_state" parent="States" node_paths=PackedStringArray("parent") instance=ExtResource("10_j14sw")]
 parent = NodePath("../..")

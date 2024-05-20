@@ -1,17 +1,24 @@
 extends RigidBody2D
 
-@export_enum("fireball", "magic_mis") var projectile_type: int
-
 @export var trail_color: Color = Color(1, 1, 1, 1)
 @export var line_length: float = 10.0 #the length of the trail
-@export var damage: float = 5
 
-@onready var player: PlayerScript = get_tree().get_nodes_in_group("player")[0]
+
+@onready var player: PlayerScript = GlobalVariables.player
 @onready var anim: AnimatedSprite2D = $Animation
 @onready var hitbox: Area2D = $hurtbox
 @onready var line: Line2D = $trail_effect
 
+var damage: float = 5
 var point_pos: Vector2 = Vector2.ZERO #the point the line is going to start from
+
+enum TYPE{
+	MISSLE,
+	FIREBALL,
+}
+var proj_type: TYPE = TYPE.MISSLE
+const MISSLE_COLOR: Color = Color(0, 0.452, 0.575)
+const FIREBALL_COLOR: Color = Color(1, 0.355, 0.192)
 #----------------------------------------------------------#
 func _ready() -> void:
 	line.modulate = trail_color
@@ -21,6 +28,16 @@ func setup_projectile() -> void:
 
 func _physics_process(_delta: float) -> void:
 	_draw_trail()
+	_set_type()
+
+func _set_type() -> void:
+	match proj_type:
+		TYPE.MISSLE:
+			anim.play("missile")
+			line.modulate = MISSLE_COLOR
+		TYPE.FIREBALL:
+			anim.play("fireball")
+			line.modulate = FIREBALL_COLOR
 
 #this function draws a trail effect behind the boolets
 func _draw_trail() -> void:
@@ -52,5 +69,8 @@ func _on_hirtbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy"):
 		if body.has_method("on_hit"):
 			body.on_hit(damage, linear_velocity.normalized())
+			queue_free()
+	elif body.is_in_group("window"):
+		body.shatter()
 	else:
 		queue_free()

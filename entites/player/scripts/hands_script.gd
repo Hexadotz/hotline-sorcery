@@ -4,7 +4,7 @@ extends Node2D
 @export var player: PlayerScript
 @export var hand: Node2D
 @export var back: Node2D
-@export var staff: Node2D
+@export var staff: Staff
 @export var pickup_raduis: Area2D
 
 var wep_list: Array[Node2D]
