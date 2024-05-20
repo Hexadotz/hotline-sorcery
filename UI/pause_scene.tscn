@@ -63,7 +63,7 @@ grow_vertical = 2
 layout_mode = 2
 
 [node name="Panel" type="Panel" parent="Pause_UI/PanelContainer"]
-custom_minimum_size = Vector2(300, 250)
+custom_minimum_size = Vector2(300, 275)
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Pause_UI/PanelContainer/Panel"]
@@ -74,16 +74,16 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -105.0
-offset_top = -115.0
+offset_top = -126.5
 offset_right = 95.0
-offset_bottom = 155.0
+offset_bottom = 143.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 7
 
 [node name="Label" type="Label" parent="Pause_UI/PanelContainer/Panel/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_l0hgq")
+theme_override_font_sizes/font_size = 19
 text = "Game Paused"
 horizontal_alignment = 1
 
