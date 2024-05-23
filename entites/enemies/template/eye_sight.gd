@@ -27,8 +27,9 @@ func _physics_process(_delta: float) -> void:
 		player_sight.monitoring = false
  
 	if player_sight.monitoring:
-		var wep_list: Array[Node2D] = wep_sight_area.get_overlapping_bodies()
-		_remember_weapons(wep_list)
+		#remember weapons
+		if wep_sight_area.has_overlapping_bodies():
+			_remember_weapons(wep_sight_area.get_overlapping_bodies())
  
 		if is_on_sight() and !parent.player.IS_DEAD and parent.ARMED:
 			if parent.current_st not in [parent.STATES.DEATH, parent.STATES.ATTACK, parent.STATES.KNOCKBACK, parent.STATES.HIDING]:
@@ -58,18 +59,3 @@ func is_on_sight() -> bool:
 		else: 
 			return false
 	return false
-
-#func is_on_sight(list: Array) -> bool:
-	#for node in list:
-		#if node.is_in_group("player"):
-			##setting up the ray paramaters
-			#ray_parm.from = parent.global_position
-			#ray_parm.to = node.global_position
- 			#
-			#var results: Dictionary = get_world_2d().direct_space_state.intersect_ray(ray_parm)
-			##this is made to prevent the game from ccrashing due to the enemy getting too close to the player the raycast fail to detect anyting
-			#if results.has("collider"):
-				#return results["collider"] == parent.player
-			#else: 
-				#return false
-	#return false

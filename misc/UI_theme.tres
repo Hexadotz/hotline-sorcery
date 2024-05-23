@@ -1,7 +1,10 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://kdfneisskda"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://kdfneisskda"]
 
 [ext_resource type="FontFile" uid="uid://dfecjk6s07bx0" path="res://misc/fonts/medieval_fontA.tres" id="1_dw68n"]
+[ext_resource type="StyleBox" uid="uid://cfkct2lh3un4a" path="res://UI/button_normal.tres" id="2_s8ugr"]
 
 [resource]
 Button/fonts/font = ExtResource("1_dw68n")
+Button/styles/normal = ExtResource("2_s8ugr")
 Label/fonts/font = ExtResource("1_dw68n")
+Panel/styles/panel = ExtResource("2_s8ugr")

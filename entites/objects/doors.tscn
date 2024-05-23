@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=3 uid="uid://bvnchy1qh44vx"]
+
+[ext_resource type="Script" path="res://entites/objects/scripts/doors.gd" id="1_xcmb6"]
+[ext_resource type="Texture2D" uid="uid://hweus7ne4tbu" path="res://icon.svg" id="2_pxgt4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b7550"]
+size = Vector2(12, 6)
+
+[sub_resource type="QuadMesh" id="QuadMesh_g7o3q"]
+size = Vector2(0.5, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5x1me"]
+size = Vector2(39, 10)
+
+[sub_resource type="QuadMesh" id="QuadMesh_og7co"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aovmf"]
+size = Vector2(62, 14)
+
+[node name="Door" type="PinJoint2D" groups=["doors"]]
+node_a = NodePath("hinges")
+node_b = NodePath("door_physics")
+bias = 0.9
+softness = 8.0
+angular_limit_enabled = true
+angular_limit_lower = -2.61799
+angular_limit_upper = 2.61799
+script = ExtResource("1_xcmb6")
+
+[node name="hinges" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hinges"]
+shape = SubResource("RectangleShape2D_b7550")
+
+[node name="hinge_placeholder" type="MeshInstance2D" parent="hinges"]
+position = Vector2(-5.06639e-07, 0)
+scale = Vector2(24, 6)
+mesh = SubResource("QuadMesh_g7o3q")
+
+[node name="door_physics" type="RigidBody2D" parent="." groups=["doors"]]
+collision_layer = 3
+collision_mask = 32
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="door_physics"]
+position = Vector2(29.5, 0)
+shape = SubResource("RectangleShape2D_5x1me")
+
+[node name="door_placeholder" type="MeshInstance2D" parent="door_physics"]
+visible = false
+modulate = Color(0.898955, 0.210203, 0, 1)
+position = Vector2(41, 1)
+scale = Vector2(102, 8)
+mesh = SubResource("QuadMesh_og7co")
+
+[node name="door_sprite" type="Sprite2D" parent="door_physics"]
+position = Vector2(32, 0.499998)
+scale = Vector2(0.5, 0.0859375)
+texture = ExtResource("2_pxgt4")
+
+[node name="Area2D" type="Area2D" parent="door_physics"]
+collision_layer = 0
+collision_mask = 64
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="door_physics/Area2D"]
+position = Vector2(31, 0)
+shape = SubResource("RectangleShape2D_aovmf")
+
+[connection signal="body_entered" from="door_physics/Area2D" to="." method="_on_area_2d_body_entered"]

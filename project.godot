@@ -101,6 +101,11 @@ switch_wep={
 2d_physics/layer_4="weapons"
 2d_physics/layer_5="windows"
 2d_physics/layer_6="doors"
+2d_physics/layer_7="enemy"
+
+[physics]
+
+2d/physics_engine="Rapier2D"
 
 [rendering]
 

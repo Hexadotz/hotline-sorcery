@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://wp3indvs0hp1"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_g7o3q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b7550"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_og7co"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5x1me"]
+size = Vector2(102, 20)
+
+[node name="Door" type="PinJoint2D" groups=["doors"]]
+node_a = NodePath("hinges")
+node_b = NodePath("door_physics")
+angular_limit_enabled = true
+angular_limit_lower = -2.61799
+angular_limit_upper = 2.61799
+
+[node name="hinges" type="StaticBody2D" parent="."]
+position = Vector2(0, -1)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="hinges"]
+position = Vector2(8.10623e-06, 1.90735e-06)
+scale = Vector2(20, 20)
+mesh = SubResource("QuadMesh_g7o3q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hinges"]
+shape = SubResource("RectangleShape2D_b7550")
+
+[node name="door_physics" type="RigidBody2D" parent="." groups=["doors"]]
+position = Vector2(7, -1)
+collision_mask = 32
+gravity_scale = 0.0
+
+[node name="balls" type="MeshInstance2D" parent="door_physics"]
+modulate = Color(0.441586, 0.251261, 4.81308e-08, 1)
+position = Vector2(41, 1.90735e-06)
+scale = Vector2(102, 20)
+mesh = SubResource("QuadMesh_og7co")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="door_physics"]
+position = Vector2(41, 0)
+shape = SubResource("RectangleShape2D_5x1me")

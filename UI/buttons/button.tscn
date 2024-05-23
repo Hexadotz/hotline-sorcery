@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnjskjdcqos36"]
+
+[ext_resource type="Theme" uid="uid://kdfneisskda" path="res://misc/UI_theme.tres" id="1_3d5se"]
+[ext_resource type="AudioStream" uid="uid://dgn8li8duk8jn" path="res://sound/menu_click01.mp3" id="2_jvijs"]
+[ext_resource type="Script" path="res://UI/buttons/button.gd" id="2_sijnn"]
+
+[node name="Button" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+theme = ExtResource("1_3d5se")
+text = "Press me"
+script = ExtResource("2_sijnn")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_jvijs")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

@@ -75,7 +75,7 @@ _data = {
 }
 
 [node name="wep_melee" type="RigidBody2D" node_paths=PackedStringArray("hurtbox", "audio") groups=["weapon"]]
-collision_layer = 11
+collision_layer = 9
 physics_material_override = SubResource("PhysicsMaterial_l3m7q")
 gravity_scale = 0.0
 can_sleep = false

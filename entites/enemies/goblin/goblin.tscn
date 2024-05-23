@@ -18,6 +18,7 @@ radius = 13.0
 
 [node name="goblin" type="CharacterBody2D" node_paths=PackedStringArray("nav_agent", "animation", "sight_area", "body", "move_state", "attack_state", "hide_state", "panic_state", "knock_state", "patrol_state", "wep_search_state") groups=["enemy"]]
 z_index = 1
+collision_layer = 65
 collision_mask = 2
 script = ExtResource("1_7s807")
 nav_agent = NodePath("NavigationAgent")
@@ -37,7 +38,8 @@ pickup_raduis = 30.0
 z_index = -1
 rotation = -1.5708
 sprite_frames = ExtResource("2_ojbe7")
-animation = &"idle"
+animation = &"knock_back"
+frame = 1
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_j7iyn")

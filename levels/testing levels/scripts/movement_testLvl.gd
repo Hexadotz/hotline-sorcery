@@ -11,9 +11,11 @@ func _ready() -> void:
 	debugger.add_stats("--weapons")
 	debugger.add_stats("wep linear velocity", "wep_template", "", "linear_velocity")
 	debugger.add_stats("--enemy")
-	debugger.add_stats("gob's current state", "goblin3", "", "get_current_statez")
-	debugger.add_stats("gob's previous state", "goblin3", "", "get_previous_state")
+	debugger.add_stats("gob's current state", "goblin", "", "get_current_state")
+	debugger.add_stats("gob's previous state", "goblin", "", "get_previous_state")
 	debugger.add_stats("gob's velocity", "goblin3", "", "velocity")
 	debugger.add_stats("gob's health", "goblin3", "", "health")
-	
-	print(GlobalVariables.window_list)
+
+func _physics_process(_delta: float) -> void:
+	#print($Door.rigid.linear_velocity.length())
+	pass

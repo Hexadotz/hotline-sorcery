@@ -1,27 +1,50 @@
-[gd_scene load_steps=4 format=3 uid="uid://bpt5t83htohip"]
+[gd_scene load_steps=6 format=3 uid="uid://bpt5t83htohip"]
 
 [ext_resource type="Script" path="res://entites/weapons/scripts/wep_staff.gd" id="1_gnawu"]
 [ext_resource type="PackedScene" uid="uid://cbw8nuibk3vht" path="res://entites/weapons/proj_fireball.tscn" id="2_a6su2"]
 [ext_resource type="SpriteFrames" uid="uid://bg2qracb3aenk" path="res://entites/weapons/staff/wand_sprites.tres" id="3_6efl4"]
 
-[node name="wep_staff" type="Node2D" node_paths=PackedStringArray("animation", "spawn_point", "cast_cooldown", "middle_point", "audio")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_vlhrq"]
+radius = 200.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ub30i"]
+size = Vector2(26, 48)
+
+[node name="wep_staff" type="Node2D" node_paths=PackedStringArray("animation", "spawn_point", "cast_cooldown", "middle_point", "audio", "hurtbox", "sound_box")]
 script = ExtResource("1_gnawu")
 animation = NodePath("staff")
 spawn_point = NodePath("staff/muzzle")
 cast_cooldown = NodePath("fire rater")
 middle_point = NodePath("staff/muzzle/center_marker")
 audio = NodePath("AudioStreamPlayer")
+hurtbox = NodePath("Hurtbox")
+sound_box = NodePath("sound_raduis")
 projectile = ExtResource("2_a6su2")
 bullet_speed = 250.0
-weapon_type = 1
+weapon_type = 4
 auto_cost = 0.5
 shotgun_spread = 3.0
+
+[node name="sound_raduis" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 64
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="sound_raduis"]
+shape = SubResource("CircleShape2D_vlhrq")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+position = Vector2(24, -18)
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(3, 0)
+shape = SubResource("RectangleShape2D_ub30i")
 
 [node name="staff" type="AnimatedSprite2D" parent="."]
 rotation = 1.5708
 sprite_frames = ExtResource("3_6efl4")
-animation = &"idle"
-frame_progress = 0.317397
+animation = &"firing"
 
 [node name="muzzle" type="Node2D" parent="staff"]
 position = Vector2(0.499999, -12)
@@ -43,6 +66,6 @@ offset_top = 563.0
 offset_right = 1055.0
 offset_bottom = 605.0
 theme_override_font_sizes/font_size = 30
-text = "fqdsgdf"
+text = "it's time to kick gum and shew ass"
 
 [connection signal="timeout" from="fire rater" to="." method="_on_fire_rater_timeout"]

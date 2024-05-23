@@ -9,7 +9,6 @@ extends Node2D
 @onready var wep_poly_col: CollisionPolygon2D = $weapon/CollisionPolygon2D
 #-----------------------------------------------------#
 func _ready() -> void:
-	print(player_sight)
 	_configure_view_radius()
 
 func _configure_view_radius() -> void:

@@ -12,8 +12,10 @@ func attack() -> void:
 	damage_area.monitoring = true
 	parent.velocity = Vector2.ZERO
 	parent.animation.play("attack")
+	
 	if !swing_audio.is_playing():
 		swing_audio.play()
+	
 	#use a lambda, if the player is dead put the enemy on a idle state, otherewise kiil chasing his ass
 	var is_dead = func():
 		if !parent.player.IS_DEAD:
@@ -25,4 +27,5 @@ func attack() -> void:
 
 func _on_damage_box_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		body.death(global_position.direction_to(body.global_position))
+		if !body.IS_DEAD:
+			body.death(global_position.direction_to(body.global_position))

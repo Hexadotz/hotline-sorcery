@@ -1,6 +1,12 @@
-res://entites/player/scripts
+res://levels
+res://sound/audio_streams
 res://entites/objects/scripts
 res://entites/objects
+res://misc/shaders
+res://UI/buttons
+res://misc
+res://UI
+res://entites/player/scripts
 res://entites/enemies/goblin
 res://art/player
 res://art/crosshair
@@ -10,13 +16,7 @@ res://entites/weapons/scripts
 res://entites/weapons
 res://art/goblin
 res://UI/scripts
-res://UI
-res://sound/audio_streams
 res://entites/player
 res://
-res://misc/shaders
 res://entites/enemies
-res://misc
 res://misc/maxwell
-res://misc/fonts
-res://misc/autoloads

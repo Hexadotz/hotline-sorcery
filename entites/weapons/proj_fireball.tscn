@@ -87,7 +87,7 @@ initial_velocity_max = 47.25
 gravity = Vector3(0, 0, 0)
 scale_min = 2.0
 scale_max = 3.0
-color = Color(0.954436, 0.26836, 0, 1)
+color = Color(0.954436, 0.671088, 0, 1)
 
 [sub_resource type="Curve" id="Curve_bd1x4"]
 _data = [Vector2(0, 0.263736), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]

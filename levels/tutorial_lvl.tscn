@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bs3366y5jqxra"]
+
+[ext_resource type="Texture2D" uid="uid://cwkhy0y43mung" path="res://art/refrence/tut_layout.PNG" id="1_3bd5a"]
+[ext_resource type="TileSet" uid="uid://j5tui1ypp0ue" path="res://levels/testing levels/tavern_tileSet.tres" id="2_8biw1"]
+[ext_resource type="PackedScene" uid="uid://bb6wptty77ery" path="res://entites/player/player_base.tscn" id="3_pxejk"]
+
+[node name="tutorial_lvl" type="Node2D"]
+
+[node name="TutLayout" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(19, -247)
+rotation = 1.5708
+texture = ExtResource("1_3bd5a")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("2_8biw1")
+format = 2
+
+[node name="player" parent="." instance=ExtResource("3_pxejk")]
