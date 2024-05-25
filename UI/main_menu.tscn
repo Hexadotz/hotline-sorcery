@@ -1,0 +1,284 @@
+[gd_scene load_steps=15 format=3 uid="uid://s2ybu4j312qf"]
+
+[ext_resource type="Shader" path="res://misc/shaders/3D_text.gdshader" id="1_5rop8"]
+[ext_resource type="Theme" uid="uid://kdfneisskda" path="res://misc/UI_theme.tres" id="1_ex5hu"]
+[ext_resource type="Script" path="res://UI/scripts/main_menu.gd" id="1_xoj62"]
+[ext_resource type="PackedScene" uid="uid://bnjskjdcqos36" path="res://UI/buttons/button.tscn" id="4_keehu"]
+
+[sub_resource type="Gradient" id="Gradient_hshae"]
+offsets = PackedFloat32Array(0, 0.997519)
+colors = PackedColorArray(0, 0, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kwiw4"]
+gradient = SubResource("Gradient_hshae")
+
+[sub_resource type="Gradient" id="Gradient_tflgi"]
+colors = PackedColorArray(0.905882, 0, 0.517647, 1, 0.905882, 0, 0.517647, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5i67p"]
+gradient = SubResource("Gradient_tflgi")
+
+[sub_resource type="Gradient" id="Gradient_v7b2t"]
+offsets = PackedFloat32Array(0, 0.183623)
+colors = PackedColorArray(0.90732, 0, 0.517654, 1, 0.63235, 0.0643248, 0.0641806, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_v1vwn"]
+gradient = SubResource("Gradient_v7b2t")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_smqrq"]
+shader = ExtResource("1_5rop8")
+shader_parameter/angle = -0.2
+shader_parameter/thickness = 32.0
+shader_parameter/scale = 1.0
+shader_parameter/shear = Vector2(0, -0.4)
+shader_parameter/slices = 64
+shader_parameter/outline = false
+shader_parameter/outline_width = 0.0
+shader_parameter/front_tex = SubResource("GradientTexture2D_5i67p")
+shader_parameter/back_tex = SubResource("GradientTexture2D_kwiw4")
+shader_parameter/side_tex = SubResource("GradientTexture2D_v1vwn")
+shader_parameter/show_bound = false
+
+[sub_resource type="Animation" id="Animation_ie4x7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Title:material:shader_parameter/angle")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Title:material:shader_parameter/shear")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -0.4)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Title:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_1btsl"]
+resource_name = "title_animation"
+length = 1.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Title:material:shader_parameter/angle")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [-0.2, 0.3, 0.3, -0.3, -0.2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Title:material:shader_parameter/shear")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2, 1.6),
+"transitions": PackedFloat32Array(1, 1.51572, 1.41421, 1, 1),
+"update": 0,
+"values": [Vector2(0, -0.4), Vector2(0, -0.4), Vector2(0, 0.4), Vector2(0, 0.4), Vector2(0, -0.4)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Title:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4, 1.2),
+"transitions": PackedFloat32Array(1, 1.23114, 1.31951),
+"update": 0,
+"values": [0.0, 0.0872665, 0.0523599]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_32obw"]
+_data = {
+"RESET": SubResource("Animation_ie4x7"),
+"title_animation": SubResource("Animation_1btsl")
+}
+
+[node name="Main Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xoj62")
+
+[node name="Title" type="Label" parent="."]
+material = SubResource("ShaderMaterial_smqrq")
+layout_mode = 0
+offset_left = 150.0
+offset_top = 74.0
+offset_right = 985.0
+offset_bottom = 224.0
+pivot_offset = Vector2(322, 67)
+theme = ExtResource("1_ex5hu")
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 124
+text = "Hotline Sorcery"
+
+[node name="menu" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -111.0
+offset_top = -273.0
+offset_right = 110.999
+offset_bottom = -92.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Panel" type="Panel" parent="menu"]
+layout_mode = 2
+theme = ExtResource("1_ex5hu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="menu/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="start" parent="menu/Panel/VBoxContainer" instance=ExtResource("4_keehu")]
+layout_mode = 2
+text = "Start Game"
+
+[node name="options" parent="menu/Panel/VBoxContainer" instance=ExtResource("4_keehu")]
+layout_mode = 2
+text = "Options"
+
+[node name="credits" parent="menu/Panel/VBoxContainer" instance=ExtResource("4_keehu")]
+layout_mode = 2
+text = "Credits
+"
+
+[node name="quit" parent="menu/Panel/VBoxContainer" instance=ExtResource("4_keehu")]
+layout_mode = 2
+text = "Quit Game"
+
+[node name="Credits" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -375.0
+offset_top = -250.0
+offset_right = 375.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ex5hu")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Credits"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 21.0
+offset_top = 22.0
+offset_right = -23.0
+offset_bottom = -125.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 90
+
+[node name="Roles" type="VBoxContainer" parent="Credits/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Credits/HBoxContainer/Roles"]
+layout_mode = 2
+theme = ExtResource("1_ex5hu")
+theme_override_font_sizes/font_size = 50
+text = "Programmer:"
+
+[node name="Label2" type="Label" parent="Credits/HBoxContainer/Roles"]
+layout_mode = 2
+theme = ExtResource("1_ex5hu")
+theme_override_font_sizes/font_size = 50
+text = "Atrist:"
+
+[node name="people" type="VBoxContainer" parent="Credits/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Credits/HBoxContainer/people"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Hexadotz"
+
+[node name="Label2" type="Label" parent="Credits/HBoxContainer/people"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Marandal"
+
+[node name="quit_credits" parent="Credits" instance=ExtResource("4_keehu")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -153.0
+offset_top = -62.0
+offset_right = -22.0
+offset_bottom = -27.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Back"
+
+[node name="animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_32obw")
+}
+autoplay = "title_animation"
+speed_scale = 0.2
+
+[node name="music" type="AudioStreamPlayer" parent="."]
+
+[connection signal="pressed" from="menu/Panel/VBoxContainer/start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="menu/Panel/VBoxContainer/options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="menu/Panel/VBoxContainer/credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="menu/Panel/VBoxContainer/quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Credits/quit_credits" to="." method="_on_quit_credits_pressed"]

@@ -25,6 +25,13 @@ func _physics_process(_delta: float) -> void:
 	get_tree().paused = !is_paused
 	pause_ui.visible = !is_paused
 
+func switch_floor() -> void:
+	var tween: Tween = get_tree().create_tween()
+	
+	tween.tween_property($switch_floor, "modulate", Color(1, 1, 1, 1), 5)
+	tween.tween_property($switch_floor, "modulate", Color(1, 1, 1, 0), 5)
+
+
 #--------------------------------------------------------------------------#
 func _on_resume_pressed() -> void:
 	is_paused = true

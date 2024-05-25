@@ -19,7 +19,8 @@ func _physics_process(_delta: float) -> void:
 			_pickup_weapon()
 		
 		if Input.is_action_just_pressed("switch_wep"):
-			_switch_wepV2()
+			_switch_wep()
+		
 		
 	#once the player dies, drop all weapons, just once
 	else:
@@ -27,7 +28,7 @@ func _physics_process(_delta: float) -> void:
 			_drop_weapons()
 
 #NOTE: i hate this
-func _switch_wepV2() -> void:
+func _switch_wep() -> void:
 	#this has to be typed to stop godot from bitching, why dosen't get_child return null when the index out of range???
 	var cur_wep: Node2D = null if hand.get_child_count() == 0 else hand.get_child(0)
 	
@@ -35,22 +36,28 @@ func _switch_wepV2() -> void:
 		#same as line 28
 		var sec_wep: Node2D = null if back.get_child_count() == 0 else back.get_child(0)
 		
-		cur_wep.reparent(back, false)
+		#put the gun in our hand to the back
+		cur_wep.reparent(back)
 		
 		cur_wep.active = false
 		cur_wep.global_transform = back.global_transform
 		
 		#if our back isn't empty put whatever is there back at our hands
 		if sec_wep != null:
-			sec_wep.reparent(hand, false)
+			sec_wep.reparent(hand)
 			sec_wep.active = true
 			sec_wep.global_transform = hand.global_transform
 	else:
 		var sec_wep: Node2D = back.get_child(0)
-		sec_wep.reparent(hand, false)
+		sec_wep.reparent(hand)
 		
 		sec_wep.active = true
 		sec_wep.global_transform = hand.global_transform
+	
+	var back_wep: Node2D = null if back.get_child_count() == 0 else back.get_child(0)
+	if back_wep != null:
+		if back_wep is Staff:
+			back_wep.animation.stop()
 
 func _pickup_weapon() -> void:
 	#picking up the first weapon in the pickup raduis

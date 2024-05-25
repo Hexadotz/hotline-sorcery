@@ -9,10 +9,6 @@ class_name Staff extends Node2D
 @export var hurtbox: Area2D
 @export var sound_box: Area2D
 
-@export_group("")
-@export var projectile: PackedScene
-@export var bullet_speed: float = 200.0
-
 @export_group("weapons")
 @export var weapon_type: WEAPON_TYPE
 @export_subgroup("normal")
@@ -31,6 +27,7 @@ class_name Staff extends Node2D
 @export var shotgun_dmg: float = 3
 @onready var shotgun_sfx: AudioStreamMP3 = preload("res://sound/magic_hit.mp3")
 
+@onready var projectile: PackedScene = preload("res://entites/weapons/proj_fireball.tscn")
 @onready var staff_sprites: SpriteFrames = preload("res://entites/weapons/staff/staff_sprites.tres")
 @onready var wand_sprites: SpriteFrames = preload("res://entites/weapons/staff/wand_sprites.tres")
 @onready var swing_sfx: AudioStreamRandomizer = preload("res://sound/audio_streams/swing_set.tres")
@@ -108,7 +105,7 @@ func _fire_normal(dmg: float, cost: float) -> void:
 	audio.play()
 	
 	var projectile_inst: RigidBody2D = projectile.instantiate() #instancate the projectile set its start position set it's direction times speed then spawn it
-	projectile_inst.prepare_proj(player, spawn_point.global_position, get_global_mouse_position(), bullet_speed)
+	projectile_inst.prepare_proj(player, spawn_point.global_position, get_global_mouse_position())
 	projectile_inst.proj_type = projectile_inst.TYPE.MISSLE
 	projectile_inst.damage = dmg
 	spawn_point.add_child(projectile_inst)
@@ -127,7 +124,7 @@ func _fire_shotgun() -> void:
 	cast_cooldown.wait_time = shotgun_cooldown
 	for point in shotgun_array:
 		var projectile_inst: RigidBody2D = projectile.instantiate()
-		projectile_inst.prepare_proj(player, spawn_point.global_position, point.global_position, bullet_speed)
+		projectile_inst.prepare_proj(player, spawn_point.global_position, point.global_position)
 		projectile_inst.damage = shotgun_dmg
 		projectile_inst.proj_type = projectile_inst.TYPE.FIREBALL
 		spawn_point.add_child(projectile_inst)
@@ -151,7 +148,7 @@ func _fire_lazer() -> void:
 
 func _fire_nade() -> void:
 	var projectile_inst: RigidBody2D = projectile.instantiate() #instancate the projectile set its start position set it's direction times speed then spawn it
-	projectile_inst.prepare_proj(player, spawn_point.global_position, get_global_mouse_position(), bullet_speed)
+	projectile_inst.prepare_proj(player, spawn_point.global_position, get_global_mouse_position())
 	projectile_inst.proj_type = projectile_inst.TYPE.BOMB
 	spawn_point.add_child(projectile_inst)
 

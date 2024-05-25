@@ -1,27 +1,25 @@
+res://levels/lvl_1_Fl_A.tscn
 res://entites/weapons/staff/staff_sprites.tres
 res://entites/weapons/staff/wand_sprites.tres
-res://UI/button_normal.tres
-res://misc/shaders/vignette.gdshader
 res://levels/testing levels/tavern_tileSet.tres
-res://entites/enemies/goblin/goblin_sprites.tres
-res://misc/shaders/background_shader.gdshader
 res://misc/shaders/shockwave.gdshader
 res://misc/shaders/shockwave_shader.tres
-res://entites/objects/explostion.tscn
-res://entites/objects/scripts/explostion.gd
-res://entites/weapons/proj_fireball.tscn
-res://entites/enemies/template/eye_sight.tscn
-res://entites/enemies/template/eye_sight.gd
-res://levels/testing levels/tavern_testLvl.tscn
+res://sound/audio_streams/explostion_set.tres
+res://UI/button_normal.tres
+res://misc/shaders/vignette.gdshader
+res://entites/enemies/goblin/goblin_sprites.tres
+res://misc/shaders/3D_text.gdshader
+res://misc/shaders/background_shader.gdshader
+res://levels/lvl_1_Fl_A.gd
 res://entites/player/player_base.tscn
 res://entites/enemies/goblin/goblin.tscn
-res://entites/weapons/scripts/proj_fireball.gd
 res://entites/weapons/wep_staff.tscn
+res://misc/blood_particle.tscn
+res://UI/main_menu.tscn
+res://UI/pause_scene.tscn
 res://entites/weapons/scripts/wep_staff.gd
+res://entites/weapons/proj_fireball.tscn
+res://entites/player/scripts/hands_script.gd
 res://entites/player/weapon_manager.tscn
+res://entites/weapons/scripts/proj_fireball.gd
 res://entites/player/scripts/player_base.gd
-res://entites/enemies/template/detection_script.gd
-res://levels/testing levels/scripts/movement_testLvl.gd
-res://entites/enemies/goblin/goblin_script.gd
-res://levels/tutorial_lvl.tscn
-res://levels/lvl_1_Fl_A.tscn

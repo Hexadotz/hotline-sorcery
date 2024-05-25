@@ -10,6 +10,7 @@ extends RigidBody2D
 @onready var hitbox: Area2D = $hurtbox
 @onready var line: Line2D = $trail_effect
 
+var proj_speed: float = 500
 var damage: float = 5
 var point_pos: Vector2 = Vector2.ZERO #the point the line is going to start from
 var direction: Vector2 = Vector2.ZERO
@@ -27,6 +28,8 @@ func _ready() -> void:
 	line.modulate = trail_color
 
 func _physics_process(_delta: float) -> void:
+	linear_velocity = direction * proj_speed 
+	
 	_draw_trail()
 	_set_type()
 
@@ -57,10 +60,9 @@ func _draw_trail() -> void:
 	while line.get_point_count() > line_length:
 		line.remove_point(0)
 
-func prepare_proj(shooter: Node2D, glob_pos: Vector2, to_vec: Vector2, proj_speed: float) -> void:
+func prepare_proj(shooter: Node2D, glob_pos: Vector2, to_vec: Vector2) -> void:
 	direction = glob_pos.direction_to(to_vec)
 	global_position = glob_pos
-	linear_velocity = direction * (proj_speed + shooter.speed)
 	rotation = shooter.rotation
 
 #if the bullet went far without colliding with anything destroy it for optimization

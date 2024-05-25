@@ -4,7 +4,11 @@
 [ext_resource type="StyleBox" uid="uid://cfkct2lh3un4a" path="res://UI/button_normal.tres" id="2_s8ugr"]
 
 [resource]
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/constants/outline_size = 5
 Button/fonts/font = ExtResource("1_dw68n")
 Button/styles/normal = ExtResource("2_s8ugr")
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 15
 Label/fonts/font = ExtResource("1_dw68n")
 Panel/styles/panel = ExtResource("2_s8ugr")

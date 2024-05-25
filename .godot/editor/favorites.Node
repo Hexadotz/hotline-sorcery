@@ -9,3 +9,4 @@ ColorRect
 AudioStreamPlayer
 Node
 Button
+StaticBody2D

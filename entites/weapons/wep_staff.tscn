@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://bpt5t83htohip"]
+[gd_scene load_steps=5 format=3 uid="uid://bpt5t83htohip"]
 
 [ext_resource type="Script" path="res://entites/weapons/scripts/wep_staff.gd" id="1_gnawu"]
-[ext_resource type="PackedScene" uid="uid://cbw8nuibk3vht" path="res://entites/weapons/proj_fireball.tscn" id="2_a6su2"]
 [ext_resource type="SpriteFrames" uid="uid://bg2qracb3aenk" path="res://entites/weapons/staff/wand_sprites.tres" id="3_6efl4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vlhrq"]
@@ -19,9 +18,6 @@ middle_point = NodePath("staff/muzzle/center_marker")
 audio = NodePath("AudioStreamPlayer")
 hurtbox = NodePath("Hurtbox")
 sound_box = NodePath("sound_raduis")
-projectile = ExtResource("2_a6su2")
-bullet_speed = 250.0
-weapon_type = 4
 auto_cost = 0.5
 shotgun_spread = 3.0
 

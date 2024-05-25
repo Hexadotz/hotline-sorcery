@@ -38,7 +38,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if !IS_DEAD:
-		_push_rigid()
+		
 		#storing the mouse position in a variable so we don't call the method more thazn once
 		mouse_pos = get_global_mouse_position()
 		
@@ -57,6 +57,7 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("restart"):
 			get_tree().reload_current_scene()
 	
+	_push_rigid()
 	move_and_slide()
 
 func looking_at() -> Vector2:
@@ -88,8 +89,8 @@ func _camera_process(delta: float) -> void:
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 func shake_cam() -> void:
 	if Input.is_action_pressed("fire") and mana > 0:
-		var range: float = rng.randf_range(-10, 10) 
-		camera.position = lerp(camera.position, Vector2(range, range), get_physics_process_delta_time() * 10)
+		var rang: float = rng.randf_range(-10, 10) 
+		camera.position = lerp(camera.position, Vector2(rang, rang), get_physics_process_delta_time() * 20)
 	else:
 		camera.position = lerp(camera.position, Vector2.ZERO, 1)
 	

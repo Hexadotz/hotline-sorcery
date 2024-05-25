@@ -17,6 +17,15 @@ shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
 process_mode = 3
 script = ExtResource("1_hxplg")
 
+[node name="switch_floor" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
 [node name="Post Process" type="TextureRect" parent="."]
 visible = false
 material = SubResource("ShaderMaterial_ulitx")
