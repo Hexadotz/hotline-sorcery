@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://by00m7vfea70u"]
+
+[ext_resource type="Texture2D" uid="uid://d3butudvhe3vw" path="res://art/decals/decal_explosion.png" id="1_s31fj"]
+
+[node name="decal" type="Sprite2D"]
+texture = ExtResource("1_s31fj")

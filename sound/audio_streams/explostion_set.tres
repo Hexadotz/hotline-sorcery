@@ -4,6 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://cy7sfrrmd0i1" path="res://sound/sfx/explostion_2.mp3" id="2_08hge"]
 
 [resource]
+resource_local_to_scene = true
 streams_count = 2
 stream_0/stream = ExtResource("1_3v07v")
 stream_0/weight = 1.0

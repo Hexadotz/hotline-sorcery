@@ -4,7 +4,7 @@
 [ext_resource type="SpriteFrames" uid="uid://bg2qracb3aenk" path="res://entites/weapons/staff/wand_sprites.tres" id="3_6efl4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vlhrq"]
-radius = 200.0
+radius = 250.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ub30i"]
 size = Vector2(26, 48)
@@ -53,15 +53,6 @@ position = Vector2(5, 0)
 one_shot = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Label" type="Label" parent="CanvasLayer"]
-offset_left = 944.0
-offset_top = 563.0
-offset_right = 1055.0
-offset_bottom = 605.0
-theme_override_font_sizes/font_size = 30
-text = "it's time to kick gum and shew ass"
+bus = &"sfx"
 
 [connection signal="timeout" from="fire rater" to="." method="_on_fire_rater_timeout"]

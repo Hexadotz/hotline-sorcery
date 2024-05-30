@@ -1,30 +1,112 @@
-[gd_scene load_steps=7 format=3 uid="uid://bxrta1oppe24y"]
+[gd_scene load_steps=19 format=3 uid="uid://bxrta1oppe24y"]
 
 [ext_resource type="Script" path="res://UI/scripts/pause_scene.gd" id="1_hxplg"]
 [ext_resource type="Theme" uid="uid://kdfneisskda" path="res://misc/UI_theme.tres" id="2_l0hgq"]
 [ext_resource type="Shader" path="res://misc/shaders/vignette.gdshader" id="2_ti763"]
 [ext_resource type="PackedScene" uid="uid://bnjskjdcqos36" path="res://UI/buttons/button.tscn" id="4_jc8pt"]
+[ext_resource type="Texture2D" uid="uid://b0ypikoko6845" path="res://art/player/staff.png" id="5_56vyo"]
+[ext_resource type="Shader" path="res://misc/shaders/liquid_fill.gdshader" id="6_756e2"]
+[ext_resource type="Texture2D" uid="uid://b5gjigvhtrrpr" path="res://art/player/wand.png" id="6_pc603"]
+[ext_resource type="PackedScene" uid="uid://cf7ahjfie3qqr" path="res://UI/options.tscn" id="8_ahyl0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ulitx"]
 shader = ExtResource("2_ti763")
-shader_parameter/vignette_intensity = 1.0
-shader_parameter/vignette_opacity = 0.4
+shader_parameter/vignette_intensity = 1.28
+shader_parameter/vignette_opacity = 0.537
 shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_keqky"]
 
-[node name="UI" type="CanvasLayer"]
+[sub_resource type="Animation" id="Animation_jptgu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("restart:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("restart:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_d0dvs"]
+resource_name = "restart_anim"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("restart:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.203922), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("restart:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0872665, -0.0872665, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7f6s0"]
+_data = {
+"RESET": SubResource("Animation_jptgu"),
+"restart_anim": SubResource("Animation_d0dvs")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_in07g"]
+atlas = ExtResource("5_56vyo")
+region = Rect2(0, 0, 15, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gkpro"]
+atlas = ExtResource("5_56vyo")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6by6d"]
+atlas = ExtResource("6_pc603")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_na3rf"]
+atlas = ExtResource("6_pc603")
+region = Rect2(32, 0, 16, 32)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kytx2"]
+shader = ExtResource("6_756e2")
+shader_parameter/range = 0.422
+shader_parameter/red = 0.285
+shader_parameter/green = 0.375
+shader_parameter/blue = 0.985
+
+[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("score_lab", "mult_lab", "mult_timer")]
 process_mode = 3
 script = ExtResource("1_hxplg")
-
-[node name="switch_floor" type="ColorRect" parent="."]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
+score_lab = NodePath("HUD/score")
+mult_lab = NodePath("HUD/multiplier")
+mult_timer = NodePath("HUD/multiplier/Timer")
 
 [node name="Post Process" type="TextureRect" parent="."]
 visible = false
@@ -41,8 +123,13 @@ grow_vertical = 2
 pivot_offset = Vector2(50, 50)
 texture = SubResource("CanvasTexture_keqky")
 
-[node name="HUD" type="Control" parent="."]
+[node name="fps" type="Label" parent="."]
 visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+text = "FPS: - 200"
+
+[node name="HUD" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -50,19 +137,177 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="HUD"]
+[node name="restart" type="Label" parent="HUD"]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.815
 anchor_bottom = 0.815
-offset_top = -10.1201
-offset_right = 213.0
-offset_bottom = 12.8799
+offset_left = 20.0
+offset_top = -13.12
+offset_right = 446.0
+offset_bottom = 55.88
+pivot_offset = Vector2(228, 34)
 theme = ExtResource("2_l0hgq")
 theme_override_font_sizes/font_size = 56
-text = "You are ded, not big surprise"
+text = "Press 'R' to restart"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD"]
+libraries = {
+"": SubResource("AnimationLibrary_7f6s0")
+}
+autoplay = "restart_anim"
+speed_scale = 0.5
+
+[node name="CenterContainer" type="CenterContainer" parent="HUD"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -625.0
+offset_top = -162.0
+offset_right = 625.0
+offset_bottom = 144.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="HUD/CenterContainer"]
+custom_minimum_size = Vector2(1300, 300)
+layout_mode = 2
+theme = ExtResource("2_l0hgq")
+
+[node name="Label" type="Label" parent="HUD/CenterContainer/Panel"]
+layout_mode = 0
+offset_left = 98.0
+offset_top = -56.0
+offset_right = 382.0
+offset_bottom = -5.0
+theme_override_font_sizes/font_size = 41
+text = "Select a staff"
+
+[node name="ItemList" type="ItemList" parent="HUD/CenterContainer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -398.0
+offset_top = -153.5
+offset_right = 398.0
+offset_bottom = 153.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_l0hgq")
+allow_rmb_select = true
+max_text_lines = 5
+auto_height = true
+item_count = 4
+max_columns = 6
+same_column_width = true
+fixed_column_width = 169
+icon_mode = 0
+fixed_icon_size = Vector2i(1450, 175)
+item_0/text = "Unus fors            single shot         mana -1"
+item_0/icon = SubResource("AtlasTexture_in07g")
+item_1/text = "Automaticus        auto shot            mana -0.5"
+item_1/icon = SubResource("AtlasTexture_gkpro")
+item_2/text = "Pyrobolum          single shot         mana -3"
+item_2/icon = SubResource("AtlasTexture_6by6d")
+item_3/text = "Cerpitus mittentis single shot        mana -5"
+item_3/icon = SubResource("AtlasTexture_na3rf")
+
+[node name="score" type="Label" parent="HUD"]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 46.0
+offset_right = 214.0
+offset_bottom = 143.0
+theme = ExtResource("2_l0hgq")
+theme_override_font_sizes/font_size = 65
+text = "1950"
+
+[node name="multiplier" type="Label" parent="HUD"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -206.0
+offset_top = 43.0
+offset_right = -3.0
+offset_bottom = 152.0
+grow_horizontal = 0
+theme = ExtResource("2_l0hgq")
+theme_override_font_sizes/font_size = 75
+text = "X 69"
+
+[node name="Timer" type="Timer" parent="HUD/multiplier"]
+wait_time = 5.0
+one_shot = true
+
+[node name="mana" type="ColorRect" parent="HUD"]
+material = SubResource("ShaderMaterial_kytx2")
+layout_mode = 0
+offset_left = 919.0
+offset_top = 406.0
+offset_right = 1669.0
+offset_bottom = 1156.0
+
+[node name="Label" type="Label" parent="HUD/mana"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 170.0
+offset_right = 181.0
+offset_bottom = 219.0
+theme = ExtResource("2_l0hgq")
+theme_override_font_sizes/font_size = 40
+text = "my name"
+
+[node name="floor_clr" type="CenterContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -41.0
+offset_top = -20.0
+offset_right = 41.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_l0hgq")
+
+[node name="Label" type="Label" parent="floor_clr"]
+layout_mode = 2
+theme = ExtResource("2_l0hgq")
+theme_override_font_sizes/font_size = 150
+text = "Floor clear"
+
+[node name="Label2" type="Label" parent="floor_clr/Label"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -220.0
+offset_top = -29.5
+offset_right = 464.0
+offset_bottom = 151.5
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("2_l0hgq")
+theme_override_font_sizes/font_size = 50
+text = "Move on to the next"
+
+[node name="all_clear_signal" type="Timer" parent="floor_clr"]
+one_shot = true
 
 [node name="Pause_UI" type="CenterContainer" parent="."]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -122,6 +367,13 @@ text = "Main menu"
 layout_mode = 2
 text = "Quit game"
 
+[node name="options" parent="." node_paths=PackedStringArray("pause_UI") instance=ExtResource("8_ahyl0")]
+visible = false
+pause_UI = NodePath("..")
+
+[connection signal="item_activated" from="HUD/CenterContainer/Panel/ItemList" to="." method="_on_item_list_item_activated"]
+[connection signal="timeout" from="HUD/multiplier/Timer" to="." method="_on_mult_timer_timeout"]
+[connection signal="timeout" from="floor_clr/all_clear_signal" to="." method="_on_all_clear_signal_timeout"]
 [connection signal="pressed" from="Pause_UI/PanelContainer/Panel/VBoxContainer/resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="Pause_UI/PanelContainer/Panel/VBoxContainer/restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="Pause_UI/PanelContainer/Panel/VBoxContainer/options" to="." method="_on_options_pressed"]

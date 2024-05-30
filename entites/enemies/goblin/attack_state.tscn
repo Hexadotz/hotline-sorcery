@@ -22,5 +22,6 @@ debug_color = Color(0.600527, 0.308065, 2.88785e-07, 0.419608)
 
 [node name="swing sfx" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_2oq2l")
+bus = &"sfx"
 
 [connection signal="body_entered" from="damage_box" to="." method="_on_damage_box_body_entered"]

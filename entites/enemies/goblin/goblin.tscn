@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://jltejnrxk3tb"]
+[gd_scene load_steps=14 format=3 uid="uid://jltejnrxk3tb"]
 
 [ext_resource type="Script" path="res://entites/enemies/goblin/goblin_script.gd" id="1_7s807"]
 [ext_resource type="SpriteFrames" uid="uid://bdqsq83jwm8rf" path="res://entites/enemies/goblin/goblin_sprites.tres" id="2_ojbe7"]
@@ -10,17 +10,21 @@
 [ext_resource type="PackedScene" uid="uid://chrkslhg8odb4" path="res://entites/enemies/goblin/knockback_state.tscn" id="8_yv5yv"]
 [ext_resource type="PackedScene" uid="uid://b3d2gll3cshny" path="res://entites/enemies/goblin/patrole_state.tscn" id="9_lddmv"]
 [ext_resource type="PackedScene" uid="uid://b4dgnvpwwcqaw" path="res://entites/enemies/goblin/wep_search_state.tscn" id="10_j14sw"]
+[ext_resource type="Texture2D" uid="uid://c2ptfvl2dx13u" path="res://art/decals/light.png" id="11_81rd1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j7iyn"]
+resource_local_to_scene = true
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i2s1b"]
+resource_local_to_scene = true
 radius = 13.0
 
 [node name="goblin" type="CharacterBody2D" node_paths=PackedStringArray("nav_agent", "animation", "sight_area", "body", "move_state", "attack_state", "hide_state", "panic_state", "knock_state", "patrol_state", "wep_search_state") groups=["enemy"]]
 z_index = 1
 collision_layer = 65
-collision_mask = 2
+collision_mask = 3
 script = ExtResource("1_7s807")
+visible_eyesight = false
 nav_agent = NodePath("NavigationAgent")
 animation = NodePath("Animation")
 sight_area = NodePath("eye_sight")
@@ -32,19 +36,21 @@ panic_state = NodePath("States/panic_state")
 knock_state = NodePath("States/knockback_state")
 patrol_state = NodePath("States/patrole_state")
 wep_search_state = NodePath("States/wep_search_state")
+detection_range = 500.0
+detection_gap = 180.0
 pickup_raduis = 30.0
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
 z_index = -1
 rotation = -1.5708
 sprite_frames = ExtResource("2_ojbe7")
-animation = &"knock_back"
-frame = 1
+animation = &"unarmed"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_j7iyn")
 
 [node name="eye_sight" parent="." instance=ExtResource("3_jw1i5")]
+visible = false
 
 [node name="hurt_box" type="Area2D" parent="."]
 
@@ -77,3 +83,9 @@ parent = NodePath("../..")
 
 [node name="wep_search_state" parent="States" node_paths=PackedStringArray("parent") instance=ExtResource("10_j14sw")]
 parent = NodePath("../..")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.3
+shadow_enabled = true
+texture = ExtResource("11_81rd1")
+texture_scale = 0.5

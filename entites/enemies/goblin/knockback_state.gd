@@ -5,9 +5,9 @@ var knocked_back: bool = false
 #----------------------------------------------------------#
 func knockback(direction: Vector2) -> void:
 	if !knocked_back:
+		print("knocked back")
 		parent.velocity = Vector2.ZERO
 		parent.animation.play("knock_back")
-		parent.animation.connect("animation_looped", func(): parent.animation.stop())
 		
 		parent.velocity = direction * 80
 		

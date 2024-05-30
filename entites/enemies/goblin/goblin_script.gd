@@ -1,13 +1,16 @@
+@tool
 class_name Goblin extends CharacterBody2D
 
 @export var inital_state: STATES
+@export var visible_eyesight: bool = true
+@export var patrol_path: PathFollow2D ##the path the enemy will follow when patrolling, if none given it will pick a random path
 
 @export_group("node refrences")
 @export var nav_agent: NavigationAgent2D
 @export var animation: AnimatedSprite2D
-@export var sight_area: Area2D
+@export var sight_area: Node2D
 @export var body: CollisionShape2D
-@export var patrol_path: PathFollow2D ##the path the enemy will follow when patrolling, if none given it will pick a random path
+
 @export_subgroup("state refrences")
 @export var move_state: Node
 @export var attack_state: Node2D
@@ -30,15 +33,17 @@ class_name Goblin extends CharacterBody2D
 var direction: Vector2 = Vector2.ZERO
 
 var ass_firction: float = 5.0
-var health: float = 20.0
+var health: float = 10.0
 var speed: float = 200
 
 
 var IS_DEAD: bool = false
 var ARMED: bool = true
 
-const RUN_SPEED: float = 125.0
-const WALK_SPEED: float = 70.0
+signal enemy_died
+
+const RUN_SPEED: float = 250#125.0
+const WALK_SPEED: float = 150#70.0
 
 enum STATES{
 	IDLE,		#0
@@ -60,20 +65,21 @@ var current_target: Node2D = null
 var weapon_memory: Array = []
 #----------------------------------------------------------#
 func _ready() -> void:
-	print(player)
 	await get_tree().create_timer(0.1).timeout
 	set_state(inital_state)
 
 func _physics_process(_delta: float) -> void:
-	if !IS_DEAD:
-		_state_machine()
+	if Engine.is_editor_hint():
+		sight_area.visible = visible_eyesight
 	else:
-		velocity = lerp(velocity, Vector2.ZERO, ass_firction * get_physics_process_delta_time())
-		if velocity.length() < 10:
-			body.disabled = true
-	
-	_push_rigid()
-	move_and_slide()
+		if !IS_DEAD:
+			_state_machine()
+		else:
+			velocity = lerp(velocity, Vector2.ZERO, ass_firction * get_physics_process_delta_time())
+			if velocity.length() < 10:
+				body.disabled = true
+		
+		move_and_slide()
 
 func set_state(new_st: STATES) -> void:
 	if current_st != new_st:
@@ -86,7 +92,7 @@ func _state_machine() -> void:
 		STATES.IDLE:
 			animation.play("idle")
 			velocity = Vector2.ZERO
-			if health <= 10:
+			if health < 5:
 				set_state(STATES.HIDING)
 		
 		STATES.CHASE:
@@ -107,7 +113,6 @@ func _state_machine() -> void:
 			attack_state.attack()
 		
 		STATES.KNOCKBACK:
-			
 			knock_state.knockback(last_shot_dir)
 			drop_weapon()
 			
@@ -122,10 +127,15 @@ func _state_machine() -> void:
 			if !IS_DEAD:
 				velocity = last_shot_dir * 100
 				IS_DEAD = true
+				enemy_died.emit()
+				cur_scene.stunts.append("kill")
 				if global_position.distance_to(player.global_position) < 50:
-					player.mana += 3
+					player.mana += 5
+				
+				drop_weapon()
 			
 		STATES.SEARCH_WEP:
+			animation.play("unarmed")
 			wep_search_state.look_for_weapon()
 
 func get_current_state() -> String:
@@ -151,21 +161,13 @@ func on_hit(dmg: float, hit_dir: Vector2, type: String = "") -> void:
 	if health <= 0:
 		set_state(STATES.DEATH)
 
-func _push_rigid() -> void:
-	if !move_and_slide():
-		return
-	else:
-		for collider_index in get_slide_collision_count():
-			var collision: KinematicCollision2D = get_slide_collision(collider_index)
-			if collision.get_collider() is RigidBody2D and collision.get_collider().is_in_group("doors"):
-				collision.get_collider().apply_force(collision.get_normal() * -5000)
-
 func drop_weapon() -> void:
 	#make the enemy unarmed
 	if ARMED:
 		var wep_ins: RigidBody2D = club.instantiate() 
 		wep_ins.global_position = global_position
 		
+		cur_scene.stunts.append("Knockback")
 		cur_scene.add_child(wep_ins)
 		ARMED = false
 

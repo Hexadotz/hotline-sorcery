@@ -73,6 +73,9 @@ func _destroy() -> void:
 	queue_free()
 
 func _on_hirtbox_body_entered(body: Node2D) -> void:
+	if body.is_in_group("boom"):
+		body.blow_up()
+	
 	if proj_type == TYPE.BOMB:
 		var boomboom = boom_scene.instantiate()
 		boomboom.global_position = global_position
@@ -86,7 +89,7 @@ func _on_hirtbox_body_entered(body: Node2D) -> void:
 			queue_free()
 			
 		elif body.is_in_group("window"):
-			body.shatter()
+			body.shatter(direction)
 			
 		elif body.is_in_group("doors"):
 			body.apply_impulse(direction * 500)

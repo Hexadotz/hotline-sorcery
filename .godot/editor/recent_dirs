@@ -1,10 +1,13 @@
 res://UI/scripts
-res://misc/shaders
 res://UI
-res://levels
+res://misc/shaders
 res://entites/objects
-res://sound/audio_streams
+res://levels
 res://entites/objects/scripts
+res://art/goblin
+res://art/placables
+res://art/tilesets
+res://sound/audio_streams
 res://UI/buttons
 res://misc
 res://entites/player/scripts
@@ -15,8 +18,5 @@ res://entites/weapons/staff
 res://entites/enemies/template
 res://entites/weapons/scripts
 res://entites/weapons
-res://art/goblin
 res://entites/player
 res://
-res://entites/enemies
-res://misc/maxwell

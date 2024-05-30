@@ -27,5 +27,5 @@ func attack() -> void:
 
 func _on_damage_box_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		if !body.IS_DEAD:
+		if !body.IS_DEAD and !body.INVINSIBLE:
 			body.death(global_position.direction_to(body.global_position))

@@ -43,8 +43,8 @@ enum WEAPON_TYPE{
 	SEMI_AUTOMATIC,
 	AUTOMATIC,
 	SHOTGUN,
-	LAZER,
-	GRENADER
+	GRENADER,
+	LAZER
 }
 
 #----------------------------------------------#
@@ -63,7 +63,6 @@ func _ready() -> void:
 	shotgun_array = spawn_point.get_children()
 
 func _physics_process(_delta: float) -> void:
-	$CanvasLayer/Label.text = "Mana: " + str(player.mana)
 	if player.mana > 0:
 		if active and can_cast:
 			match weapon_type:
@@ -82,7 +81,7 @@ func _physics_process(_delta: float) -> void:
 				WEAPON_TYPE.SHOTGUN:
 					if Input.is_action_just_pressed("fire"):
 						_fire_shotgun()
-						
+				#Rest in piss Mr lazer weapon you will probably be missed
 				WEAPON_TYPE.LAZER:
 					if Input.is_action_pressed("fire"):
 						_fire_lazer()
@@ -160,7 +159,7 @@ func swing() -> void:
 	
 	var enemy_list: Array  = hurtbox.get_overlapping_bodies()
 	for node in enemy_list:
-		if node.is_in_group("enemy"):
+		if node.is_in_group("enemy") and active:
 			node.set_state(node.STATES.KNOCKBACK)
 
 func _alert_enemies() -> void:

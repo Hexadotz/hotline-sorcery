@@ -21,7 +21,6 @@ func _physics_process(_delta: float) -> void:
 		if Input.is_action_just_pressed("switch_wep"):
 			_switch_wep()
 		
-		
 	#once the player dies, drop all weapons, just once
 	else:
 		if !weapons_dropped:
@@ -61,22 +60,21 @@ func _switch_wep() -> void:
 
 func _pickup_weapon() -> void:
 	#picking up the first weapon in the pickup raduis
-	if pickup_raduis.has_overlapping_bodies():
-		var list: Array[Node2D] = pickup_raduis.get_overlapping_bodies()
-		for wep in list:
-			if hand.get_child_count() + back.get_child_count() < 2:
-				#if we have the staff already equipped switch it to the back
-				if hand.get_child_count() == 1:
-					var cur_wep: Node2D = null if hand.get_child_count() == 0 else hand.get_child(0) 
-					
-					cur_wep.reparent(back, false)
-					cur_wep.active = false
-					cur_wep.global_transform = back.global_transform
+	var list: Array[Node2D] = pickup_raduis.get_overlapping_bodies()
+	for wep in list:
+		if hand.get_child_count() + back.get_child_count() < 2:
+			#if we have the staff already equipped switch it to the back
+			if hand.get_child_count() == 1:
+				var cur_wep: Node2D = null if hand.get_child_count() == 0 else hand.get_child(0) 
 				
-				#put the weapon we picked up in our hands
-				wep.reparent(hand, false)
-				wep.pickup()
-				wep.global_transform = hand.global_transform
+				cur_wep.reparent(back, false)
+				cur_wep.active = false
+				cur_wep.global_transform = back.global_transform
+			
+			#put the weapon we picked up in our hands
+			wep.reparent(hand, false)
+			wep.pickup()
+			wep.global_transform = hand.global_transform
 
 func _drop_weapons() -> void:
 	var prim_wep = hand.get_child(0) if hand.get_child_count() != 0 else null

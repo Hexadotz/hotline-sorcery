@@ -1,0 +1,126 @@
+[gd_scene load_steps=5 format=3 uid="uid://cf7ahjfie3qqr"]
+
+[ext_resource type="Script" path="res://UI/scripts/options.gd" id="1_na5l5"]
+[ext_resource type="PackedScene" uid="uid://l73l5wc2dtsm" path="res://UI/volume_silder.tscn" id="2_xhwa1"]
+[ext_resource type="Theme" uid="uid://kdfneisskda" path="res://misc/UI_theme.tres" id="2_xq6cd"]
+[ext_resource type="PackedScene" uid="uid://bnjskjdcqos36" path="res://UI/buttons/button.tscn" id="4_eum82"]
+
+[node name="options" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_na5l5")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="CenterContainer"]
+custom_minimum_size = Vector2(650, 350)
+layout_mode = 2
+theme = ExtResource("2_xq6cd")
+
+[node name="Label" type="Label" parent="CenterContainer/Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 50
+text = "Options"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = 73.0
+offset_right = -18.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="labels" type="VBoxContainer" parent="CenterContainer/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="Show fps" type="Label" parent="CenterContainer/Panel/HBoxContainer/labels"]
+layout_mode = 2
+tooltip_text = "Display the current frames per second on the top left corner"
+mouse_filter = 1
+text = "Show Fps: "
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/Panel/HBoxContainer/labels"]
+layout_mode = 2
+
+[node name="Master" type="Label" parent="CenterContainer/Panel/HBoxContainer/labels"]
+layout_mode = 2
+text = "Master volume"
+
+[node name="Music volume" type="Label" parent="CenterContainer/Panel/HBoxContainer/labels"]
+layout_mode = 2
+text = "Music volume"
+
+[node name="SFX volume" type="Label" parent="CenterContainer/Panel/HBoxContainer/labels"]
+layout_mode = 2
+text = "SFX volume"
+
+[node name="HSeparator2" type="HSeparator" parent="CenterContainer/Panel/HBoxContainer/labels"]
+layout_mode = 2
+
+[node name="disLights" type="Label" parent="CenterContainer/Panel/HBoxContainer/labels"]
+layout_mode = 2
+tooltip_text = "Disables all the lights in game, greatly improve preformance"
+mouse_filter = 1
+text = "Disable lights"
+
+[node name="Control" type="Control" parent="CenterContainer/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="buttons" type="VBoxContainer" parent="CenterContainer/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="showFps" type="CheckBox" parent="CenterContainer/Panel/HBoxContainer/buttons"]
+layout_mode = 2
+
+[node name="HSlider" parent="CenterContainer/Panel/HBoxContainer/buttons" instance=ExtResource("2_xhwa1")]
+layout_mode = 2
+bus_name = "Master"
+
+[node name="HSlider2" parent="CenterContainer/Panel/HBoxContainer/buttons" instance=ExtResource("2_xhwa1")]
+layout_mode = 2
+bus_name = "Music"
+
+[node name="HSlider3" parent="CenterContainer/Panel/HBoxContainer/buttons" instance=ExtResource("2_xhwa1")]
+layout_mode = 2
+bus_name = "sfx"
+
+[node name="disableLights" type="CheckBox" parent="CenterContainer/Panel/HBoxContainer/buttons"]
+layout_mode = 2
+
+[node name="close" parent="CenterContainer/Panel" instance=ExtResource("4_eum82")]
+layout_mode = 0
+offset_left = 538.0
+offset_top = 296.0
+offset_right = 624.0
+offset_bottom = 331.0
+text = "Close
+"
+
+[connection signal="toggled" from="CenterContainer/Panel/HBoxContainer/buttons/showFps" to="." method="_on_show_fps_toggled"]
+[connection signal="toggled" from="CenterContainer/Panel/HBoxContainer/buttons/disableLights" to="." method="_on_disable_lights_toggled"]
+[connection signal="pressed" from="CenterContainer/Panel/close" to="." method="_on_close_pressed"]

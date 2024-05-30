@@ -1,3 +1,4 @@
+@tool
 extends Node2D
  
 @export var pref_weapon: String = ""
@@ -22,20 +23,25 @@ func _configure_view_radius() -> void:
 	wep_poly_col.polygon = sight_shape
 	player_poly_col.polygon = sight_shape
  
+#4 days are left, 4 fucking days are left and im still struggling to get this shit to work god please help me
 func _physics_process(_delta: float) -> void:
-	if parent.current_st == parent.STATES.DEATH:
-		player_sight.monitoring = false
- 
-	if player_sight.monitoring:
-		#remember weapons
-		if wep_sight_area.has_overlapping_bodies():
-			_remember_weapons(wep_sight_area.get_overlapping_bodies())
- 
-		if is_on_sight() and !parent.player.IS_DEAD and parent.ARMED:
-			if parent.current_st not in [parent.STATES.DEATH, parent.STATES.ATTACK, parent.STATES.KNOCKBACK, parent.STATES.HIDING]:
-				parent.set_state(parent.STATES.CHASE)
+	if Engine.is_editor_hint():
+		_configure_view_radius()
 	else:
-		player_poly_col.disabled = true
+		if parent.current_st == parent.STATES.DEATH:
+			player_sight.monitoring = false
+	 
+		if player_sight.monitoring:
+			#remember weapons
+			if wep_sight_area.has_overlapping_bodies():
+				_remember_weapons(wep_sight_area.get_overlapping_bodies())
+	 
+			if is_on_sight() and !parent.player.IS_DEAD and parent.ARMED:
+				if parent.current_st not in [parent.STATES.DEATH, parent.STATES.ATTACK, parent.STATES.KNOCKBACK, parent.STATES.HIDING]:
+					#parent.cur_scene.stunts.append("Exposure")
+					parent.set_state(parent.STATES.CHASE)
+		else:
+			player_poly_col.disabled = true
  
 func _remember_weapons(list: Array) -> void:
 	for wep in list:

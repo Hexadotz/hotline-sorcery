@@ -276,6 +276,7 @@ autoplay = "title_animation"
 speed_scale = 0.2
 
 [node name="music" type="AudioStreamPlayer" parent="."]
+bus = &"Music"
 
 [connection signal="pressed" from="menu/Panel/VBoxContainer/start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="menu/Panel/VBoxContainer/options" to="." method="_on_options_pressed"]

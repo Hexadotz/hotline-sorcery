@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://7fqmamg5ukin"]
+[gd_scene load_steps=23 format=3 uid="uid://7fqmamg5ukin"]
 
 [ext_resource type="Material" uid="uid://chamkf3dlbktv" path="res://misc/shaders/shockwave_shader.tres" id="1_rv8ss"]
 [ext_resource type="Script" path="res://entites/objects/scripts/explostion.gd" id="1_uoqnx"]
@@ -7,20 +7,44 @@
 [ext_resource type="AudioStream" uid="uid://wxlhh0jo0ps8" path="res://sound/audio_streams/explostion_set.tres" id="5_u7ysl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_enpns"]
+resource_local_to_scene = true
 radius = 60.0
 
-[sub_resource type="QuadMesh" id="QuadMesh_c1dne"]
-size = Vector2(150, 150)
+[sub_resource type="Curve" id="Curve_4v11d"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.99999, 0.573203), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
 
-[sub_resource type="Gradient" id="Gradient_7tgxf"]
+[sub_resource type="CurveTexture" id="CurveTexture_iwfme"]
+curve = SubResource("Curve_4v11d")
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_yq8jd"]
-noise_type = 0
+[sub_resource type="Gradient" id="Gradient_rb7tb"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.583333, 0, 1)
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xesgm"]
-bump_strength = 23.2
-color_ramp = SubResource("Gradient_7tgxf")
-noise = SubResource("FastNoiseLite_yq8jd")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_v0moh"]
+gradient = SubResource("Gradient_rb7tb")
+
+[sub_resource type="Curve" id="Curve_44pk1"]
+min_value = -1.0
+_data = [Vector2(0.00468384, 0.400178), 0.0, 0.0, 0, 0, Vector2(0.255269, 0.93079), 0.0, 0.0, 0, 0, Vector2(0.466042, 0.584738), 0.0, 0.0, 0, 0, Vector2(0.751756, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.411713), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_t3a1b"]
+curve = SubResource("Curve_44pk1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nva2h"]
+resource_local_to_scene = true
+particle_flag_disable_z = true
+emission_shape = 2
+emission_sphere_radius = 17.49
+spread = 180.0
+initial_velocity_min = 300.0
+initial_velocity_max = 300.0
+gravity = Vector3(0, 0, 0)
+scale_min = 3.0
+scale_max = 4.0
+color_ramp = SubResource("GradientTexture1D_v0moh")
+alpha_curve = SubResource("CurveTexture_iwfme")
+hue_variation_curve = SubResource("CurveTexture_t3a1b")
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_48h66"]
 particles_animation = true
@@ -45,6 +69,7 @@ point_count = 6
 curve = SubResource("Curve_cq7yh")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i8xon"]
+resource_local_to_scene = true
 particle_flag_disable_z = true
 emission_shape = 2
 emission_sphere_radius = 50.0
@@ -64,7 +89,7 @@ resource_name = "BOOM"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Icon:material:shader_parameter/radius")
+tracks/0/path = NodePath("shockwave_shadder:material:shader_parameter/radius")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -79,7 +104,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Icon:material:shader_parameter/radius")
+tracks/0/path = NodePath("shockwave_shadder:material:shader_parameter/radius")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -95,26 +120,31 @@ _data = {
 "RESET": SubResource("Animation_nryof")
 }
 
-[node name="explostion" type="Node2D" node_paths=PackedStringArray("blast_zone", "particles", "anim", "audio")]
+[node name="explostion" type="Node2D" node_paths=PackedStringArray("blast_zone", "particles", "part_trail", "anim", "audio")]
 script = ExtResource("1_uoqnx")
 blast_zone = NodePath("blast_raduis")
 particles = NodePath("BOOM_particles")
+part_trail = NodePath("BOOM_trails")
 anim = NodePath("shockwave_anim")
 audio = NodePath("AudioListener2D")
 
 [node name="blast_raduis" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 64
+collision_mask = 68
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="blast_raduis"]
 shape = SubResource("CircleShape2D_enpns")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
-visible = false
-mesh = SubResource("QuadMesh_c1dne")
-texture = SubResource("NoiseTexture2D_xesgm")
+[node name="BOOM_trails" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_nva2h")
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
 
 [node name="BOOM_particles" type="GPUParticles2D" parent="."]
+z_index = 1
 material = SubResource("CanvasItemMaterial_48h66")
 emitting = false
 amount = 24
@@ -126,13 +156,7 @@ preprocess = 0.01
 explosiveness = 1.0
 randomness = 0.5
 
-[node name="test_icon" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(3.99999, -3)
-scale = Vector2(2.79687, 2.79688)
-texture = ExtResource("2_1xm2f")
-
-[node name="Icon" type="Sprite2D" parent="."]
+[node name="shockwave_shadder" type="Sprite2D" parent="."]
 material = ExtResource("1_rv8ss")
 scale = Vector2(1.3, 1.3)
 texture = ExtResource("2_1xm2f")
@@ -146,8 +170,7 @@ speed_scale = 3.0
 [node name="AudioListener2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_u7ysl")
 max_distance = 1000.0
-
-[node name="Camera2D" type="Camera2D" parent="."]
+bus = &"sfx"
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

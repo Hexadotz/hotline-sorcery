@@ -4,7 +4,8 @@
 [ext_resource type="AudioStream" uid="uid://b81ss6uf6uwxv" path="res://sound/sfx/glass-hit-192119.mp3" id="2_rqfb3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e1v3d"]
-size = Vector2(4, 60)
+resource_local_to_scene = true
+size = Vector2(8, 60)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8pvke"]
 particle_flag_disable_z = true
@@ -16,8 +17,8 @@ scale_min = 3.0
 scale_max = 5.0
 color = Color(0.372725, 0.650219, 1, 1)
 
-[node name="window" type="StaticBody2D" groups=["window"]]
-collision_mask = 16
+[node name="window" type="StaticBody2D" groups=["nav", "window"]]
+collision_mask = 21
 script = ExtResource("1_74aif")
 
 [node name="Sprite" type="Sprite2D" parent="."]
@@ -26,13 +27,15 @@ script = ExtResource("1_74aif")
 shape = SubResource("RectangleShape2D_e1v3d")
 
 [node name="placeholder" type="ColorRect" parent="."]
-offset_left = -2.0
+visible = false
+offset_left = -4.0
 offset_top = -30.0
-offset_right = 2.0
+offset_right = 4.0
 offset_bottom = 30.0
 color = Color(0, 0.516667, 1, 1)
 
 [node name="Window_bits" type="GPUParticles2D" parent="."]
+emitting = false
 amount = 32
 process_material = SubResource("ParticleProcessMaterial_8pvke")
 lifetime = 0.2
@@ -45,5 +48,6 @@ one_shot = true
 
 [node name="AudioSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_rqfb3")
+bus = &"sfx"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

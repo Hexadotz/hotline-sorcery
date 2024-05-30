@@ -9,9 +9,6 @@ var location_acquired: bool = false
 func _ready() -> void:
 	pass
 
-func _physics_process(_delta: float) -> void:
-	pass
-
 #TODO: fix this as the goblin freaks out since he picks a place to go to evrey frame
 func hide() -> void:
 	if hide_places.size() != 0:
@@ -25,4 +22,5 @@ func hide() -> void:
 		
 		#once we reach our hiding spot set the state to panic
 		parent.nav_agent.connect("target_reached" , func(): parent.set_state(parent.STATES.PANIC))
-
+	else:
+		parent.set_state(parent.STATES.PANIC)

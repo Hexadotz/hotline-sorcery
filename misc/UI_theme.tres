@@ -1,13 +1,19 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://kdfneisskda"]
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://kdfneisskda"]
 
 [ext_resource type="FontFile" uid="uid://dfecjk6s07bx0" path="res://misc/fonts/medieval_fontA.tres" id="1_dw68n"]
 [ext_resource type="StyleBox" uid="uid://cfkct2lh3un4a" path="res://UI/button_normal.tres" id="2_s8ugr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bjc1p"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [resource]
 Button/colors/font_outline_color = Color(0, 0, 0, 1)
 Button/constants/outline_size = 5
 Button/fonts/font = ExtResource("1_dw68n")
 Button/styles/normal = ExtResource("2_s8ugr")
+ItemList/font_sizes/font_size = 21
+ItemList/fonts/font = ExtResource("1_dw68n")
+ItemList/styles/panel = SubResource("StyleBoxFlat_bjc1p")
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
 Label/constants/outline_size = 15
 Label/fonts/font = ExtResource("1_dw68n")

@@ -9,6 +9,7 @@ size = Vector2(10, 10)
 position = Vector2(-333.644, -618.331)
 rotation = 1.74976
 script = ExtResource("1_11k2h")
+metadata/_edit_vertical_guides_ = [-578.0]
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 modulate = Color(0.716667, 0, 1, 1)
