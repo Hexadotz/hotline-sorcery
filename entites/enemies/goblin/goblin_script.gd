@@ -132,6 +132,7 @@ func _state_machine() -> void:
 				if global_position.distance_to(player.global_position) < 50:
 					player.mana += 5
 				
+				$Sfx.play()
 				drop_weapon()
 			
 		STATES.SEARCH_WEP:

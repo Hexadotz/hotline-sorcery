@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://jltejnrxk3tb"]
+[gd_scene load_steps=15 format=3 uid="uid://jltejnrxk3tb"]
 
 [ext_resource type="Script" path="res://entites/enemies/goblin/goblin_script.gd" id="1_7s807"]
 [ext_resource type="SpriteFrames" uid="uid://bdqsq83jwm8rf" path="res://entites/enemies/goblin/goblin_sprites.tres" id="2_ojbe7"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://b3d2gll3cshny" path="res://entites/enemies/goblin/patrole_state.tscn" id="9_lddmv"]
 [ext_resource type="PackedScene" uid="uid://b4dgnvpwwcqaw" path="res://entites/enemies/goblin/wep_search_state.tscn" id="10_j14sw"]
 [ext_resource type="Texture2D" uid="uid://c2ptfvl2dx13u" path="res://art/decals/light.png" id="11_81rd1"]
+[ext_resource type="AudioStream" uid="uid://gl7neblheyru" path="res://sound/audio_streams/death_set.tres" id="12_ock66"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j7iyn"]
 resource_local_to_scene = true
@@ -89,3 +90,6 @@ energy = 0.3
 shadow_enabled = true
 texture = ExtResource("11_81rd1")
 texture_scale = 0.5
+
+[node name="Sfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_ock66")

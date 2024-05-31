@@ -1,123 +1,72 @@
-[gd_scene load_steps=15 format=3 uid="uid://s2ybu4j312qf"]
+[gd_scene load_steps=24 format=3 uid="uid://s2ybu4j312qf"]
 
-[ext_resource type="Shader" path="res://misc/shaders/3D_text.gdshader" id="1_5rop8"]
 [ext_resource type="Theme" uid="uid://kdfneisskda" path="res://misc/UI_theme.tres" id="1_ex5hu"]
 [ext_resource type="Script" path="res://UI/scripts/main_menu.gd" id="1_xoj62"]
+[ext_resource type="Shader" path="res://misc/shaders/menu_background.gdshader" id="2_2rxur"]
 [ext_resource type="PackedScene" uid="uid://bnjskjdcqos36" path="res://UI/buttons/button.tscn" id="4_keehu"]
+[ext_resource type="PackedScene" uid="uid://cf7ahjfie3qqr" path="res://UI/options.tscn" id="5_doggi"]
+[ext_resource type="FontFile" uid="uid://dfecjk6s07bx0" path="res://misc/fonts/medieval_fontA.tres" id="6_4c5bq"]
+[ext_resource type="AudioStream" uid="uid://c1qads58fblss" path="res://sound/music/wild_encounter.mp3" id="6_l42fs"]
+[ext_resource type="Texture2D" uid="uid://di2ocl0dlwrk3" path="res://UI/KeySample.png" id="7_uj7eh"]
+[ext_resource type="Texture2D" uid="uid://c1dhyac0o1d0e" path="res://UI/Keys/Blank-Md-Key.png" id="8_yhtqg"]
 
-[sub_resource type="Gradient" id="Gradient_hshae"]
-offsets = PackedFloat32Array(0, 0.997519)
-colors = PackedColorArray(0, 0, 0, 1, 1, 0, 0, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_err6c"]
+shader = ExtResource("2_2rxur")
+shader_parameter/zoom = 2.0
+shader_parameter/rotate_speed = 0.5
+shader_parameter/disp = Vector2(0.5, 0.5)
+shader_parameter/transparent = false
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_kwiw4"]
-gradient = SubResource("Gradient_hshae")
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_stio0"]
+load_path = "res://.godot/imported/KeySample.png-8d9b0ae24bedaf0a22591bc25a79e232.ctex"
 
-[sub_resource type="Gradient" id="Gradient_tflgi"]
-colors = PackedColorArray(0.905882, 0, 0.517647, 1, 0.905882, 0, 0.517647, 1)
+[sub_resource type="AtlasTexture" id="AtlasTexture_6m8w5"]
+resource_local_to_scene = true
+atlas = SubResource("CompressedTexture2D_stio0")
+region = Rect2(96, 132, 32, 28)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_5i67p"]
-gradient = SubResource("Gradient_tflgi")
+[sub_resource type="AtlasTexture" id="AtlasTexture_d62wu"]
+atlas = ExtResource("7_uj7eh")
+region = Rect2(192, 100, 32, 28)
 
-[sub_resource type="Gradient" id="Gradient_v7b2t"]
-offsets = PackedFloat32Array(0, 0.183623)
-colors = PackedColorArray(0.90732, 0, 0.517654, 1, 0.63235, 0.0643248, 0.0641806, 1)
+[sub_resource type="AtlasTexture" id="AtlasTexture_07dh5"]
+resource_local_to_scene = true
+atlas = SubResource("CompressedTexture2D_stio0")
+region = Rect2(64, 36, 32, 28)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_v1vwn"]
-gradient = SubResource("Gradient_v7b2t")
+[sub_resource type="AtlasTexture" id="AtlasTexture_csngt"]
+resource_local_to_scene = true
+atlas = SubResource("CompressedTexture2D_stio0")
+region = Rect2(160, 36, 32, 28)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_smqrq"]
-shader = ExtResource("1_5rop8")
-shader_parameter/angle = -0.2
-shader_parameter/thickness = 32.0
-shader_parameter/scale = 1.0
-shader_parameter/shear = Vector2(0, -0.4)
-shader_parameter/slices = 64
-shader_parameter/outline = false
-shader_parameter/outline_width = 0.0
-shader_parameter/front_tex = SubResource("GradientTexture2D_5i67p")
-shader_parameter/back_tex = SubResource("GradientTexture2D_kwiw4")
-shader_parameter/side_tex = SubResource("GradientTexture2D_v1vwn")
-shader_parameter/show_bound = false
+[sub_resource type="AtlasTexture" id="AtlasTexture_hto1p"]
+resource_local_to_scene = true
+atlas = SubResource("CompressedTexture2D_stio0")
+region = Rect2(192, 36, 32, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ampub"]
+resource_local_to_scene = true
+atlas = SubResource("CompressedTexture2D_stio0")
+region = Rect2(64, 132, 32, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f6wwy"]
+resource_local_to_scene = true
+atlas = SubResource("CompressedTexture2D_stio0")
+region = Rect2(128, 164, 48, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o8jca"]
+atlas = ExtResource("8_yhtqg")
+region = Rect2(0, 4, 48, 28)
+
+[sub_resource type="SystemFont" id="SystemFont_y0gg0"]
 
 [sub_resource type="Animation" id="Animation_ie4x7"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Title:material:shader_parameter/angle")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [-0.2]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Title:material:shader_parameter/shear")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -0.4)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Title:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
 
 [sub_resource type="Animation" id="Animation_1btsl"]
 resource_name = "title_animation"
 length = 1.6
 loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Title:material:shader_parameter/angle")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.8, 1.2, 1.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [-0.2, 0.3, 0.3, -0.3, -0.2]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Title:material:shader_parameter/shear")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.8, 1.2, 1.6),
-"transitions": PackedFloat32Array(1, 1.51572, 1.41421, 1, 1),
-"update": 0,
-"values": [Vector2(0, -0.4), Vector2(0, -0.4), Vector2(0, 0.4), Vector2(0, 0.4), Vector2(0, -0.4)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Title:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.4, 1.2),
-"transitions": PackedFloat32Array(1, 1.23114, 1.31951),
-"update": 0,
-"values": [0.0, 0.0872665, 0.0523599]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_32obw"]
 _data = {
@@ -134,32 +83,28 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xoj62")
 
-[node name="Title" type="Label" parent="."]
-material = SubResource("ShaderMaterial_smqrq")
-layout_mode = 0
-offset_left = 150.0
-offset_top = 74.0
-offset_right = 985.0
-offset_bottom = 224.0
-pivot_offset = Vector2(322, 67)
-theme = ExtResource("1_ex5hu")
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/font_size = 124
-text = "Hotline Sorcery"
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_err6c")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="menu" type="PanelContainer" parent="."]
 layout_mode = 1
-anchors_preset = 7
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -111.0
-offset_top = -273.0
-offset_right = 110.999
-offset_bottom = -92.0
+anchor_bottom = 0.5
+offset_left = -376.0
+offset_top = -100.0
+offset_right = -126.0
+offset_bottom = 100.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 
 [node name="Panel" type="Panel" parent="menu"]
 layout_mode = 2
@@ -196,6 +141,10 @@ text = "Credits
 layout_mode = 2
 text = "Quit Game"
 
+[node name="options" parent="." instance=ExtResource("5_doggi")]
+visible = false
+layout_mode = 1
+
 [node name="Credits" type="Panel" parent="."]
 visible = false
 layout_mode = 1
@@ -220,7 +169,7 @@ anchor_bottom = 1.0
 offset_left = 21.0
 offset_top = 22.0
 offset_right = -23.0
-offset_bottom = -125.0
+offset_bottom = -328.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 90
@@ -238,7 +187,7 @@ text = "Programmer:"
 layout_mode = 2
 theme = ExtResource("1_ex5hu")
 theme_override_font_sizes/font_size = 50
-text = "Atrist:"
+text = "Art and sound:"
 
 [node name="people" type="VBoxContainer" parent="Credits/HBoxContainer"]
 layout_mode = 2
@@ -268,6 +217,258 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Back"
 
+[node name="start_game" type="Panel" parent="."]
+visible = false
+self_modulate = Color(1, 1, 1, 0.533333)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ex5hu")
+
+[node name="Panel" type="Panel" parent="start_game"]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 24.0
+offset_right = 960.0
+offset_bottom = 432.0
+
+[node name="intro" type="RichTextLabel" parent="start_game/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -351.5
+offset_top = -185.0
+offset_right = 351.5
+offset_bottom = 185.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("6_4c5bq")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "			Defbrief
+A group of pesky goblins has envaded a tavren, causing havok across it it is unkown why they've decided to attack the humans as they normally keep in thier territory but it matters little as you, the mage of the town been contacted by the people who live in that town to help them with this problem, your mission is simple:
+Get in			 [color=red]kill them all[/color] 			 leave
+Good Luck"
+fit_content = true
+scroll_active = false
+
+[node name="control_text" type="Label" parent="start_game"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 432.0
+offset_right = 236.0
+offset_bottom = 481.0
+theme = ExtResource("1_ex5hu")
+theme_override_font_sizes/font_size = 40
+text = "Controls:"
+
+[node name="Container_movement" type="Control" parent="start_game"]
+anchors_preset = 0
+offset_left = 72.0
+offset_top = 496.0
+offset_right = 240.0
+offset_bottom = 616.0
+
+[node name="TextureRect" type="TextureRect" parent="start_game/Container_movement"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.002
+offset_left = 48.0
+offset_top = 8.0
+offset_right = 85.696
+offset_bottom = 48.0
+texture = SubResource("AtlasTexture_6m8w5")
+
+[node name="TextureRect2" type="TextureRect" parent="start_game/Container_movement"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.002
+offset_left = 48.0
+offset_top = 48.0
+offset_right = 85.696
+offset_bottom = 88.0
+texture = SubResource("AtlasTexture_d62wu")
+
+[node name="TextureRect3" type="TextureRect" parent="start_game/Container_movement"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.002
+offset_left = 8.0
+offset_top = 48.0
+offset_right = 45.696
+offset_bottom = 88.0
+texture = SubResource("AtlasTexture_07dh5")
+
+[node name="TextureRect4" type="TextureRect" parent="start_game/Container_movement"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.002
+offset_left = 88.0
+offset_top = 48.0
+offset_right = 125.696
+offset_bottom = 88.0
+texture = SubResource("AtlasTexture_csngt")
+
+[node name="Label" type="Label" parent="start_game/Container_movement"]
+layout_mode = 0
+offset_top = 88.0
+offset_right = 148.0
+offset_bottom = 119.0
+theme = ExtResource("1_ex5hu")
+theme_override_font_sizes/font_size = 25
+text = "Move Around"
+
+[node name="Control_A" type="Control" parent="start_game"]
+anchors_preset = 0
+offset_left = 248.0
+offset_top = 504.0
+offset_right = 472.0
+offset_bottom = 608.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="start_game/Control_A"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="start_game/Control_A/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect4" type="TextureRect" parent="start_game/Control_A/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_hto1p")
+
+[node name="Label" type="Label" parent="start_game/Control_A/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_ex5hu")
+text = "Throw / pickup weapon"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="start_game/Control_A/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect4" type="TextureRect" parent="start_game/Control_A/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_ampub")
+
+[node name="Label" type="Label" parent="start_game/Control_A/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("1_ex5hu")
+text = "Switch weapon"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="start_game/Control_A/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect4" type="TextureRect" parent="start_game/Control_A/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_f6wwy")
+
+[node name="Label" type="Label" parent="start_game/Control_A/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme = ExtResource("1_ex5hu")
+text = "Walk (hold)"
+
+[node name="combat_B" type="Control" parent="start_game"]
+anchors_preset = 0
+offset_left = 480.0
+offset_top = 520.0
+offset_right = 760.0
+offset_bottom = 584.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="start_game/combat_B"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="start_game/combat_B/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect4" type="TextureRect" parent="start_game/combat_B/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+texture = SubResource("AtlasTexture_o8jca")
+
+[node name="Label" type="Label" parent="start_game/combat_B/VBoxContainer/HBoxContainer/TextureRect4"]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 69.0
+offset_bottom = 23.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = SubResource("SystemFont_y0gg0")
+text = "Mouse1"
+
+[node name="Label" type="Label" parent="start_game/combat_B/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_ex5hu")
+text = "Shoot Staff / swing weapon"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="start_game/combat_B/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect4" type="TextureRect" parent="start_game/combat_B/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+texture = SubResource("AtlasTexture_o8jca")
+
+[node name="Label" type="Label" parent="start_game/combat_B/VBoxContainer/HBoxContainer2/TextureRect4"]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 69.0
+offset_bottom = 23.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = SubResource("SystemFont_y0gg0")
+text = "Mouse2"
+
+[node name="Label" type="Label" parent="start_game/combat_B/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("1_ex5hu")
+text = "Look far"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="start_game"]
+layout_mode = 0
+offset_left = 936.0
+offset_top = 512.0
+offset_right = 1092.0
+offset_bottom = 586.0
+
+[node name="Start level" parent="start_game/VBoxContainer" instance=ExtResource("4_keehu")]
+layout_mode = 2
+text = "Start Level"
+
+[node name="back to MM" parent="start_game/VBoxContainer" instance=ExtResource("4_keehu")]
+layout_mode = 2
+text = "Back to Main Menu"
+
+[node name="VSeparator" type="VSeparator" parent="start_game"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 0
+offset_left = 232.0
+offset_top = 504.0
+offset_right = 236.0
+offset_bottom = 604.0
+
+[node name="VSeparator2" type="VSeparator" parent="start_game"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 0
+offset_left = 464.0
+offset_top = 504.0
+offset_right = 468.0
+offset_bottom = 604.0
+
 [node name="animation" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_32obw")
@@ -276,6 +477,8 @@ autoplay = "title_animation"
 speed_scale = 0.2
 
 [node name="music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_l42fs")
+autoplay = true
 bus = &"Music"
 
 [connection signal="pressed" from="menu/Panel/VBoxContainer/start" to="." method="_on_start_pressed"]
@@ -283,3 +486,5 @@ bus = &"Music"
 [connection signal="pressed" from="menu/Panel/VBoxContainer/credits" to="." method="_on_credits_pressed"]
 [connection signal="pressed" from="menu/Panel/VBoxContainer/quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="Credits/quit_credits" to="." method="_on_quit_credits_pressed"]
+[connection signal="pressed" from="start_game/VBoxContainer/Start level" to="." method="_on_start_level_pressed"]
+[connection signal="pressed" from="start_game/VBoxContainer/back to MM" to="." method="_on_back_to_mm_pressed"]

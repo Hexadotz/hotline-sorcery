@@ -7,6 +7,7 @@ class_name PlayerScript extends CharacterBody2D
 @export var wep_manager: Node2D
 @export var floor_color: ColorRect
 @export var UI: PlayerUI
+@export var sfx_player: AudioStreamPlayer
 
 @export var max_ang: float = 45
 @export var tilt_strength: float = 10
@@ -30,6 +31,7 @@ signal switch_floor
 signal died
 
 @export var INVINSIBLE: bool = false
+var LOCK_MOVE: bool = false
 var IS_DEAD: bool = false
 var mana: float = 12
 #-------debugging stuff----------#
@@ -38,29 +40,35 @@ var test_point: PackedScene = preload("res://entites/player/test_mesh.tscn")
 func _ready() -> void:
 	self.connect("shake_cam", shake_camera)
 	cur_scene.connect("switched_floor", _on_floor_changed)
+	camera.make_current()
 
 func _physics_process(delta: float) -> void:
-	if !IS_DEAD:
-		#storing the mouse position in a variable so we don't call the method more thazn once
-		mouse_pos = get_global_mouse_position()
-		
-		#makes the player look where the mouse is pointing at for aiming
-		look_at(mouse_pos)
-		
-		velocity = lerp(velocity, target_dir, acceleration * delta)
-		#-----------------------------------------------------#
-		#if CAM_SHAKING:
-		shake_camera()
-		_camera_process(delta)
-		_animation_process(delta)
+	if !LOCK_MOVE:
+		if !IS_DEAD:
+			#storing the mouse position in a variable so we don't call the method more thazn once
+			mouse_pos = get_global_mouse_position()
+			
+			#makes the player look where the mouse is pointing at for aiming
+			look_at(mouse_pos)
+			
+			velocity = lerp(velocity, target_dir, acceleration * delta)
+			#-----------------------------------------------------#
+			#if CAM_SHAKING:
+			shake_camera()
+			_camera_process(delta)
+			_animation_process(delta)
+		else:
+			velocity = velocity.lerp(Vector2.ZERO, 5 * get_physics_process_delta_time())
 	else:
-		velocity = velocity.lerp(Vector2.ZERO, 5 * get_physics_process_delta_time())
+		look_at(global_position + Vector2.DOWN)
+		direction = Vector2.DOWN
+		velocity = lerp(velocity, direction * 50, acceleration * delta)
+	
+	if velocity.is_equal_approx(Vector2(1, 1)):
+		$body.disabled = true
 		
-		if velocity.is_equal_approx(Vector2(1, 1)):
-			$body.disabled = true
-		
-		if Input.is_action_just_pressed("restart"):
-			get_tree().reload_current_scene()
+	if Input.is_action_just_pressed("restart"):
+		get_tree().reload_current_scene()
 	
 	_push_rigid()
 	move_and_slide()
@@ -128,7 +136,7 @@ func death(direc: Vector2) -> void:
 		cur_scene.add_child(blood_ins)
 		
 		emit_signal("died")
-	
+		sfx_player.play()
 	
 
 func _on_floor_changed(floor_pos: Vector2) -> void:

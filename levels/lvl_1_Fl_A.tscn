@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://sk3wjy85ch22"]
+[gd_scene load_steps=40 format=3 uid="uid://sk3wjy85ch22"]
 
 [ext_resource type="Script" path="res://levels/lvl_1_Fl_A.gd" id="1_bg62l"]
 [ext_resource type="TileSet" uid="uid://j5tui1ypp0ue" path="res://levels/testing levels/tavern_tileSet.tres" id="2_kd6p7"]
@@ -9,7 +9,17 @@
 [ext_resource type="PackedScene" uid="uid://coa5vb54xko2t" path="res://entites/objects/table.tscn" id="7_slxe7"]
 [ext_resource type="PackedScene" uid="uid://cvhwghca4vuxe" path="res://entites/objects/barrel.tscn" id="8_absl1"]
 [ext_resource type="PackedScene" uid="uid://c25qw4uq55abq" path="res://entites/objects/torch.tscn" id="8_ggdfg"]
-[ext_resource type="PackedScene" uid="uid://cfbu68jex4a01" path="res://entites/weapons/wep_club.tscn" id="9_p1vhy"]
+[ext_resource type="Theme" uid="uid://kdfneisskda" path="res://misc/UI_theme.tres" id="11_j5uef"]
+[ext_resource type="Shader" path="res://misc/shaders/background.gdshader" id="11_twjo7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q0ttb"]
+resource_local_to_scene = true
+shader = ExtResource("11_twjo7")
+shader_parameter/first_color = Color(0.768627, 0, 0.627451, 1)
+shader_parameter/second_color = Color(0.32912, 0.1232, 0.44, 1)
+shader_parameter/position = 0.0
+shader_parameter/size = 0.795
+shader_parameter/angle = 104.825
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7s7ks"]
 size = Vector2(88, 184)
@@ -144,8 +154,65 @@ fog_sun_scatter = 1.0
 fog_density = 1.0
 fog_height_density = 16.0
 
-[node name="lvl1" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3706v"]
+size = Vector2(96, 42)
+
+[sub_resource type="Animation" id="Animation_yuibl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Control:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 650)]
+}
+
+[sub_resource type="Animation" id="Animation_qgt5w"]
+resource_name = "roll_credits"
+length = 15.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Control:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 650), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_etoy4"]
+_data = {
+"RESET": SubResource("Animation_yuibl"),
+"roll_credits": SubResource("Animation_qgt5w")
+}
+
+[node name="lvl1" type="Node2D" node_paths=PackedStringArray("background")]
 script = ExtResource("1_bg62l")
+background = NodePath("ColorRect")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -3
+z_as_relative = false
+material = SubResource("ShaderMaterial_q0ttb")
+custom_minimum_size = Vector2(750, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -384.0
+offset_top = -764.0
+offset_right = 616.0
+offset_bottom = 236.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(375, 375)
 
 [node name="Floor A" type="Node2D" parent="."]
 
@@ -1265,22 +1332,13 @@ position = Vector2(203, -687)
 position = Vector2(-728, -700)
 rect = Rect2(-10, -10, 1050, 750)
 
-[node name="player" parent="." instance=ExtResource("3_6njmj")]
-position = Vector2(0, -184)
-INVINSIBLE = true
-
 [node name="level_boundry" type="StaticBody2D" parent="."]
 visible = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="level_boundry"]
+position = Vector2(-72, -52)
 build_mode = 1
-polygon = PackedVector2Array(-858, -864, 472, -846, 484, 88, -878, 100)
-
-[node name="wep_melee" parent="." instance=ExtResource("9_p1vhy")]
-position = Vector2(288, -248)
-
-[node name="music" type="AudioStreamPlayer" parent="."]
-bus = &"Music"
+polygon = PackedVector2Array(-760, -716, 460, -712, 468, 72, -832, 64)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.992188, 0.912735, 0.744141, 1)
@@ -1288,7 +1346,121 @@ color = Color(0.992188, 0.912735, 0.744141, 1)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_cmp3g")
 
+[node name="level_complete" type="Area2D" parent="."]
+position = Vector2(8, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="level_complete"]
+shape = SubResource("RectangleShape2D_3706v")
+
+[node name="Cutscene_Camera" type="Camera2D" parent="."]
+zoom = Vector2(2.5, 2.5)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Cutscene_Camera"]
+
+[node name="Control" type="Control" parent="Cutscene_Camera/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 650.0
+offset_right = 1152.0
+offset_bottom = 1298.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("11_j5uef")
+
+[node name="Panel" type="Panel" parent="Cutscene_Camera/CanvasLayer/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Cutscene_Camera/CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -276.0
+offset_right = 49.0
+offset_bottom = -215.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Magus"
+
+[node name="Label2" type="Label" parent="Cutscene_Camera/CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -236.0
+offset_top = -180.0
+offset_right = 222.0
+offset_bottom = -55.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "A game made for the
+mini gamejam 2024"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="Cutscene_Camera/CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -352.0
+offset_top = -16.0
+offset_right = 363.0
+offset_bottom = 109.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Made by Hexadotz and marandal
+Music by A drop a Day and marandal"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="Cutscene_Camera/CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -356.0
+offset_top = 160.0
+offset_right = 359.0
+offset_bottom = 221.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Thanks for Playing!"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscene_Camera"]
+libraries = {
+"": SubResource("AnimationLibrary_etoy4")
+}
+
+[node name="player" parent="." instance=ExtResource("3_6njmj")]
+position = Vector2(0, -184)
+INVINSIBLE = true
+
+[node name="music" type="AudioStreamPlayer" parent="."]
+bus = &"Music"
+
 [connection signal="body_entered" from="Floor A/TO_B/tp_area" to="." method="_on_to_B_body_entered"]
 [connection signal="body_entered" from="Floor B/TO_C/to_area" to="." method="_on_TO_C_body_entered"]
 [connection signal="body_entered" from="Floor B/TO_A/to_A" to="." method="_on_BACK_TO_A_body_entered"]
 [connection signal="body_entered" from="Floor C/TO_B/to_area" to="." method="_on_BACK_TO_B_body_entered"]
+[connection signal="body_entered" from="level_complete" to="." method="_on_level_complete_body_entered"]

@@ -110,7 +110,7 @@ func _on_options_pressed() -> void:
 	option_ui.visible = !option_ui.visible
 
 func _on_menu_pressed() -> void:
-	pass
+	get_tree().change_scene_to_packed(preload("res://UI/main_menu.tscn"))
 
 func _on_exit_pressed() -> void:
 	get_tree().quit()

@@ -19,7 +19,8 @@ audio = NodePath("AudioStreamPlayer")
 hurtbox = NodePath("Hurtbox")
 sound_box = NodePath("sound_raduis")
 auto_cost = 0.5
-shotgun_spread = 3.0
+shotgun_spread = 2.0
+shotgun_pellets = 5
 
 [node name="sound_raduis" type="Area2D" parent="."]
 collision_layer = 0
@@ -40,7 +41,7 @@ shape = SubResource("RectangleShape2D_ub30i")
 [node name="staff" type="AnimatedSprite2D" parent="."]
 rotation = 1.5708
 sprite_frames = ExtResource("3_6efl4")
-animation = &"firing"
+animation = &"idle"
 
 [node name="muzzle" type="Node2D" parent="staff"]
 position = Vector2(0.499999, -12)

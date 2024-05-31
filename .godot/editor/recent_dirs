@@ -1,13 +1,13 @@
+res://sound/audio_streams
+res://misc/shaders
 res://UI/scripts
 res://UI
-res://misc/shaders
 res://entites/objects
 res://levels
 res://entites/objects/scripts
 res://art/goblin
 res://art/placables
 res://art/tilesets
-res://sound/audio_streams
 res://UI/buttons
 res://misc
 res://entites/player/scripts

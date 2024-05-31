@@ -64,6 +64,7 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	if player.mana > 0:
+		hurtbox.monitoring = false
 		if active and can_cast:
 			match weapon_type:
 				WEAPON_TYPE.SEMI_AUTOMATIC:
@@ -92,6 +93,7 @@ func _physics_process(_delta: float) -> void:
 		
 	else:
 		animation.stop()
+		hurtbox.monitoring = true
 		if Input.is_action_just_pressed("fire"):
 			swing()
 
@@ -150,6 +152,7 @@ func _fire_nade() -> void:
 	projectile_inst.prepare_proj(player, spawn_point.global_position, get_global_mouse_position())
 	projectile_inst.proj_type = projectile_inst.TYPE.BOMB
 	spawn_point.add_child(projectile_inst)
+	player.mana -= 5
 
 #--------------------------------------------------------------------#
 func swing() -> void:

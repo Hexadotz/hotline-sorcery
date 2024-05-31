@@ -1,0 +1,15 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=4 format=3 uid="uid://gl7neblheyru"]
+
+[ext_resource type="AudioStream" uid="uid://blq8jyqp56pin" path="res://sound/sfx/blood_splatter_A.mp3" id="1_0e5d7"]
+[ext_resource type="AudioStream" uid="uid://chwcmd6a2y4pf" path="res://sound/sfx/blood_splatter_B.mp3" id="2_w0iuc"]
+[ext_resource type="AudioStream" uid="uid://by5e5d8gkastc" path="res://sound/sfx/blood_splatter_C.mp3" id="3_li6co"]
+
+[resource]
+random_pitch = 1.25
+streams_count = 3
+stream_0/stream = ExtResource("1_0e5d7")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("2_w0iuc")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("3_li6co")
+stream_2/weight = 1.0
