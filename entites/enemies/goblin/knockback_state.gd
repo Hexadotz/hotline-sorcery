@@ -6,6 +6,7 @@ var knocked_back: bool = false
 func knockback(direction: Vector2) -> void:
 	if !knocked_back:
 		print("knocked back")
+		parent.cur_scene.knockbacks += 1
 		parent.velocity = Vector2.ZERO
 		parent.animation.play("knock_back")
 		

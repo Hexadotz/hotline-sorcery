@@ -10,6 +10,7 @@ extends Node2D
 
 @onready var music_player: AudioStreamPlayer = $music
 @onready var cutscene_cam: Camera2D = $Cutscene_Camera
+@onready var resaults: CanvasLayer = $end_lvl
 const OFFSET: Vector2 = Vector2(500, 500)
 
 var cur_floor: int = 0
@@ -29,7 +30,12 @@ signal level_started
 signal switched_floor
 signal floor_cleared
 
-var stunts: Array = []
+var knockbacks: int = 0
+var kills: int = 0
+var expos: int = 0
+var booms: int = 0
+var highest_combo: int = 1
+
 #-------------musics---------------#
 @onready var credits_music: AudioStreamMP3 = preload("res://sound/music/43-journey-onward-loop-retrowave-128-ytshorts.savetube.me.mp3")
 @onready var lvl_clear_music: AudioStreamMP3 = preload("res://sound/menu_ambience.mp3")
@@ -49,7 +55,7 @@ func _physics_process(_delta: float) -> void:
 	C_clear = _is_floor_clear($"Floor C/enemies")
 	
 	level_clear = C_clear
-	
+	print(booms)
 	if !music_player.is_playing():
 		music_player.play()
 	
@@ -142,6 +148,8 @@ func _on_level_complete_body_entered(body: Node2D) -> void:
 			go_up = true
 			
 			$level_boundry/CollisionPolygon2D.call_deferred("set_disabled", true)
+			resaults.start()
 			await get_tree().create_timer(20).timeout
 			
 			$Cutscene_Camera/AnimationPlayer.play("roll_credits")
+			resaults.start()

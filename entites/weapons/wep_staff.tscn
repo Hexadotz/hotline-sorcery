@@ -18,8 +18,10 @@ middle_point = NodePath("staff/muzzle/center_marker")
 audio = NodePath("AudioStreamPlayer")
 hurtbox = NodePath("Hurtbox")
 sound_box = NodePath("sound_raduis")
-auto_cost = 0.5
-shotgun_spread = 2.0
+normal_cost = 1.5
+auto_cooldown = 0.15
+auto_cost = 1.0
+shotgun_spread = 1.5
 shotgun_pellets = 5
 
 [node name="sound_raduis" type="Area2D" parent="."]

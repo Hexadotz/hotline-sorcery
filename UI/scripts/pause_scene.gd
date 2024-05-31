@@ -21,7 +21,7 @@ var is_paused: bool = true
 
 var kill_mult: int = 1
 var score: int = 0
-const KILL_SCORE: int = 200
+const KILL_SCORE: int = 1000
 
 signal lvl_done
 #NOTE: appearantly the ordering of the controle node actually do fucking matter
@@ -38,6 +38,7 @@ func _ready() -> void:
 	for n in get_tree().get_nodes_in_group("enemy"):
 		n.connect("enemy_died", _calculate_score)
 
+var dir: int = 1
 func _physics_process(delta: float) -> void:
 	
 	var fps: float = Engine.get_frames_per_second()
@@ -49,6 +50,11 @@ func _physics_process(delta: float) -> void:
 		mult_lab.visible = true
 	else:
 		mult_lab.visible = false
+	
+	#mult_lab.rotation += ((0.1 * kill_mult) * delta) * dir
+	#mult_lab.rotation = clamp(mult_lab.rotation, -8, 8)
+	#if mult_lab.rotation >= 8 or mult_lab.rotation <= -8:
+		#dir *= -1
 	
 	#toggle the pause menu on or off
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -64,22 +70,24 @@ func _physics_process(delta: float) -> void:
 	get_tree().paused = !is_paused
 	pause_ui.visible = !is_paused
 	
-	
 	_mana_label(delta)
-
 
 func _mana_label(delta: float) -> void:
 	player.mana = clamp(player.mana, 0, 15)
 	var rng: float = player.mana
 	rng = lerp(rng, remap(player.mana, 0, 15, 0, 1), 0.2 * delta)
 	
-	mana_label.text = "Will: " + str(player.mana)
+	mana_label.text = "Mana: " + str(player.mana)
 	mana_shader.material.set_shader_parameter("range", remap(player.mana, 0, 15, 0, 1))
 
 
 func _calculate_score() -> void:
 	score += (KILL_SCORE * kill_mult)
 	kill_mult += 1
+	
+	if kill_mult > player.cur_scene.highest_combo:
+		player.cur_scene.highest_combo = kill_mult
+	
 	mult_timer.start()
 
 func show_floor_clear(txt: String = "") -> void:

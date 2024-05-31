@@ -149,7 +149,7 @@ func _fire_lazer() -> void:
 
 func _fire_nade() -> void:
 	var projectile_inst: RigidBody2D = projectile.instantiate() #instancate the projectile set its start position set it's direction times speed then spawn it
-	projectile_inst.prepare_proj(player, spawn_point.global_position, get_global_mouse_position())
+	projectile_inst.prepare_proj(player, spawn_point.global_position, middle_point.global_position)
 	projectile_inst.proj_type = projectile_inst.TYPE.BOMB
 	spawn_point.add_child(projectile_inst)
 	player.mana -= 5

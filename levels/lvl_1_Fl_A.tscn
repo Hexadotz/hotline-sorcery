@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://sk3wjy85ch22"]
+[gd_scene load_steps=44 format=3 uid="uid://sk3wjy85ch22"]
 
 [ext_resource type="Script" path="res://levels/lvl_1_Fl_A.gd" id="1_bg62l"]
 [ext_resource type="TileSet" uid="uid://j5tui1ypp0ue" path="res://levels/testing levels/tavern_tileSet.tres" id="2_kd6p7"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://c25qw4uq55abq" path="res://entites/objects/torch.tscn" id="8_ggdfg"]
 [ext_resource type="Theme" uid="uid://kdfneisskda" path="res://misc/UI_theme.tres" id="11_j5uef"]
 [ext_resource type="Shader" path="res://misc/shaders/background.gdshader" id="11_twjo7"]
+[ext_resource type="Script" path="res://levels/resault_UI.gd" id="12_4vlfj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q0ttb"]
 resource_local_to_scene = true
@@ -19,7 +20,7 @@ shader_parameter/first_color = Color(0.768627, 0, 0.627451, 1)
 shader_parameter/second_color = Color(0.32912, 0.1232, 0.44, 1)
 shader_parameter/position = 0.0
 shader_parameter/size = 0.795
-shader_parameter/angle = 104.825
+shader_parameter/angle = 109.712
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7s7ks"]
 size = Vector2(88, 184)
@@ -194,6 +195,66 @@ _data = {
 "roll_credits": SubResource("Animation_qgt5w")
 }
 
+[sub_resource type="Animation" id="Animation_sa0q1"]
+resource_name = "resaults_anim"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel/centerer:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_i1bxf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel/centerer:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5e0ob"]
+_data = {
+"RESET": SubResource("Animation_i1bxf"),
+"resaults_anim": SubResource("Animation_sa0q1")
+}
+
 [node name="lvl1" type="Node2D" node_paths=PackedStringArray("background")]
 script = ExtResource("1_bg62l")
 background = NodePath("ColorRect")
@@ -277,12 +338,6 @@ rotation = 1.52084
 
 [node name="enemies" type="Node2D" parent="Floor A"]
 
-[node name="goblin8" parent="Floor A/enemies" instance=ExtResource("4_0yluj")]
-position = Vector2(248, -408)
-rotation = 3.14159
-detection_range = 350.0
-detection_gap = 250.0
-
 [node name="goblin" parent="Floor A/enemies" node_paths=PackedStringArray("patrol_path") instance=ExtResource("4_0yluj")]
 position = Vector2(28, -668)
 inital_state = 6
@@ -325,6 +380,12 @@ detection_gap = 250.0
 
 [node name="goblin7" parent="Floor A/enemies" instance=ExtResource("4_0yluj")]
 position = Vector2(-664, -696)
+detection_range = 350.0
+detection_gap = 250.0
+
+[node name="goblin8" parent="Floor A/enemies" instance=ExtResource("4_0yluj")]
+position = Vector2(248, -408)
+rotation = 3.14159
 detection_range = 350.0
 detection_gap = 250.0
 
@@ -406,23 +467,18 @@ length = 50
 
 [node name="barrel" parent="Floor A/objects" instance=ExtResource("8_absl1")]
 position = Vector2(-582, -486)
-combussin = true
 
 [node name="barrel2" parent="Floor A/objects" instance=ExtResource("8_absl1")]
 position = Vector2(162, -498)
-combussin = true
 
 [node name="barrel3" parent="Floor A/objects" instance=ExtResource("8_absl1")]
 position = Vector2(-468, -654)
-combussin = true
 
 [node name="barrel4" parent="Floor A/objects" instance=ExtResource("8_absl1")]
 position = Vector2(-396, -654)
-combussin = true
 
 [node name="barrel5" parent="Floor A/objects" instance=ExtResource("8_absl1")]
 position = Vector2(-66, -636)
-combussin = true
 
 [node name="table" parent="Floor A/objects" instance=ExtResource("7_slxe7")]
 position = Vector2(-536, -296)
@@ -1458,6 +1514,179 @@ INVINSIBLE = true
 
 [node name="music" type="AudioStreamPlayer" parent="."]
 bus = &"Music"
+
+[node name="end_lvl" type="CanvasLayer" parent="." node_paths=PackedStringArray("score_lbl", "kills_lbl", "knock_lbl", "seen_lbl", "barrel_lbl", "combo_lbl")]
+layer = 0
+script = ExtResource("12_4vlfj")
+score_lbl = NodePath("Panel/centerer/Panel/HBoxContainer/VBoxContainer2/score_txt")
+kills_lbl = NodePath("Panel/centerer/Panel/HBoxContainer/VBoxContainer2/kills_txt")
+knock_lbl = NodePath("Panel/centerer/Panel/HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer/knockback")
+seen_lbl = NodePath("Panel/centerer/Panel/HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer2/seen")
+barrel_lbl = NodePath("Panel/centerer/Panel/HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer3/barrel")
+combo_lbl = NodePath("Panel/centerer/Panel/HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer4/combo")
+
+[node name="Panel" type="Panel" parent="end_lvl"]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+
+[node name="centerer" type="CenterContainer" parent="end_lvl/Panel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="end_lvl/Panel/centerer"]
+custom_minimum_size = Vector2(750, 500)
+layout_mode = 2
+theme = ExtResource("11_j5uef")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="end_lvl/Panel/centerer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -228.0
+offset_right = 350.0
+offset_bottom = 228.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="end_lvl/Panel/centerer/Panel/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="end_lvl/Panel/centerer/Panel/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Resaults:"
+
+[node name="Label2" type="Label" parent="end_lvl/Panel/centerer/Panel/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Total Score ="
+
+[node name="Label3" type="Label" parent="end_lvl/Panel/centerer/Panel/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Total Kills ="
+
+[node name="Label4" type="Label" parent="end_lvl/Panel/centerer/Panel/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Events:"
+
+[node name="Control" type="Control" parent="end_lvl/Panel/centerer/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="end_lvl/Panel/centerer/Panel/HBoxContainer"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="end_lvl/Panel/centerer/Panel/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="score_txt" type="Label" parent="end_lvl/Panel/centerer/Panel/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "1000"
+
+[node name="kills_txt" type="Label" parent="end_lvl/Panel/centerer/Panel/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "5"
+
+[node name="Control2" type="Control" parent="end_lvl/Panel/centerer/Panel/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="end_lvl/Panel/centerer/Panel/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="end_lvl/Panel/centerer/Panel/HBoxContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="end_lvl/Panel/centerer/Panel/HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Knockbacks: "
+
+[node name="knockback" type="Label" parent="end_lvl/Panel/centerer/Panel/HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "20 times"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="end_lvl/Panel/centerer/Panel/HBoxContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="end_lvl/Panel/centerer/Panel/HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Seen by enemy: "
+
+[node name="seen" type="Label" parent="end_lvl/Panel/centerer/Panel/HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "100 times"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="end_lvl/Panel/centerer/Panel/HBoxContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="end_lvl/Panel/centerer/Panel/HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "barrels blown: "
+
+[node name="barrel" type="Label" parent="end_lvl/Panel/centerer/Panel/HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "100 times"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="end_lvl/Panel/centerer/Panel/HBoxContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="end_lvl/Panel/centerer/Panel/HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Highest combo: "
+
+[node name="combo" type="Label" parent="end_lvl/Panel/centerer/Panel/HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "100 "
+
+[node name="Label2" type="Label" parent="end_lvl/Panel/centerer/Panel"]
+layout_mode = 0
+offset_left = 99.0
+offset_top = 298.0
+offset_right = 207.0
+offset_bottom = 341.0
+theme_override_font_sizes/font_size = 35
+text = "Rating:"
+
+[node name="rate" type="Label" parent="end_lvl/Panel/centerer/Panel"]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 318.0
+offset_right = 268.0
+offset_bottom = 469.0
+theme_override_font_sizes/font_size = 125
+text = "S++"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="end_lvl"]
+libraries = {
+"": SubResource("AnimationLibrary_5e0ob")
+}
 
 [connection signal="body_entered" from="Floor A/TO_B/tp_area" to="." method="_on_to_B_body_entered"]
 [connection signal="body_entered" from="Floor B/TO_C/to_area" to="." method="_on_TO_C_body_entered"]

@@ -11,6 +11,7 @@ polygon = PackedVector2Array(7, -10, 11, -3, 10, 4, 9, 8, 3, 11, -5, 11, -8, 8, 
 
 [node name="barrel" type="StaticBody2D" groups=["boom"]]
 script = ExtResource("1_5v3ch")
+combussin = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_gx1gv")

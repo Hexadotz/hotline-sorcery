@@ -17,7 +17,6 @@ func panic() -> void:
 		change_rotation = true
 		$look_cooldown.start()
 	
-	#print(to_angle)
 	parent.rotation = lerp_angle(parent.rotation, to_angle, 5 * get_physics_process_delta_time())
 
 func _on_look_cooldown_timeout() -> void:

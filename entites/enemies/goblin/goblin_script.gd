@@ -128,7 +128,7 @@ func _state_machine() -> void:
 				velocity = last_shot_dir * 100
 				IS_DEAD = true
 				enemy_died.emit()
-				cur_scene.stunts.append("kill")
+				cur_scene.kills += 1
 				if global_position.distance_to(player.global_position) < 50:
 					player.mana += 5
 				
@@ -168,7 +168,6 @@ func drop_weapon() -> void:
 		var wep_ins: RigidBody2D = club.instantiate() 
 		wep_ins.global_position = global_position
 		
-		cur_scene.stunts.append("Knockback")
 		cur_scene.add_child(wep_ins)
 		ARMED = false
 

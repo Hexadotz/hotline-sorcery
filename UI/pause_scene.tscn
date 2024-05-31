@@ -226,7 +226,7 @@ offset_top = 46.0
 offset_right = 214.0
 offset_bottom = 143.0
 theme = ExtResource("2_l0hgq")
-theme_override_font_sizes/font_size = 65
+theme_override_font_sizes/font_size = 50
 text = "1950"
 
 [node name="multiplier" type="Label" parent="HUD"]
@@ -234,13 +234,14 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -206.0
-offset_top = 43.0
-offset_right = -3.0
-offset_bottom = 152.0
+offset_left = -179.0
+offset_top = 35.0
+offset_right = -33.0
+offset_bottom = 114.0
 grow_horizontal = 0
+pivot_offset = Vector2(73, 39)
 theme = ExtResource("2_l0hgq")
-theme_override_font_sizes/font_size = 75
+theme_override_font_sizes/font_size = 65
 text = "X 69"
 
 [node name="Timer" type="Timer" parent="HUD/multiplier"]

@@ -18,11 +18,12 @@ func _configure_view_radius() -> void:
 	sight_shape.append(Vector2(0,0))
 	sight_shape.append(Vector2(parent.detection_range, parent.detection_gap))
 	sight_shape.append(Vector2(parent.detection_range, -parent.detection_gap))
- 
+	 
 	#fuck my whole life
 	wep_poly_col.polygon = sight_shape
 	player_poly_col.polygon = sight_shape
  
+var player_seen: bool = false
 #4 days are left, 4 fucking days are left and im still struggling to get this shit to work god please help me
 func _physics_process(_delta: float) -> void:
 	if Engine.is_editor_hint():
@@ -38,8 +39,11 @@ func _physics_process(_delta: float) -> void:
 	 
 			if is_on_sight() and !parent.player.IS_DEAD and parent.ARMED:
 				if parent.current_st not in [parent.STATES.DEATH, parent.STATES.ATTACK, parent.STATES.KNOCKBACK, parent.STATES.HIDING]:
-					#parent.cur_scene.stunts.append("Exposure")
+					#parent.cur_scene.expos += 1
 					parent.set_state(parent.STATES.CHASE)
+					if !player_seen:
+						parent.cur_scene.expos += 1
+						player_seen = true
 		else:
 			player_poly_col.disabled = true
  
