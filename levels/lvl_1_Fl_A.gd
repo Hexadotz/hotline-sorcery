@@ -11,6 +11,10 @@ extends Node2D
 @onready var music_player: AudioStreamPlayer = $music
 @onready var cutscene_cam: Camera2D = $Cutscene_Camera
 @onready var resaults: CanvasLayer = $end_lvl
+#----------------------------#
+@onready var TO_B = $"Floor A/TO_B"
+@onready var TO_C = $"Floor B/TO_C"
+#----------------------------#
 const OFFSET: Vector2 = Vector2(500, 500)
 
 var cur_floor: int = 0
@@ -47,6 +51,7 @@ func _ready() -> void:
 		x.connect("enemy_died", _check_floor_clear)
 	cur_floor = 0
 	
+	set_floor_light(!GlobalVariables.disable_lights)
 	music_player.stream = combat_music
 
 func _physics_process(_delta: float) -> void:
@@ -55,7 +60,7 @@ func _physics_process(_delta: float) -> void:
 	C_clear = _is_floor_clear($"Floor C/enemies")
 	
 	level_clear = C_clear
-	print(booms)
+	
 	if !music_player.is_playing():
 		music_player.play()
 	
@@ -64,9 +69,6 @@ func _physics_process(_delta: float) -> void:
 		background.global_position = cutscene_cam.global_position - OFFSET
 	else:
 		background.global_position = player.global_position - OFFSET
-
-func _background_colors() -> void:
-	pass
 
 func _is_floor_clear(entites: Node2D) -> bool:
 	for x in entites.get_children():
@@ -96,6 +98,7 @@ func _check_floor_clear() -> void:
 		B_clear_instant = true
 	elif C_clear: 
 		player.UI.emit_signal("lvl_done", "balls")
+		door_coll.disabled = true
 		
 		music_player.stream = preload("res://sound/sfx/HM_lvlClear.mp3")
 		music_player.play()
@@ -138,7 +141,7 @@ func _on_BACK_TO_B_body_entered(body: Node2D) -> void:
 var go_up: bool = false
 func _on_level_complete_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		#if level_clear:
+		if level_clear:
 			music_player.stream = credits_music
 			music_player.play()
 			body.LOCK_MOVE = true
@@ -148,8 +151,16 @@ func _on_level_complete_body_entered(body: Node2D) -> void:
 			go_up = true
 			
 			$level_boundry/CollisionPolygon2D.call_deferred("set_disabled", true)
-			resaults.start()
+			#resaults.start()
 			await get_tree().create_timer(20).timeout
 			
 			$Cutscene_Camera/AnimationPlayer.play("roll_credits")
+			
+			await get_tree().create_timer(22).timeout
+			$Cutscene_Camera/CanvasLayer.visible = false
 			resaults.start()
+
+@onready var door_coll: CollisionShape2D = $doory/CollisionShape2D
+func _on_got_in_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		door_coll.call_deferred("disabled", false)

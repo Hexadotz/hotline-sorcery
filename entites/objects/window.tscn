@@ -27,7 +27,6 @@ script = ExtResource("1_74aif")
 shape = SubResource("RectangleShape2D_e1v3d")
 
 [node name="placeholder" type="ColorRect" parent="."]
-visible = false
 offset_left = -4.0
 offset_top = -30.0
 offset_right = 4.0

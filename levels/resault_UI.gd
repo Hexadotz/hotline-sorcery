@@ -34,3 +34,4 @@ func start() -> void:
 	Rank.text = rating
 	
 	anim.play("resaults_anim")
+

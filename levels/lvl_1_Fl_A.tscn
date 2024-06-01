@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://sk3wjy85ch22"]
+[gd_scene load_steps=49 format=3 uid="uid://sk3wjy85ch22"]
 
 [ext_resource type="Script" path="res://levels/lvl_1_Fl_A.gd" id="1_bg62l"]
 [ext_resource type="TileSet" uid="uid://j5tui1ypp0ue" path="res://levels/testing levels/tavern_tileSet.tres" id="2_kd6p7"]
@@ -21,6 +21,44 @@ shader_parameter/second_color = Color(0.32912, 0.1232, 0.44, 1)
 shader_parameter/position = 0.0
 shader_parameter/size = 0.795
 shader_parameter/angle = 109.712
+
+[sub_resource type="Animation" id="Animation_vggox"]
+resource_name = "rainbow"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(1, 0, 0.766666, 1), Color(1, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_yvd4q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cxpxd"]
+_data = {
+"RESET": SubResource("Animation_yvd4q"),
+"rainbow": SubResource("Animation_vggox")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7s7ks"]
 size = Vector2(88, 184)
@@ -255,6 +293,12 @@ _data = {
 "resaults_anim": SubResource("Animation_sa0q1")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r32m6"]
+size = Vector2(84, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c5uxo"]
+size = Vector2(80, 20)
+
 [node name="lvl1" type="Node2D" node_paths=PackedStringArray("background")]
 script = ExtResource("1_bg62l")
 background = NodePath("ColorRect")
@@ -274,6 +318,104 @@ offset_bottom = 236.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(375, 375)
+
+[node name="exit" type="ColorRect" parent="."]
+offset_left = -40.0
+offset_top = -28.0
+offset_right = 56.0
+offset_bottom = 12.0
+color = Color(1, 0, 0, 1)
+
+[node name="Label" type="Label" parent="exit"]
+offset_left = 28.0
+offset_top = 4.0
+offset_right = 68.0
+offset_bottom = 27.0
+text = "EXIT"
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = 208.0
+offset_top = -692.0
+offset_right = 296.0
+offset_bottom = -512.0
+color = Color(1, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ColorRect2"]
+libraries = {
+"": SubResource("AnimationLibrary_cxpxd")
+}
+autoplay = "rainbow"
+
+[node name="Label" type="Label" parent="ColorRect2"]
+offset_left = 12.0
+offset_top = 156.0
+offset_right = 74.0
+offset_bottom = 179.0
+theme_override_font_sizes/font_size = 10
+text = "Change floor"
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+offset_left = -1312.0
+offset_top = -688.0
+offset_right = -1224.0
+offset_bottom = -480.0
+color = Color(1, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ColorRect3"]
+libraries = {
+"": SubResource("AnimationLibrary_cxpxd")
+}
+autoplay = "rainbow"
+
+[node name="Label" type="Label" parent="ColorRect3"]
+offset_left = 12.0
+offset_top = 156.0
+offset_right = 74.0
+offset_bottom = 179.0
+theme_override_font_sizes/font_size = 10
+text = "Change floor"
+
+[node name="ColorRect4" type="ColorRect" parent="."]
+offset_left = -2212.0
+offset_top = -688.0
+offset_right = -2124.0
+offset_bottom = -496.0
+color = Color(1, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ColorRect4"]
+libraries = {
+"": SubResource("AnimationLibrary_cxpxd")
+}
+autoplay = "rainbow"
+
+[node name="Label" type="Label" parent="ColorRect4"]
+offset_left = 12.0
+offset_top = 156.0
+offset_right = 74.0
+offset_bottom = 179.0
+theme_override_font_sizes/font_size = 10
+text = "Change floor"
+
+[node name="ColorRect5" type="ColorRect" parent="."]
+offset_left = -3708.0
+offset_top = -688.0
+offset_right = -3620.0
+offset_bottom = -496.0
+color = Color(1, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ColorRect5"]
+libraries = {
+"": SubResource("AnimationLibrary_cxpxd")
+}
+autoplay = "rainbow"
+
+[node name="Label" type="Label" parent="ColorRect5"]
+offset_left = 12.0
+offset_top = 156.0
+offset_right = 74.0
+offset_bottom = 179.0
+theme_override_font_sizes/font_size = 10
+text = "Change floor"
 
 [node name="Floor A" type="Node2D" parent="."]
 
@@ -1419,20 +1561,11 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 650.0
-offset_right = 1152.0
-offset_bottom = 1298.0
+offset_right = 2304.0
+offset_bottom = 1946.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("11_j5uef")
-
-[node name="Panel" type="Panel" parent="Cutscene_Camera/CanvasLayer/Control"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Label" type="Label" parent="Cutscene_Camera/CanvasLayer/Control"]
 layout_mode = 1
@@ -1508,13 +1641,6 @@ libraries = {
 "": SubResource("AnimationLibrary_etoy4")
 }
 
-[node name="player" parent="." instance=ExtResource("3_6njmj")]
-position = Vector2(0, -184)
-INVINSIBLE = true
-
-[node name="music" type="AudioStreamPlayer" parent="."]
-bus = &"Music"
-
 [node name="end_lvl" type="CanvasLayer" parent="." node_paths=PackedStringArray("score_lbl", "kills_lbl", "knock_lbl", "seen_lbl", "barrel_lbl", "combo_lbl")]
 layer = 0
 script = ExtResource("12_4vlfj")
@@ -1524,6 +1650,7 @@ knock_lbl = NodePath("Panel/centerer/Panel/HBoxContainer/VBoxContainer2/VBoxCont
 seen_lbl = NodePath("Panel/centerer/Panel/HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer2/seen")
 barrel_lbl = NodePath("Panel/centerer/Panel/HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer3/barrel")
 combo_lbl = NodePath("Panel/centerer/Panel/HBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer4/combo")
+metadata/_edit_use_anchors_ = true
 
 [node name="Panel" type="Panel" parent="end_lvl"]
 self_modulate = Color(1, 1, 1, 0)
@@ -1688,8 +1815,32 @@ libraries = {
 "": SubResource("AnimationLibrary_5e0ob")
 }
 
+[node name="player" parent="." instance=ExtResource("3_6njmj")]
+visible = false
+position = Vector2(0, -72)
+INVINSIBLE = true
+
+[node name="music" type="AudioStreamPlayer" parent="."]
+bus = &"Music"
+
+[node name="got_in" type="Area2D" parent="."]
+position = Vector2(0, -184)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="got_in"]
+position = Vector2(10, 4)
+shape = SubResource("RectangleShape2D_r32m6")
+
+[node name="doory" type="StaticBody2D" parent="."]
+position = Vector2(0, -148)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="doory"]
+position = Vector2(8, 0)
+shape = SubResource("RectangleShape2D_c5uxo")
+disabled = true
+
 [connection signal="body_entered" from="Floor A/TO_B/tp_area" to="." method="_on_to_B_body_entered"]
 [connection signal="body_entered" from="Floor B/TO_C/to_area" to="." method="_on_TO_C_body_entered"]
 [connection signal="body_entered" from="Floor B/TO_A/to_A" to="." method="_on_BACK_TO_A_body_entered"]
 [connection signal="body_entered" from="Floor C/TO_B/to_area" to="." method="_on_BACK_TO_B_body_entered"]
 [connection signal="body_entered" from="level_complete" to="." method="_on_level_complete_body_entered"]
+[connection signal="body_entered" from="got_in" to="." method="_on_got_in_body_entered"]

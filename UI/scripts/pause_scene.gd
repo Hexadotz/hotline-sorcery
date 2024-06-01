@@ -40,9 +40,9 @@ func _ready() -> void:
 
 var dir: int = 1
 func _physics_process(delta: float) -> void:
-	
 	var fps: float = Engine.get_frames_per_second()
 	$fps.text = "FPS:" + str(fps)
+	fps_label.visible = GlobalVariables.show_fps
 	
 	score_lab.text = str(score)
 	if kill_mult > 1:
@@ -50,11 +50,6 @@ func _physics_process(delta: float) -> void:
 		mult_lab.visible = true
 	else:
 		mult_lab.visible = false
-	
-	#mult_lab.rotation += ((0.1 * kill_mult) * delta) * dir
-	#mult_lab.rotation = clamp(mult_lab.rotation, -8, 8)
-	#if mult_lab.rotation >= 8 or mult_lab.rotation <= -8:
-		#dir *= -1
 	
 	#toggle the pause menu on or off
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -65,7 +60,6 @@ func _physics_process(delta: float) -> void:
 	#NOTE: i'm thinking about making the mouse mode confined to keep it from going from ouside the window
 	#We also need a custom cursor
 	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED) if is_paused else Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	
 	#show the pause menu if we're not is_paused else hide it
 	get_tree().paused = !is_paused
 	pause_ui.visible = !is_paused
@@ -79,7 +73,6 @@ func _mana_label(delta: float) -> void:
 	
 	mana_label.text = "Mana: " + str(player.mana)
 	mana_shader.material.set_shader_parameter("range", remap(player.mana, 0, 15, 0, 1))
-
 
 func _calculate_score() -> void:
 	score += (KILL_SCORE * kill_mult)
@@ -101,6 +94,7 @@ func show_floor_clear(txt: String = "") -> void:
 		$floor_clr/all_clear_signal.start()
 
 func _weapon_selection() -> void:
+	player.LOCK_CAM = true
 	$HUD/CenterContainer.visible = true
 	player.wep_manager.staff.active = false
 
@@ -118,10 +112,7 @@ func _on_options_pressed() -> void:
 	option_ui.visible = !option_ui.visible
 
 func _on_menu_pressed() -> void:
-	get_tree().change_scene_to_packed(preload("res://UI/main_menu.tscn"))
-
-func _on_exit_pressed() -> void:
-	get_tree().quit()
+	get_tree().change_scene_to_file("res://UI/main_menu.tscn")
 
 #--------------------------------------------------------#
 func _on_item_list_item_activated(index: int) -> void:
@@ -129,6 +120,7 @@ func _on_item_list_item_activated(index: int) -> void:
 	player.wep_manager.staff.active = true
 	$HUD/CenterContainer.visible = false
 	score_lab.visible = true
+	player.LOCK_CAM = false
 
 func _on_mult_timer_timeout() -> void:
 	kill_mult = 1

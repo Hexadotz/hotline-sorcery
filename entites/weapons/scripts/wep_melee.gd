@@ -17,8 +17,8 @@ func _ready() -> void:
 	active = false
 
 func _physics_process(_delta: float) -> void:
-	if Input.is_action_just_pressed("fire") and get_parent() != cur_scene:
-		if active:
+	if Input.is_action_just_pressed("fire"):
+		if active and get_parent().name == "hand":
 			swing()
 	
 	if Input.is_action_just_pressed("drop-pickup"):
@@ -36,7 +36,6 @@ func swing() -> void:
 		if node.is_in_group("enemy"):  
 			node.on_hit(throw_strength, global_position.direction_to(node.global_position))
 	
-	active = false
 	$cooldown.start()
 
 func pickup() -> void:

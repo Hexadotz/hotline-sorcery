@@ -5,7 +5,8 @@ extends Control
 
 #-------------------------------------------------------------#
 func _ready() -> void:
-	pass
+	$CenterContainer/Panel/HBoxContainer/buttons/showFps.button_pressed = GlobalVariables.show_fps
+	$CenterContainer/Panel/HBoxContainer/buttons/disableLights.button_pressed = !GlobalVariables.disable_lights
 
 func _physics_process(_delta: float) -> void:
 	pass
@@ -15,10 +16,10 @@ func _on_close_pressed() -> void:
 
 func _on_show_fps_toggled(toggled_on: bool) -> void:
 	if pause_UI:
-		pause_UI.fps_label.visible = toggled_on
-		GlobalVariables
+		GlobalVariables.show_fps = toggled_on
 
 func _on_disable_lights_toggled(toggled_on: bool) -> void:
+	GlobalVariables.disable_lights = !toggled_on
 	var cur_scene = get_tree().get_current_scene()
 	if cur_scene:
 		if cur_scene.has_method("set_floor_light"):

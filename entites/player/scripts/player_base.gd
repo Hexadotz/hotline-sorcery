@@ -32,6 +32,7 @@ signal died
 
 @export var INVINSIBLE: bool = false
 var LOCK_MOVE: bool = false
+var LOCK_CAM: bool = false
 var IS_DEAD: bool = false
 var mana: float = 12
 #-------debugging stuff----------#
@@ -53,10 +54,11 @@ func _physics_process(delta: float) -> void:
 			
 			velocity = lerp(velocity, target_dir, acceleration * delta)
 			#-----------------------------------------------------#
-			#if CAM_SHAKING:
-			shake_camera()
-			_camera_process(delta)
+			if !LOCK_CAM:
+				shake_camera()
+				_camera_process(delta)
 			_animation_process(delta)
+			
 		else:
 			velocity = velocity.lerp(Vector2.ZERO, 5 * get_physics_process_delta_time())
 	else:

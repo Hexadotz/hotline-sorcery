@@ -6,7 +6,7 @@ extends Node
 #NOTE: the bastard can steal the club from your hand and kill you with it
 func look_for_weapon() -> void:
 	if parent.weapon_memory.size() != 0:
-		var wep: Node2D = parent.weapon_memory.pick_random()
+		var wep: Node2D = parent.weapon_memory[0] if is_instance_valid(parent.weapon_memory[0]) else null
 		if wep != null:
 			parent.current_target = wep
 			parent.move_state.move_to(parent.current_target.global_position)

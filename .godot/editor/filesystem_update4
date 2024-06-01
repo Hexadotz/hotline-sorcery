@@ -30,3 +30,12 @@ res://entites/weapons/scripts/wep_staff.gd
 res://levels/resault_UI.gd
 res://entites/objects/barrel.tscn
 res://entites/objects/scripts/barrel.gd
+res://entites/enemies/goblin/wep_search_state.gd
+res://entites/objects/window.tscn
+res://entites/weapons/wep_club.tscn
+res://entites/weapons/scripts/wep_melee.gd
+res://UI/scripts/main_menu.gd
+res://UI/scripts/options.gd
+res://UI/options.tscn
+res://entites/player/scripts/player_base.gd
+res://misc/shaders/pixelate.gdshader
