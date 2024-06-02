@@ -29,7 +29,20 @@ func start() -> void:
 	var rating: String = "?"
 	if score < 32000:
 		rating = "D"
+	else:
+		if score < 42000:
+			rating = "C"
+		else:
+			if score < 52000:
+				rating = "B"
+			else:
+				if score < 62000:
+					rating = "A"
+				else:
+					rating = "S"
 	
+	if level.highest_combo >= 31:
+		rating ="WTF HOW??"
 	
 	Rank.text = rating
 	

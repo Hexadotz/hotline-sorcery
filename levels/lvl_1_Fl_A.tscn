@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://sk3wjy85ch22"]
+[gd_scene load_steps=46 format=3 uid="uid://sk3wjy85ch22"]
 
 [ext_resource type="Script" path="res://levels/lvl_1_Fl_A.gd" id="1_bg62l"]
 [ext_resource type="TileSet" uid="uid://j5tui1ypp0ue" path="res://levels/testing levels/tavern_tileSet.tres" id="2_kd6p7"]
@@ -22,6 +22,21 @@ shader_parameter/position = 0.0
 shader_parameter/size = 0.795
 shader_parameter/angle = 109.712
 
+[sub_resource type="Animation" id="Animation_yvd4q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_vggox"]
 resource_name = "rainbow"
 length = 2.0
@@ -37,21 +52,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 0, 0, 1), Color(1, 0, 0.766666, 1), Color(1, 0, 0, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_yvd4q"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 0, 0, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cxpxd"]
@@ -196,41 +196,31 @@ fog_height_density = 16.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3706v"]
 size = Vector2(96, 42)
 
-[sub_resource type="Animation" id="Animation_yuibl"]
+[sub_resource type="Animation" id="Animation_i1bxf"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/Control:position")
+tracks/0/path = NodePath("Panel:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 650)]
+"values": [Color(1, 1, 1, 0)]
 }
-
-[sub_resource type="Animation" id="Animation_qgt5w"]
-resource_name = "roll_credits"
-length = 15.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/Control:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 15),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 650), Vector2(0, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_etoy4"]
-_data = {
-"RESET": SubResource("Animation_yuibl"),
-"roll_credits": SubResource("Animation_qgt5w")
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel/centerer:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_sa0q1"]
@@ -260,33 +250,6 @@ tracks/1/keys = {
 "values": [false, true]
 }
 
-[sub_resource type="Animation" id="Animation_i1bxf"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Panel:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Panel/centerer:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5e0ob"]
 _data = {
 "RESET": SubResource("Animation_i1bxf"),
@@ -297,7 +260,7 @@ _data = {
 size = Vector2(84, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c5uxo"]
-size = Vector2(80, 20)
+size = Vector2(88, 20)
 
 [node name="lvl1" type="Node2D" node_paths=PackedStringArray("background")]
 script = ExtResource("1_bg62l")
@@ -327,6 +290,7 @@ offset_bottom = 12.0
 color = Color(1, 0, 0, 1)
 
 [node name="Label" type="Label" parent="exit"]
+layout_mode = 0
 offset_left = 28.0
 offset_top = 4.0
 offset_right = 68.0
@@ -347,6 +311,7 @@ libraries = {
 autoplay = "rainbow"
 
 [node name="Label" type="Label" parent="ColorRect2"]
+layout_mode = 0
 offset_left = 12.0
 offset_top = 156.0
 offset_right = 74.0
@@ -368,6 +333,7 @@ libraries = {
 autoplay = "rainbow"
 
 [node name="Label" type="Label" parent="ColorRect3"]
+layout_mode = 0
 offset_left = 12.0
 offset_top = 156.0
 offset_right = 74.0
@@ -389,6 +355,7 @@ libraries = {
 autoplay = "rainbow"
 
 [node name="Label" type="Label" parent="ColorRect4"]
+layout_mode = 0
 offset_left = 12.0
 offset_top = 156.0
 offset_right = 74.0
@@ -410,6 +377,7 @@ libraries = {
 autoplay = "rainbow"
 
 [node name="Label" type="Label" parent="ColorRect5"]
+layout_mode = 0
 offset_left = 12.0
 offset_top = 156.0
 offset_right = 74.0
@@ -1553,94 +1521,6 @@ shape = SubResource("RectangleShape2D_3706v")
 [node name="Cutscene_Camera" type="Camera2D" parent="."]
 zoom = Vector2(2.5, 2.5)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Cutscene_Camera"]
-
-[node name="Control" type="Control" parent="Cutscene_Camera/CanvasLayer"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 650.0
-offset_right = 2304.0
-offset_bottom = 1946.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("11_j5uef")
-
-[node name="Label" type="Label" parent="Cutscene_Camera/CanvasLayer/Control"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -276.0
-offset_right = 49.0
-offset_bottom = -215.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 50
-text = "Magus"
-
-[node name="Label2" type="Label" parent="Cutscene_Camera/CanvasLayer/Control"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -236.0
-offset_top = -180.0
-offset_right = 222.0
-offset_bottom = -55.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 50
-text = "A game made for the
-mini gamejam 2024"
-horizontal_alignment = 1
-
-[node name="Label3" type="Label" parent="Cutscene_Camera/CanvasLayer/Control"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -352.0
-offset_top = -16.0
-offset_right = 363.0
-offset_bottom = 109.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 50
-text = "Made by Hexadotz and marandal
-Music by A drop a Day and marandal"
-horizontal_alignment = 1
-
-[node name="Label4" type="Label" parent="Cutscene_Camera/CanvasLayer/Control"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -356.0
-offset_top = 160.0
-offset_right = 359.0
-offset_bottom = 221.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 50
-text = "Thanks for Playing!"
-horizontal_alignment = 1
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscene_Camera"]
-libraries = {
-"": SubResource("AnimationLibrary_etoy4")
-}
-
 [node name="end_lvl" type="CanvasLayer" parent="." node_paths=PackedStringArray("score_lbl", "kills_lbl", "knock_lbl", "seen_lbl", "barrel_lbl", "combo_lbl")]
 layer = 0
 script = ExtResource("12_4vlfj")
@@ -1816,9 +1696,7 @@ libraries = {
 }
 
 [node name="player" parent="." instance=ExtResource("3_6njmj")]
-visible = false
 position = Vector2(0, -72)
-INVINSIBLE = true
 
 [node name="music" type="AudioStreamPlayer" parent="."]
 bus = &"Music"
@@ -1834,7 +1712,7 @@ shape = SubResource("RectangleShape2D_r32m6")
 position = Vector2(0, -148)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="doory"]
-position = Vector2(8, 0)
+position = Vector2(4, 0)
 shape = SubResource("RectangleShape2D_c5uxo")
 disabled = true
 

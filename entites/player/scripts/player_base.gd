@@ -61,16 +61,17 @@ func _physics_process(delta: float) -> void:
 			
 		else:
 			velocity = velocity.lerp(Vector2.ZERO, 5 * get_physics_process_delta_time())
+			if velocity.is_equal_approx(Vector2(1, 1)):
+				$body.disabled = true
+		
+			if Input.is_action_just_pressed("restart"):
+				get_tree().reload_current_scene()
 	else:
 		look_at(global_position + Vector2.DOWN)
 		direction = Vector2.DOWN
 		velocity = lerp(velocity, direction * 50, acceleration * delta)
 	
-	if velocity.is_equal_approx(Vector2(1, 1)):
-		$body.disabled = true
 		
-	if Input.is_action_just_pressed("restart"):
-		get_tree().reload_current_scene()
 	
 	_push_rigid()
 	move_and_slide()

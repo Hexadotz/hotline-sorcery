@@ -138,6 +138,7 @@ func _on_BACK_TO_B_body_entered(body: Node2D) -> void:
 			
 			emit_signal("switched_floor", $"Floor B/TO_C".global_position)
 #---------------------------------------------------------#
+@export var cutscene_anim: AnimationPlayer
 var go_up: bool = false
 func _on_level_complete_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
@@ -151,16 +152,12 @@ func _on_level_complete_body_entered(body: Node2D) -> void:
 			go_up = true
 			
 			$level_boundry/CollisionPolygon2D.call_deferred("set_disabled", true)
-			#resaults.start()
-			await get_tree().create_timer(20).timeout
 			
-			$Cutscene_Camera/AnimationPlayer.play("roll_credits")
-			
-			await get_tree().create_timer(22).timeout
-			$Cutscene_Camera/CanvasLayer.visible = false
+			await get_tree().create_timer(42).timeout
+			cutscene_anim.visible = false
 			resaults.start()
 
 @onready var door_coll: CollisionShape2D = $doory/CollisionShape2D
 func _on_got_in_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		door_coll.call_deferred("disabled", false)
+		door_coll.set_deferred("set_disabled", false)
